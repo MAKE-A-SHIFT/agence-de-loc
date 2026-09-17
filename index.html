@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gordo Taller | Alquiler de Motos para Bolt en Paraguay</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans antialiased">
+
+  <!-- Navbar -->
+  <nav class="fixed w-full bg-white shadow-md z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-16">
+        <div class="flex items-center">
+          <span class="font-black text-2xl text-blue-900 tracking-tight">GORDO<span class="text-green-500">TALLER</span></span>
+        </div>
+        <div class="flex items-center">
+          <select id="lang-select" class="bg-gray-100 border-none text-sm rounded-md py-1 px-2 focus:ring-green-500 focus:border-green-500 cursor-pointer font-bold text-gray-700">
+            <option value="castillano">🇵🇾 Castillano (PY)</option>
+            <option value="es">🇪🇸 Español</option>
+            <option value="guarani">🇵🇾 Guarani</option>
+            <option value="fr">🇫🇷 Français</option>
+            <option value="en">🇬🇧 English</option>
+            <option value="de">🇩🇪 Deutsch</option>
+            <option value="it">🇮🇹 Italiano</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero-bg pt-24 pb-16 lg:pt-32 lg:pb-24 flex items-center justify-center min-h-[80vh] text-center px-4">
+    <div class="hero-content max-w-4xl mx-auto animate-on-scroll">
+      <h1 class="text-5xl md:text-7xl font-black text-white mb-6 leading-tight" data-i18n="hero_title">
+        Activá tu cuenta Bolt hoy. Tu moto ya está lista.
+      </h1>
+      <p class="text-xl md:text-2xl text-gray-300 mb-10 max-w-2xl mx-auto font-medium" data-i18n="hero_subtitle">
+        Llevá tu moto por 50.000 Gs al día. Sin vueltas. Retirás hoy mismo de Gordo Taller en Areguá.
+      </p>
+      <a href="#garage" class="btn-pulse inline-block bg-green-500 hover:bg-green-400 text-white font-bold text-xl py-4 px-10 rounded-full shadow-lg shadow-green-500/50 transition-all uppercase tracking-wide" data-i18n="hero_btn">
+        Ver motos disponibles
+      </a>
+    </div>
+  </section>
+
+  <!-- Social Proof / Trust -->
+  <section class="py-12 bg-white shadow-sm relative z-10 border-b border-gray-100 animate-on-scroll">
+    <div class="max-w-7xl mx-auto px-4 text-center">
+      <div class="inline-flex items-center justify-center space-x-3 mb-2">
+        <svg class="w-8 h-8 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.243-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+        <h2 class="text-3xl font-black text-blue-900 uppercase" data-i18n="trust_title">Gordo Taller - Areguá</h2>
+      </div>
+      <p class="text-lg font-bold text-gray-600 mb-6" data-i18n="trust_text">Mantenimiento mecánico 100% incluido. Taller propio, motos de confianza.</p>
+      
+      <!-- Map Section -->
+      <div class="max-w-2xl mx-auto rounded-2xl overflow-hidden shadow-md mb-6 border border-gray-200">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3607.7289945196564!2d-57.3871408!3d-25.2813589!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x945da9b5f5f72365%3A0x6b74e64f0b2f56b5!2sCacique%20Aregua!5e0!3m2!1sen!2spy!4v1700000000000!5m2!1sen!2spy" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+      
+      <a href="https://maps.google.com/?q=Cacique+Aregua,+Paraguay" target="_blank" class="inline-flex items-center space-x-2 bg-blue-900 hover:bg-blue-800 text-white font-bold py-3 px-8 rounded-full shadow-lg transition-colors">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path></svg>
+        <span data-i18n="map_btn">Tocá acá para que el GPS te lleve al taller</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- Offer & Conditions -->
+  <section class="py-16 bg-gray-50 animate-on-scroll delay-100">
+    <div class="max-w-5xl mx-auto px-4">
+      <h2 class="text-3xl font-black text-center mb-10 text-gray-800" data-i18n="offer_title">Condiciones Claras</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-start space-x-4">
+          <div class="text-4xl">🚀</div>
+          <div>
+            <p class="font-bold text-lg text-gray-800" data-i18n="offer_bolt">Te creamos la cuenta Bolt en el acto si no tenés.</p>
+          </div>
+        </div>
+        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-start space-x-4">
+          <div class="text-4xl">🏍️</div>
+          <div>
+            <p class="font-bold text-lg text-gray-800" data-i18n="offer_mante">Mantenimiento mecánico a nuestro cargo (no incluye combustible ni casco).</p>
+          </div>
+        </div>
+        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-start space-x-4">
+          <div class="text-4xl">💰</div>
+          <div>
+            <p class="font-bold text-lg text-gray-800" data-i18n="offer_price">50.000 Gs por día.</p>
+          </div>
+        </div>
+        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-start space-x-4 border-l-4 border-l-blue-900">
+          <div class="text-4xl">📋</div>
+          <div>
+            <p class="font-bold text-lg text-gray-800" data-i18n="offer_req">Requisitos: Cédula de Identidad, Certificado de Antecedentes Policiales y Garantía.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- The Garage / Calendar -->
+  <section id="garage" class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4">
+      <h2 class="text-4xl font-black text-center mb-12 text-blue-900 animate-on-scroll" data-i18n="fleet_title">Elegí tu moto y mirá las fechas libres</h2>
+      
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        
+        <!-- Moto Card 1 -->
+        <div class="moto-card bg-gray-50 rounded-2xl overflow-hidden shadow-md border border-gray-200 flex flex-col animate-on-scroll delay-100">
+          <div class="h-48 overflow-hidden bg-gray-200">
+            <img src="assets/images/kenton.jpg" alt="Kenton" class="w-full h-full object-cover">
+          </div>
+          <div class="p-5 flex-grow flex flex-col justify-between">
+            <div>
+              <h3 class="text-2xl font-black mb-1">Kenton 150cc</h3>
+              <p class="text-gray-500 font-bold mb-4">50.000 Gs/día</p>
+            </div>
+            <button class="btn-dispo w-full bg-blue-900 hover:bg-blue-800 text-white font-bold py-3 rounded-xl transition-colors text-center" data-moto="Kenton 150cc" data-i18n="btn_dispo">
+              Ver Disponibilidad
+            </button>
+          </div>
+        </div>
+
+        <!-- Moto Card 2 -->
+        <div class="moto-card bg-gray-50 rounded-2xl overflow-hidden shadow-md border border-gray-200 flex flex-col animate-on-scroll delay-200">
+          <div class="h-48 overflow-hidden bg-gray-200">
+            <img src="assets/images/motostar.jpg" alt="Motostar" class="w-full h-full object-cover">
+          </div>
+          <div class="p-5 flex-grow flex flex-col justify-between">
+            <div>
+              <h3 class="text-2xl font-black mb-1">Motostar 150</h3>
+              <p class="text-gray-500 font-bold mb-4">50.000 Gs/día</p>
+            </div>
+            <button class="btn-dispo w-full bg-blue-900 hover:bg-blue-800 text-white font-bold py-3 rounded-xl transition-colors text-center" data-moto="Motostar 150" data-i18n="btn_dispo">
+              Ver Disponibilidad
+            </button>
+          </div>
+        </div>
+
+        <!-- Moto Card 3 -->
+        <div class="moto-card bg-gray-50 rounded-2xl overflow-hidden shadow-md border border-gray-200 flex flex-col animate-on-scroll delay-300">
+          <div class="h-48 overflow-hidden bg-gray-200">
+            <img src="assets/images/honda.jpg" alt="Honda" class="w-full h-full object-cover">
+          </div>
+          <div class="p-5 flex-grow flex flex-col justify-between">
+            <div>
+              <h3 class="text-2xl font-black mb-1">Honda CG</h3>
+              <p class="text-gray-500 font-bold mb-4">50.000 Gs/día</p>
+            </div>
+            <button class="btn-dispo w-full bg-blue-900 hover:bg-blue-800 text-white font-bold py-3 rounded-xl transition-colors text-center" data-moto="Honda CG" data-i18n="btn_dispo">
+              Ver Disponibilidad
+            </button>
+          </div>
+        </div>
+
+        <!-- Moto Card 4 -->
+        <div class="moto-card bg-gray-50 rounded-2xl overflow-hidden shadow-md border border-gray-200 flex flex-col animate-on-scroll delay-400">
+          <div class="h-48 overflow-hidden bg-gray-200">
+            <img src="assets/images/leopard.jpg" alt="Leopard" class="w-full h-full object-cover">
+          </div>
+          <div class="p-5 flex-grow flex flex-col justify-between">
+            <div>
+              <h3 class="text-2xl font-black mb-1">Leopard 150</h3>
+              <p class="text-gray-500 font-bold mb-4">50.000 Gs/día</p>
+            </div>
+            <button class="btn-dispo w-full bg-blue-900 hover:bg-blue-800 text-white font-bold py-3 rounded-xl transition-colors text-center" data-moto="Leopard 150" data-i18n="btn_dispo">
+              Ver Disponibilidad
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Modal Calendar -->
+  <div id="calendar-modal" class="fixed inset-0 bg-black bg-opacity-60 z-[100] hidden items-center justify-center p-4 backdrop-blur-sm transition-opacity">
+    <div class="bg-white rounded-3xl p-6 w-full max-w-md shadow-2xl relative">
+      <button id="close-modal" class="absolute top-4 right-4 text-gray-400 hover:text-gray-800 transition-colors">
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+      </button>
+      <h3 class="text-2xl font-black mb-6 pr-8 text-blue-900" data-i18n="modal_title">Seleccioná una fecha libre</h3>
+      
+      <!-- Grid Calendar JS -->
+      <div id="calendar-grid" class="grid grid-cols-4 gap-2 mb-6">
+        <!-- JS will populate -->
+      </div>
+      
+      <p class="text-center text-sm text-gray-500 font-bold mt-4">Los días en verde están disponibles. Tocá uno para reservar por WhatsApp.</p>
+    </div>
+  </div>
+
+  <footer class="bg-blue-900 py-8 text-center text-white">
+    <p class="font-bold">© 2026 Gordo Taller - Areguá, Paraguay</p>
+  </footer>
+
+  <script src="translations.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
