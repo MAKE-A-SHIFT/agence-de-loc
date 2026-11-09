@@ -1,10 +1,18 @@
 /* ==========================================================================
-   G&L MOTORS - Interactive Logic & Real Bolt Moto Asunción Earnings Estimator
+   G&L MOTORS - Multi-Currency (50k / 350k / 1.4M PYG), Bolt Estimator & Checkout
    ========================================================================== */
 
 const WHATSAPP_NUMBER = "595995620416";
 
-// Currency Configuration (anchored on our official 50.000 Gs/day rate)
+// Official Base Rates in Paraguayan Guaraníes (PYG)
+const BASE_PRICES_PYG = {
+  daily: 50000,
+  weekly: 350000,
+  monthly: 1400000,
+  monthlyEffectiveDaily: 46600 // 1,400,000 / 30 days
+};
+
+// Currency Configuration (dynamically converts 50k / 350k / 1,400,000 PYG)
 const CURRENCIES = {
   PYG: {
     code: "PYG",
@@ -14,72 +22,47 @@ const CURRENCIES = {
     rateFromPyg: 1,
     symbolPos: "before",
     sep: ".",
-    daily: "₲50.000",
-    weekly: "₲350.000",
-    monthly: "₲1.500.000",
-    pygDaily: "50.000 Gs / jour",
-    pygWeekly: "~₲50.000/jour",
-    pygMonthly: "~₲50.000/jour"
+    roundStep: 1000
   },
   USD: {
     code: "USD",
     symbol: "$",
     flag: "🇺🇸",
     name: "US Dollar",
-    rateFromPyg: 1 / 7150,
+    rateFromPyg: 1 / 7150, // 50k -> $7, 350k -> $49, 1.4M -> $196
     symbolPos: "before",
     sep: ",",
-    daily: "$7",
-    weekly: "$49",
-    monthly: "$210",
-    pygDaily: "₲50.000",
-    pygWeekly: "₲350.000 (~$7/j)",
-    pygMonthly: "₲1.500.000 (~$7/j)"
+    roundStep: 1
   },
   EUR: {
     code: "EUR",
     symbol: "€",
     flag: "🇪🇺",
     name: "Euro",
-    rateFromPyg: 1 / 7800,
+    rateFromPyg: 1 / 7800, // 50k -> 6€, 350k -> 45€, 1.4M -> 179€
     symbolPos: "after",
     sep: ".",
-    daily: "6€",
-    weekly: "45€",
-    monthly: "190€",
-    pygDaily: "₲50.000",
-    pygWeekly: "₲350.000 (~6€/j)",
-    pygMonthly: "₲1.500.000 (~6€/j)"
+    roundStep: 1
   },
   BRL: {
     code: "BRL",
     symbol: "R$",
     flag: "🇧🇷",
     name: "Real",
-    rateFromPyg: 1 / 1315,
+    rateFromPyg: 1 / 1315, // 50k -> R$38, 350k -> R$266, 1.4M -> R$1.065
     symbolPos: "before",
     sep: ".",
-    daily: "R$38",
-    weekly: "R$265",
-    monthly: "R$1.140",
-    pygDaily: "₲50.000",
-    pygWeekly: "₲350.000 (~R$38/j)",
-    pygMonthly: "₲1.500.000 (~R$38/j)"
+    roundStep: 1
   },
   ARS: {
     code: "ARS",
     symbol: "$",
     flag: "🇦🇷",
     name: "Peso Argentino",
-    rateFromPyg: 190 / 1000,
+    rateFromPyg: 190 / 1000, // 50k -> $9.500, 350k -> $66.500, 1.4M -> $266.000
     symbolPos: "before",
     sep: ".",
-    daily: "$9.500",
-    weekly: "$66.500",
-    monthly: "$285.000",
-    pygDaily: "₲50.000",
-    pygWeekly: "₲350.000 (~$9.500/j)",
-    pygMonthly: "₲1.500.000 (~$9.500/j)"
+    roundStep: 500
   }
 };
 
@@ -95,10 +78,10 @@ const LANGUAGES = {
 };
 
 const ORIGINAL_REVIEWS = {
-  1: "We booked this bike at the very last minute and everything went super smoothly. The team at G&L MOTORS really went out of their way to help us set up Bolt for free and 2 hours later we were already riding.",
-  2: "No pensé que fuera tan sencillo alquilar una 150cc en Areguá. A 50.000 Gs por día con mantenimiento incluido en su propio taller G&L MOTORS, es imbatible para moverse sin estrés.",
-  3: "Great experience riding between Areguá and Asunción, especially during rush hour. Good Honda CG motorcycle, great mechanical service. Just take it easy and it's super convenient daily.",
-  4: "I speak English and Spanish, the staff is very friendly and the motorcycle is in great condition. If you message them on WhatsApp with your arrival time at Cacique Areguá, they are ready on time!"
+  1: "Alquilé una Kenton 150cc a último minuto para recorrer Areguá y San Bernardino el fin de semana, todo por WhatsApp en 10 minutos. Moto impecable, cascos nuevos y pude pagar directo por transferencia SIPAP sin comisión.",
+  2: "Alquilo mi Honda CG por mes a 1.400.000 Gs para trabajar en Bolt por Asunción. Me abrieron la cuenta de Bolt gratis el primer día y el mantenimiento de cada semana en el taller está incluido. Imposible encontrar algo más rentable.",
+  3: "Awesome experience! As an expat in Asunción, being able to pay in USDT (Solana) and having a reliable 150cc to beat rush-hour traffic changes everything. Super responsive 7/7 support.",
+  4: "Gente muy seria y mecánica de primera. Ya sea que pagues en efectivo, tarjeta o transferencia bancaria, todo es transparente. Avisas por WhatsApp antes de llegar a Areguá y en 15 minutos ya salís andando."
 };
 
 let currentLang = localStorage.getItem("gl_lang") || "fr";
@@ -107,22 +90,21 @@ let selectedShareIndex = 0;
 const reviewShowingOriginal = { 1: false, 2: false, 3: false, 4: false };
 
 // Bolt Estimator State (Real Asunción Market Data)
-let estimatorHours = 8; // default 8h/day
-let estimatorDays = 6;  // default 6 days/week
-let estimatorMode = "normal"; // 'normal' (32,500 Gs/h gross) or 'peak' (42,000 Gs/h gross)
+let estimatorHours = 8;
+let estimatorDays = 6;
+let estimatorMode = "normal";
 
-function formatPygAmount(pygAmount, currencyCode = currentCurrency) {
+function formatPygAmount(pygAmount, currencyCode = currentCurrency, compact = false) {
   const c = CURRENCIES[currencyCode] || CURRENCIES.PYG;
   let val = pygAmount * c.rateFromPyg;
-  if (currencyCode === "PYG") {
-    val = Math.round(val / 1000) * 1000;
-  } else if (currencyCode === "ARS") {
-    val = Math.round(val / 500) * 500;
+  if (c.roundStep >= 500) {
+    val = Math.round(val / c.roundStep) * c.roundStep;
   } else {
     val = Math.round(val);
   }
   const formatted = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, c.sep);
-  return c.symbolPos === "before" ? `${c.symbol} ${formatted}` : `${formatted} ${c.symbol}`;
+  const space = compact ? "" : " ";
+  return c.symbolPos === "before" ? `${c.symbol}${space}${formatted}` : `${formatted}${space}${c.symbol}`;
 }
 
 // 1. Language Switching
@@ -152,7 +134,6 @@ function setLanguage(lang) {
   if (flagEl) flagEl.textContent = langInfo.flag;
   if (codeEl) codeEl.textContent = langInfo.code;
 
-  // Highlight active language in dropdown
   document.querySelectorAll("[data-lang-option]").forEach((btn) => {
     const isSelected = btn.getAttribute("data-lang-option") === lang;
     btn.classList.toggle("bg-gray-50", isSelected);
@@ -174,9 +155,10 @@ function setLanguage(lang) {
 
   updateCurrencyDisplay();
   updateBoltEstimator();
+  updatePaymentProcessorNote();
 }
 
-// 2. Currency Switching
+// 2. Currency Switching (adapts 50k / 350k / 1.4M PYG across the entire site)
 function setCurrency(code) {
   if (!CURRENCIES[code]) code = "PYG";
   currentCurrency = code;
@@ -198,42 +180,78 @@ function updateCurrencyDisplay() {
   if (currCode) currCode.textContent = c.code;
   if (currSymbol) currSymbol.textContent = `(${c.symbol})`;
 
-  // Highlight active currency in dropdown
   document.querySelectorAll("[data-currency-option]").forEach((btn) => {
     const isSelected = btn.getAttribute("data-currency-option") === currentCurrency;
     btn.classList.toggle("bg-gray-100", isSelected);
     btn.classList.toggle("font-semibold", isSelected);
   });
 
+  // Formatted strings in active currency
+  const dailyMain = formatPygAmount(BASE_PRICES_PYG.daily, currentCurrency, true);
+  const weeklyMain = formatPygAmount(BASE_PRICES_PYG.weekly, currentCurrency, true);
+  const monthlyMain = formatPygAmount(BASE_PRICES_PYG.monthly, currentCurrency, true);
+  const monthlyEffMain = formatPygAmount(BASE_PRICES_PYG.monthlyEffectiveDaily, currentCurrency, true);
+
+  // Tooltips (always show PYG equivalent + effective daily rate)
+  const dailyTooltip =
+    currentCurrency === "PYG"
+      ? `50.000 PYG${perDay}`
+      : `₲50.000 PYG`;
+  const weeklyTooltip =
+    currentCurrency === "PYG"
+      ? `~₲50.000${perDay}`
+      : `₲350.000 (~${dailyMain}${perDay})`;
+  const monthlyTooltip =
+    currentCurrency === "PYG"
+      ? `~₲46.600${perDay}`
+      : `₲1.400.000 (~${monthlyEffMain}${perDay})`;
+
   // Update Hero price
   document.querySelectorAll('[data-price="hero-daily"]').forEach((el) => {
-    el.textContent = `${c.daily}${perDay}`;
+    el.textContent = `${dailyMain}${perDay}`;
   });
   document.querySelectorAll('[data-price-tooltip="hero-daily"]').forEach((el) => {
-    el.textContent = c.pygDaily;
+    el.textContent = dailyTooltip;
   });
 
   // Update Services Daily / Weekly / Monthly prices & tooltips
   document.querySelectorAll('[data-price="daily"]').forEach((el) => {
-    el.textContent = `${c.daily}${perDay}`;
+    el.textContent = `${dailyMain}${perDay}`;
   });
   document.querySelectorAll('[data-price-tooltip="daily"]').forEach((el) => {
-    el.textContent = c.pygDaily;
+    el.textContent = dailyTooltip;
   });
 
   document.querySelectorAll('[data-price="weekly"]').forEach((el) => {
-    el.textContent = c.weekly;
+    el.textContent = weeklyMain;
   });
   document.querySelectorAll('[data-price-tooltip="weekly"]').forEach((el) => {
-    el.textContent = c.pygWeekly;
+    el.textContent = weeklyTooltip;
   });
 
   document.querySelectorAll('[data-price="monthly"]').forEach((el) => {
-    el.textContent = c.monthly;
+    el.textContent = monthlyMain;
   });
   document.querySelectorAll('[data-price-tooltip="monthly"]').forEach((el) => {
-    el.textContent = c.pygMonthly;
+    el.textContent = monthlyTooltip;
   });
+
+  // Update Booking Modal Plan Options dynamically with active currency
+  const planSelect = document.getElementById("booking-plan-select");
+  if (planSelect && planSelect.options.length >= 3) {
+    const pygSuffix = currentCurrency === "PYG" ? "" : ` / 50.000 PYG`;
+    const pygWeekSuffix = currentCurrency === "PYG" ? "" : ` / 350.000 PYG`;
+    const pygMonthSuffix = currentCurrency === "PYG" ? "" : ` / 1.400.000 PYG`;
+
+    planSelect.options[0].textContent = `${t.services_daily_title || "Journalier"} — ${dailyMain}${pygSuffix}`;
+    planSelect.options[0].value = `Journalier (${dailyMain} / 50.000 PYG)`;
+
+    planSelect.options[1].textContent = `${t.services_weekly_title || "Hebdomadaire"} — ${weeklyMain}${pygWeekSuffix}`;
+    planSelect.options[1].value = `Hebdomadaire (${weeklyMain} / 350.000 PYG)`;
+
+    planSelect.options[2].textContent = `${t.services_monthly_title || "Mensuel"} — ${monthlyMain}${pygMonthSuffix}`;
+    planSelect.options[2].value = `Mensuel (${monthlyMain} / 1.400.000 PYG)`;
+  }
 }
 
 // 3. Real Asunción Bolt Moto Earnings Estimator
@@ -275,17 +293,11 @@ function setEstimatorMode(mode) {
 }
 
 function updateBoltEstimator() {
-  // Real Asunción Bolt Moto parameters:
-  // - Normal hours gross avg: 32,500 Gs/h (midpoint of 25,000 - 40,000 Gs/h)
-  // - With peak/dynamic hours gross avg: 42,000 Gs/h (blended with 50,000 - 60,000 Gs/h peak)
-  // - Bolt platform fee in Paraguay: ~17% (midpoint of 15% - 20%)
-  // - 150cc fuel (nafta) in urban traffic: ~3,000 Gs/hour
-  // - G&L MOTORS daily rental: 50,000 Gs/day (maintenance = 0 Gs)
   const grossPerHourPyg = estimatorMode === "peak" ? 42000 : 32500;
   const grossDayPyg = estimatorHours * grossPerHourPyg;
   const boltCommissionPyg = Math.round(grossDayPyg * 0.17);
   const fuelDayPyg = estimatorHours * 3000;
-  const rentalDayPyg = 50000;
+  const rentalDayPyg = BASE_PRICES_PYG.daily; // 50,000 PYG
   const totalDeductionsPyg = boltCommissionPyg + fuelDayPyg + rentalDayPyg;
 
   const netDayPyg = Math.max(0, grossDayPyg - totalDeductionsPyg);
@@ -346,13 +358,11 @@ function handleScroll() {
     }
   });
 
-  // Hero Parallax
   const heroBg = document.getElementById("hero-parallax-bg");
   if (heroBg && scrollY < vh * 1.2) {
     heroBg.style.transform = `translate3d(0, ${scrollY * 0.35}px, 0)`;
   }
 
-  // Flying Scooter Animation across viewport on scroll
   const flyingScooter = document.getElementById("flying-scooter");
   if (flyingScooter) {
     const docHeight = Math.max(document.body.scrollHeight - vh, 1);
@@ -362,25 +372,27 @@ function handleScroll() {
     flyingScooter.style.transform = `translate3d(${xPos}px, 0, 0) rotate(${rot}deg)`;
   }
 
-  // Scooter Showcase Subtle Parallax
   document.querySelectorAll("[data-scooter-card]").forEach((card, idx) => {
     const rect = card.getBoundingClientRect();
-    if (rect.top < vh && rect.bottom > 0) {
+    if (rect.top < vh && rect.bottom > 0 && window.innerWidth >= 768) {
       const centerOffset = (vh / 2 - (rect.top + rect.height / 2)) / vh;
       const dir = idx % 2 === 0 ? 1 : -1;
-      const shiftX = centerOffset * 18 * dir;
-      const rot = centerOffset * 2.5 * dir;
+      const shiftX = centerOffset * 16 * dir;
+      const rot = centerOffset * 2 * dir;
       card.style.transform = `translate3d(${shiftX}px, 0, 0) rotate(${rot}deg)`;
+    } else {
+      card.style.transform = "";
     }
   });
 
-  // About / Bolt Image Parallax
   const aboutImg = document.getElementById("about-parallax-img");
   if (aboutImg) {
     const rect = aboutImg.getBoundingClientRect();
-    if (rect.top < vh && rect.bottom > 0) {
-      const offset = ((vh - rect.top) / (vh + rect.height) - 0.5) * 24;
+    if (rect.top < vh && rect.bottom > 0 && window.innerWidth >= 768) {
+      const offset = ((vh - rect.top) / (vh + rect.height) - 0.5) * 20;
       aboutImg.style.transform = `translate3d(0, ${offset}px, 0)`;
+    } else {
+      aboutImg.style.transform = "";
     }
   }
 }
@@ -491,12 +503,30 @@ function toggleFaq(index) {
   });
 }
 
-// 9. Booking Modal
-function openBookingModal(defaultBike = "", precheckBolt = false) {
+// 9. Booking & Payment Processor Modal
+function updatePaymentProcessorNote() {
+  const paySelect = document.getElementById("booking-payment-select");
+  const noteEl = document.getElementById("payment-processor-note");
+  if (!paySelect || !noteEl) return;
+
+  const val = paySelect.value;
+  if (val === "SIPAP") {
+    noteEl.textContent = "✓ Virement instantané SIPAP 24/7 / Alias au Paraguay (0% de frais bancaires).";
+  } else if (val === "CRYPTO") {
+    noteEl.textContent = "✓ Paiement direct sans frais via Solana (USDC / USDT / SOL) ou Bitcoin Lightning.";
+  } else if (val === "CARD") {
+    noteEl.textContent = "✓ Lien de paiement sécurisé uPay (Pagopar / ueno) & Bancard : accepte Visa, Mastercard, Débito & QR.";
+  } else {
+    noteEl.textContent = "✓ Paiement en espèces (Guaraníes PYG ou USD) directement à l'atelier lors de la remise des clés.";
+  }
+}
+
+function openBookingModal(defaultBike = "", precheckBolt = false, defaultPayment = "") {
   const modal = document.getElementById("booking-modal");
   const bikeSelect = document.getElementById("booking-bike-select");
   const dateInput = document.getElementById("booking-date-input");
   const boltCheck = document.getElementById("booking-bolt-checkbox");
+  const paySelect = document.getElementById("booking-payment-select");
 
   if (bikeSelect && defaultBike) {
     bikeSelect.value = defaultBike;
@@ -504,12 +534,16 @@ function openBookingModal(defaultBike = "", precheckBolt = false) {
   if (boltCheck && precheckBolt) {
     boltCheck.checked = true;
   }
+  if (paySelect && defaultPayment) {
+    paySelect.value = defaultPayment;
+  }
   if (dateInput && !dateInput.value) {
     const today = new Date().toISOString().split("T")[0];
     dateInput.value = today;
     dateInput.min = today;
   }
 
+  updatePaymentProcessorNote();
   modal?.classList.add("active");
   document.body.style.overflow = "hidden";
 }
@@ -523,11 +557,13 @@ function closeBookingModal() {
 function submitBookingModal(e) {
   e.preventDefault();
   const bike = document.getElementById("booking-bike-select")?.value || "Honda CG 150";
-  const plan = document.getElementById("booking-plan-select")?.value || "Journalier (50.000 Gs/jour)";
+  const plan = document.getElementById("booking-plan-select")?.value || "Journalier (50.000 PYG)";
+  const paymentSelect = document.getElementById("booking-payment-select");
+  const paymentText = paymentSelect?.options[paymentSelect.selectedIndex]?.textContent || "Transferencia Paraguay (SIPAP)";
   const date = document.getElementById("booking-date-input")?.value || "Aujourd'hui";
   const needBolt = document.getElementById("booking-bolt-checkbox")?.checked;
 
-  let message = `Bonjour G&L MOTORS ! 🏍️\nJe souhaite réserver une moto :\n• Modèle : ${bike}\n• Formule : ${plan}\n• Date de retrait : ${date}`;
+  let message = `Bonjour G&L MOTORS ! 🏍️\nJe souhaite réserver une moto :\n• Modèle : ${bike}\n• Formule : ${plan}\n• Moyen de paiement : ${paymentText}\n• Date de retrait : ${date}`;
   if (needBolt) {
     message += `\n• Option Bolt : Je souhaite obtenir mon compte chauffeur Bolt GRATUITEMENT avec la moto.`;
   }
@@ -582,6 +618,7 @@ document.addEventListener("DOMContentLoaded", () => {
   setLanguage(currentLang);
   setCurrency(currentCurrency);
   updateBoltEstimator();
+  updatePaymentProcessorNote();
 
   window.addEventListener("scroll", handleScroll, { passive: true });
   handleScroll();
