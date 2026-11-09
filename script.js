@@ -78,10 +78,10 @@ const LANGUAGES = {
 };
 
 const ORIGINAL_REVIEWS = {
-  1: "Alquilé una Kenton 150cc a último minuto para recorrer Areguá y San Bernardino el fin de semana, todo por WhatsApp en 10 minutos. Moto impecable, cascos nuevos y pude pagar directo por transferencia SIPAP sin comisión.",
-  2: "Alquilo mi Honda CG por mes a 1.400.000 Gs para trabajar en Bolt por Asunción. Me abrieron la cuenta de Bolt gratis el primer día y el mantenimiento de cada semana en el taller está incluido. Imposible encontrar algo más rentable.",
-  3: "Awesome experience! As an expat in Asunción, being able to pay in USDT (Solana) and having a reliable 150cc to beat rush-hour traffic changes everything. Super responsive 7/7 support.",
-  4: "Gente muy seria y mecánica de primera. Ya sea que pagues en efectivo, tarjeta o transferencia bancaria, todo es transparente. Avisas por WhatsApp antes de llegar a Areguá y en 15 minutos ya salís andando."
+  1: "Alquilé la Buler Faiter Rojo 150cc (2025) a último minuto para recorrer Areguá y San Bernardino el fin de semana, todo por WhatsApp en 10 minutos. Moto impecable, cascos nuevos y pude pagar directo por transferencia SIPAP sin comisión.",
+  2: "Alquilo mi Boxer Azul 150cc por mes a 1.400.000 Gs para trabajar en Bolt por Asunción. Me abrieron la cuenta de Bolt gratis el primer día y el mantenimiento de cada semana en el taller está incluido. Imposible encontrar algo más rentable.",
+  3: "Awesome experience! As an expat in Asunción, being able to pay in USDT (Solana) and having a fully equipped XVR 150cc to beat rush-hour traffic changes everything. Super responsive 7/7 support.",
+  4: "Gente muy seria y mecánica de primera con la Star New Desert Rojo 150cc. Ya sea que pagues en efectivo, tarjeta o transferencia bancaria, todo es transparente. Avisas por WhatsApp antes de llegar a Areguá y en 15 minutos ya salís andando."
 };
 
 let currentLang = localStorage.getItem("gl_lang") || "fr";
