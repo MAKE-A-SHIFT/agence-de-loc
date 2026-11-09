@@ -1,5 +1,5 @@
 /* ==========================================================================
-   GORDO TALLER - Interactive Logic (Cloned from andaway.com.py/fr)
+   G&L MOTORS - Interactive Logic & Real Bolt Moto Asunción Earnings Estimator
    ========================================================================== */
 
 const WHATSAPP_NUMBER = "595995620416";
@@ -11,6 +11,9 @@ const CURRENCIES = {
     symbol: "₲",
     flag: "🇵🇾",
     name: "Guaraní",
+    rateFromPyg: 1,
+    symbolPos: "before",
+    sep: ".",
     daily: "₲50.000",
     weekly: "₲350.000",
     monthly: "₲1.500.000",
@@ -23,6 +26,9 @@ const CURRENCIES = {
     symbol: "$",
     flag: "🇺🇸",
     name: "US Dollar",
+    rateFromPyg: 1 / 7150,
+    symbolPos: "before",
+    sep: ",",
     daily: "$7",
     weekly: "$49",
     monthly: "$210",
@@ -35,6 +41,9 @@ const CURRENCIES = {
     symbol: "€",
     flag: "🇪🇺",
     name: "Euro",
+    rateFromPyg: 1 / 7800,
+    symbolPos: "after",
+    sep: ".",
     daily: "6€",
     weekly: "45€",
     monthly: "190€",
@@ -47,6 +56,9 @@ const CURRENCIES = {
     symbol: "R$",
     flag: "🇧🇷",
     name: "Real",
+    rateFromPyg: 1 / 1315,
+    symbolPos: "before",
+    sep: ".",
     daily: "R$38",
     weekly: "R$265",
     monthly: "R$1.140",
@@ -59,6 +71,9 @@ const CURRENCIES = {
     symbol: "$",
     flag: "🇦🇷",
     name: "Peso Argentino",
+    rateFromPyg: 190 / 1000,
+    symbolPos: "before",
+    sep: ".",
     daily: "$9.500",
     weekly: "$66.500",
     monthly: "$285.000",
@@ -80,22 +95,41 @@ const LANGUAGES = {
 };
 
 const ORIGINAL_REVIEWS = {
-  1: "We booked this bike at the very last minute and everything went super smoothly. The owner at Gordo Taller really went out of his way to help us set up Bolt and 2 hours later we were already riding.",
-  2: "No pensé que fuera tan sencillo alquilar una 150cc en Areguá. A 50.000 Gs por día con mantenimiento incluido en su propio taller, es imbatible para moverse sin estrés.",
+  1: "We booked this bike at the very last minute and everything went super smoothly. The team at G&L MOTORS really went out of their way to help us set up Bolt for free and 2 hours later we were already riding.",
+  2: "No pensé que fuera tan sencillo alquilar una 150cc en Areguá. A 50.000 Gs por día con mantenimiento incluido en su propio taller G&L MOTORS, es imbatible para moverse sin estrés.",
   3: "Great experience riding between Areguá and Asunción, especially during rush hour. Good Honda CG motorcycle, great mechanical service. Just take it easy and it's super convenient daily.",
   4: "I speak English and Spanish, the staff is very friendly and the motorcycle is in great condition. If you message them on WhatsApp with your arrival time at Cacique Areguá, they are ready on time!"
 };
 
-let currentLang = localStorage.getItem("gordo_lang") || "fr";
-let currentCurrency = localStorage.getItem("gordo_currency") || "PYG";
+let currentLang = localStorage.getItem("gl_lang") || "fr";
+let currentCurrency = localStorage.getItem("gl_currency") || "PYG";
 let selectedShareIndex = 0;
 const reviewShowingOriginal = { 1: false, 2: false, 3: false, 4: false };
+
+// Bolt Estimator State (Real Asunción Market Data)
+let estimatorHours = 8; // default 8h/day
+let estimatorDays = 6;  // default 6 days/week
+let estimatorMode = "normal"; // 'normal' (32,500 Gs/h gross) or 'peak' (42,000 Gs/h gross)
+
+function formatPygAmount(pygAmount, currencyCode = currentCurrency) {
+  const c = CURRENCIES[currencyCode] || CURRENCIES.PYG;
+  let val = pygAmount * c.rateFromPyg;
+  if (currencyCode === "PYG") {
+    val = Math.round(val / 1000) * 1000;
+  } else if (currencyCode === "ARS") {
+    val = Math.round(val / 500) * 500;
+  } else {
+    val = Math.round(val);
+  }
+  const formatted = val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, c.sep);
+  return c.symbolPos === "before" ? `${c.symbol} ${formatted}` : `${formatted} ${c.symbol}`;
+}
 
 // 1. Language Switching
 function setLanguage(lang) {
   if (!translations[lang]) lang = "fr";
   currentLang = lang;
-  localStorage.setItem("gordo_lang", lang);
+  localStorage.setItem("gl_lang", lang);
   document.documentElement.lang = lang === "castillano" ? "es" : lang === "guarani" ? "gn" : lang;
 
   const t = translations[lang];
@@ -139,14 +173,16 @@ function setLanguage(lang) {
   });
 
   updateCurrencyDisplay();
+  updateBoltEstimator();
 }
 
 // 2. Currency Switching
 function setCurrency(code) {
   if (!CURRENCIES[code]) code = "PYG";
   currentCurrency = code;
-  localStorage.setItem("gordo_currency", code);
+  localStorage.setItem("gl_currency", code);
   updateCurrencyDisplay();
+  updateBoltEstimator();
 }
 
 function updateCurrencyDisplay() {
@@ -200,13 +236,93 @@ function updateCurrencyDisplay() {
   });
 }
 
-// 3. Scroll-Aware Navbar & Parallax Animations
+// 3. Real Asunción Bolt Moto Earnings Estimator
+function setEstimatorHours(val) {
+  estimatorHours = Number(val) || 8;
+  const slider = document.getElementById("bolt-hours-slider");
+  if (slider && Number(slider.value) !== estimatorHours) {
+    slider.value = estimatorHours;
+  }
+  updateBoltEstimator();
+}
+
+function setEstimatorDays(days) {
+  estimatorDays = Number(days) || 6;
+  document.querySelectorAll("[data-est-days]").forEach((btn) => {
+    const active = Number(btn.getAttribute("data-est-days")) === estimatorDays;
+    btn.classList.toggle("bg-[#34D186]", active);
+    btn.classList.toggle("text-black", active);
+    btn.classList.toggle("border-[#34D186]", active);
+    btn.classList.toggle("bg-neutral-800", !active);
+    btn.classList.toggle("text-neutral-300", !active);
+    btn.classList.toggle("border-neutral-700", !active);
+  });
+  updateBoltEstimator();
+}
+
+function setEstimatorMode(mode) {
+  estimatorMode = mode === "peak" ? "peak" : "normal";
+  document.querySelectorAll("[data-est-mode]").forEach((btn) => {
+    const active = btn.getAttribute("data-est-mode") === estimatorMode;
+    btn.classList.toggle("bg-[#34D186]", active);
+    btn.classList.toggle("text-black", active);
+    btn.classList.toggle("border-[#34D186]", active);
+    btn.classList.toggle("bg-neutral-800", !active);
+    btn.classList.toggle("text-neutral-300", !active);
+    btn.classList.toggle("border-neutral-700", !active);
+  });
+  updateBoltEstimator();
+}
+
+function updateBoltEstimator() {
+  // Real Asunción Bolt Moto parameters:
+  // - Normal hours gross avg: 32,500 Gs/h (midpoint of 25,000 - 40,000 Gs/h)
+  // - With peak/dynamic hours gross avg: 42,000 Gs/h (blended with 50,000 - 60,000 Gs/h peak)
+  // - Bolt platform fee in Paraguay: ~17% (midpoint of 15% - 20%)
+  // - 150cc fuel (nafta) in urban traffic: ~3,000 Gs/hour
+  // - G&L MOTORS daily rental: 50,000 Gs/day (maintenance = 0 Gs)
+  const grossPerHourPyg = estimatorMode === "peak" ? 42000 : 32500;
+  const grossDayPyg = estimatorHours * grossPerHourPyg;
+  const boltCommissionPyg = Math.round(grossDayPyg * 0.17);
+  const fuelDayPyg = estimatorHours * 3000;
+  const rentalDayPyg = 50000;
+  const totalDeductionsPyg = boltCommissionPyg + fuelDayPyg + rentalDayPyg;
+
+  const netDayPyg = Math.max(0, grossDayPyg - totalDeductionsPyg);
+  const netWeekPyg = netDayPyg * estimatorDays;
+  const netMonthPyg = Math.round((netWeekPyg * 4.33) / 5000) * 5000;
+
+  const hoursValEl = document.getElementById("est-hours-value");
+  const grossDayEl = document.getElementById("est-gross-day");
+  const deductionsDayEl = document.getElementById("est-deductions-day");
+  const netDayEl = document.getElementById("est-net-day");
+  const netWeekEl = document.getElementById("est-net-week");
+  const netMonthEl = document.getElementById("est-net-month");
+  const netMonthPygSub = document.getElementById("est-net-month-pyg-sub");
+
+  if (hoursValEl) hoursValEl.textContent = estimatorHours;
+  if (grossDayEl) grossDayEl.textContent = formatPygAmount(grossDayPyg);
+  if (deductionsDayEl) deductionsDayEl.textContent = `- ${formatPygAmount(totalDeductionsPyg)}`;
+  if (netDayEl) netDayEl.textContent = formatPygAmount(netDayPyg);
+  if (netWeekEl) netWeekEl.textContent = formatPygAmount(netWeekPyg);
+  if (netMonthEl) netMonthEl.textContent = formatPygAmount(netMonthPyg);
+
+  if (netMonthPygSub) {
+    if (currentCurrency !== "PYG") {
+      netMonthPygSub.textContent = `(${formatPygAmount(netMonthPyg, "PYG")})`;
+      netMonthPygSub.classList.remove("hidden");
+    } else {
+      netMonthPygSub.classList.add("hidden");
+    }
+  }
+}
+
+// 4. Scroll-Aware Navbar & Parallax Animations
 function handleScroll() {
   const scrollY = window.scrollY;
   const vh = window.innerHeight;
   const pastHero = scrollY > vh * 0.8;
 
-  // Update Navbar theme (matches Andaway useScrolledPastHero)
   const navPills = document.querySelectorAll(".nav-adaptive-pill");
   const navBookBtns = document.querySelectorAll(".nav-adaptive-cta");
 
@@ -258,18 +374,18 @@ function handleScroll() {
     }
   });
 
-  // About Image Parallax
+  // About / Bolt Image Parallax
   const aboutImg = document.getElementById("about-parallax-img");
   if (aboutImg) {
     const rect = aboutImg.getBoundingClientRect();
     if (rect.top < vh && rect.bottom > 0) {
-      const offset = ((vh - rect.top) / (vh + rect.height) - 0.5) * 36;
+      const offset = ((vh - rect.top) / (vh + rect.height) - 0.5) * 24;
       aboutImg.style.transform = `translate3d(0, ${offset}px, 0)`;
     }
   }
 }
 
-// 4. Video Sound Toggle
+// 5. Video Sound Toggle
 function toggleVideoSound() {
   const video = document.getElementById("showcase-video");
   const mutedIcon = document.getElementById("video-icon-muted");
@@ -289,7 +405,7 @@ function toggleVideoSound() {
   }
 }
 
-// 5. Testimonials Original / Translation Toggle
+// 6. Testimonials Original / Translation Toggle
 function toggleReviewOriginal(id) {
   const t = translations[currentLang] || translations.fr;
   const textEl = document.getElementById(`review-text-${id}`);
@@ -306,7 +422,7 @@ function toggleReviewOriginal(id) {
   }
 }
 
-// 6. Social Share Actions
+// 7. Social Share Actions
 function selectShareMessage(index) {
   selectedShareIndex = index;
   document.querySelectorAll("[data-share-option]").forEach((label, idx) => {
@@ -340,14 +456,12 @@ async function shareNativeOrCopy() {
   if (navigator.share) {
     try {
       await navigator.share({
-        title: "Gordo Taller - Location de Motos",
+        title: "G&L MOTORS - Location de Motos",
         text: text,
         url: window.location.href
       });
       return;
-    } catch (_) {
-      // Fallback to clipboard
-    }
+    } catch (_) {}
   }
 
   try {
@@ -362,7 +476,7 @@ async function shareNativeOrCopy() {
   } catch (_) {}
 }
 
-// 7. FAQ Accordion
+// 8. FAQ Accordion
 function toggleFaq(index) {
   const items = document.querySelectorAll(".faq-item");
   items.forEach((item, idx) => {
@@ -377,14 +491,18 @@ function toggleFaq(index) {
   });
 }
 
-// 8. Booking Modal
-function openBookingModal(defaultBike = "") {
+// 9. Booking Modal
+function openBookingModal(defaultBike = "", precheckBolt = false) {
   const modal = document.getElementById("booking-modal");
   const bikeSelect = document.getElementById("booking-bike-select");
   const dateInput = document.getElementById("booking-date-input");
+  const boltCheck = document.getElementById("booking-bolt-checkbox");
 
   if (bikeSelect && defaultBike) {
     bikeSelect.value = defaultBike;
+  }
+  if (boltCheck && precheckBolt) {
+    boltCheck.checked = true;
   }
   if (dateInput && !dateInput.value) {
     const today = new Date().toISOString().split("T")[0];
@@ -409,9 +527,9 @@ function submitBookingModal(e) {
   const date = document.getElementById("booking-date-input")?.value || "Aujourd'hui";
   const needBolt = document.getElementById("booking-bolt-checkbox")?.checked;
 
-  let message = `Bonjour Gordo Taller ! 🏍️\nJe souhaite réserver une moto :\n• Modèle : ${bike}\n• Formule : ${plan}\n• Date de retrait : ${date}`;
+  let message = `Bonjour G&L MOTORS ! 🏍️\nJe souhaite réserver une moto :\n• Modèle : ${bike}\n• Formule : ${plan}\n• Date de retrait : ${date}`;
   if (needBolt) {
-    message += `\n• Option : J'aimerais aussi créer mon compte chauffeur Bolt avec vous.`;
+    message += `\n• Option Bolt : Je souhaite obtenir mon compte chauffeur Bolt GRATUITEMENT avec la moto.`;
   }
 
   const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
@@ -419,9 +537,8 @@ function submitBookingModal(e) {
   closeBookingModal();
 }
 
-// 9. Initialization & Event Listeners
+// 10. Initialization & Event Listeners
 document.addEventListener("DOMContentLoaded", () => {
-  // Dropdown toggles (Currency, Language, Mobile Menu)
   const currBtn = document.getElementById("currency-menu-btn");
   const currDropdown = document.getElementById("currency-dropdown");
   const langBtn = document.getElementById("lang-menu-btn");
@@ -456,18 +573,16 @@ document.addEventListener("DOMContentLoaded", () => {
     mobileMenu?.classList.add("hidden");
   });
 
-  // Close mobile menu when clicking a nav link
   document.querySelectorAll("#mobile-menu a").forEach((link) => {
     link.addEventListener("click", () => {
       mobileMenu?.classList.add("hidden");
     });
   });
 
-  // Initialize language & currency
   setLanguage(currentLang);
   setCurrency(currentCurrency);
+  updateBoltEstimator();
 
-  // Scroll listener
   window.addEventListener("scroll", handleScroll, { passive: true });
   handleScroll();
 });
