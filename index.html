@@ -1,203 +1,1350 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="fr" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gordo Taller | Alquiler de Motos para Bolt en Paraguay</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gordo Taller - Location de motos 150cc à Areguá &amp; Asunción, Paraguay</title>
+  <meta name="description" content="Location de motos 150cc à Areguá et Grand Asunción, Paraguay dès 50.000 Gs/jour. Prêtes pour travailler sur Bolt ou explorer la ville et le lac Ypacaraí. Entretien mécanique 100% inclus." />
+  <meta property="og:title" content="Gordo Taller - Location de motos 150cc à Areguá &amp; Asunción" />
+  <meta property="og:description" content="Parcourez Areguá et Asunción en toute liberté. Motos 150cc dès 50.000 Gs/jour avec entretien mécanique 100% inclus et création de compte Bolt immédiate." />
+  <meta property="og:type" content="website" />
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="style.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Geist', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+            mono: ['Geist Mono', 'ui-monospace', 'SFMono-Regular', 'monospace']
+          }
+        }
+      }
+    };
+  </script>
+  <link rel="stylesheet" href="style.css" />
 </head>
-<body class="bg-gray-50 text-gray-900 font-sans antialiased">
+<body class="antialiased bg-white text-gray-900 selection:bg-black selection:text-white">
 
-  <!-- Navbar -->
-  <nav class="fixed w-full bg-white shadow-md z-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between h-16">
-        <div class="flex items-center">
-          <span class="font-black text-2xl text-blue-900 tracking-tight">GORDO<span class="text-green-500">TALLER</span></span>
+  <!-- ========================================================================
+       FLOATING TOP NAVBAR (SiteNav - exact clone of andaway.com.py/fr)
+       ======================================================================== -->
+  <header class="fixed inset-x-0 top-4 z-50 px-4">
+    <div class="mx-auto flex max-w-6xl items-center justify-between gap-2">
+      
+      <!-- Left: Desktop Nav Pills + Mobile Hamburger -->
+      <div class="relative flex items-center gap-2">
+        <nav aria-label="Primary" class="hidden md:flex items-center gap-1.5">
+          <a href="#services" data-i18n="nav_pricing" class="nav-adaptive-pill px-3.5 py-2 rounded-full border backdrop-blur-sm text-sm font-medium transition-all duration-300 border-white/40 text-white hover:bg-white/10 hover:border-white/70">Tarifs</a>
+          <a href="#testimonials" data-i18n="nav_reviews" class="nav-adaptive-pill px-3.5 py-2 rounded-full border backdrop-blur-sm text-sm font-medium transition-all duration-300 border-white/40 text-white hover:bg-white/10 hover:border-white/70">Avis</a>
+          <a href="#faq" data-i18n="nav_faq" class="nav-adaptive-pill px-3.5 py-2 rounded-full border backdrop-blur-sm text-sm font-medium transition-all duration-300 border-white/40 text-white hover:bg-white/10 hover:border-white/70">FAQ</a>
+          <a href="#contact" data-i18n="nav_contact" class="nav-adaptive-pill px-3.5 py-2 rounded-full border backdrop-blur-sm text-sm font-medium transition-all duration-300 border-white/40 text-white hover:bg-white/10 hover:border-white/70">Contact</a>
+        </nav>
+
+        <!-- Mobile Menu Button -->
+        <button id="mobile-menu-btn" type="button" aria-label="Menu" class="nav-adaptive-pill md:hidden flex items-center justify-center w-10 h-10 rounded-full border backdrop-blur-sm transition-all duration-300 border-white/40 text-white hover:bg-white/10 hover:border-white/70">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+
+        <!-- Mobile Dropdown -->
+        <div id="mobile-menu" class="hidden absolute left-0 top-12 w-56 rounded-2xl border border-gray-200 bg-white/95 backdrop-blur-md shadow-xl py-2 z-50">
+          <a href="#services" data-i18n="nav_pricing" class="block px-4 py-2.5 text-sm font-medium text-gray-800 hover:bg-gray-100">Tarifs</a>
+          <a href="#testimonials" data-i18n="nav_reviews" class="block px-4 py-2.5 text-sm font-medium text-gray-800 hover:bg-gray-100">Avis</a>
+          <a href="#faq" data-i18n="nav_faq" class="block px-4 py-2.5 text-sm font-medium text-gray-800 hover:bg-gray-100">FAQ</a>
+          <a href="#contact" data-i18n="nav_contact" class="block px-4 py-2.5 text-sm font-medium text-gray-800 hover:bg-gray-100">Contact</a>
         </div>
-        <div class="flex items-center">
-          <select id="lang-select" class="bg-gray-100 border-none text-sm rounded-md py-1 px-2 focus:ring-green-500 focus:border-green-500 cursor-pointer font-bold text-gray-700">
-            <option value="castillano">🇵🇾 Castillano (PY)</option>
-            <option value="es">🇪🇸 Español</option>
-            <option value="guarani">🇵🇾 Guarani</option>
-            <option value="fr">🇫🇷 Français</option>
-            <option value="en">🇬🇧 English</option>
-            <option value="de">🇩🇪 Deutsch</option>
-            <option value="it">🇮🇹 Italiano</option>
+      </div>
+
+      <!-- Right: Currency Switcher + Language Switcher + Book CTA -->
+      <div class="flex items-center gap-2">
+        
+        <!-- Currency Switcher -->
+        <div class="relative">
+          <button id="currency-menu-btn" type="button" aria-label="Select currency" class="nav-adaptive-pill flex items-center gap-1.5 px-3 py-2 rounded-full border backdrop-blur-sm text-sm font-medium transition-all duration-300 cursor-pointer border-white/40 text-white hover:bg-white/10 hover:border-white/70">
+            <span id="current-currency-flag" class="text-base leading-none">🇵🇾</span>
+            <span id="current-currency-code" class="hidden sm:inline">PYG</span>
+            <span id="current-currency-symbol" class="text-xs opacity-75">(₲)</span>
+            <svg class="w-3.5 h-3.5 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+
+          <div id="currency-dropdown" class="hidden absolute right-0 mt-2 w-48 rounded-2xl bg-white shadow-xl border border-gray-200 py-1.5 z-50">
+            <button type="button" data-currency-option="PYG" onclick="setCurrency('PYG')" class="w-full px-4 py-2.5 text-left text-sm flex items-center gap-3 hover:bg-gray-100 transition-colors text-gray-900">
+              <span class="text-lg">🇵🇾</span>
+              <div class="flex-1">
+                <div class="font-medium">PYG</div>
+                <div class="text-xs text-gray-500">Guaraní</div>
+              </div>
+              <span class="text-gray-500 font-mono">₲</span>
+            </button>
+            <button type="button" data-currency-option="USD" onclick="setCurrency('USD')" class="w-full px-4 py-2.5 text-left text-sm flex items-center gap-3 hover:bg-gray-100 transition-colors text-gray-900">
+              <span class="text-lg">🇺🇸</span>
+              <div class="flex-1">
+                <div class="font-medium">USD</div>
+                <div class="text-xs text-gray-500">US Dollar</div>
+              </div>
+              <span class="text-gray-500 font-mono">$</span>
+            </button>
+            <button type="button" data-currency-option="EUR" onclick="setCurrency('EUR')" class="w-full px-4 py-2.5 text-left text-sm flex items-center gap-3 hover:bg-gray-100 transition-colors text-gray-900">
+              <span class="text-lg">🇪🇺</span>
+              <div class="flex-1">
+                <div class="font-medium">EUR</div>
+                <div class="text-xs text-gray-500">Euro</div>
+              </div>
+              <span class="text-gray-500 font-mono">€</span>
+            </button>
+            <button type="button" data-currency-option="BRL" onclick="setCurrency('BRL')" class="w-full px-4 py-2.5 text-left text-sm flex items-center gap-3 hover:bg-gray-100 transition-colors text-gray-900">
+              <span class="text-lg">🇧🇷</span>
+              <div class="flex-1">
+                <div class="font-medium">BRL</div>
+                <div class="text-xs text-gray-500">Real</div>
+              </div>
+              <span class="text-gray-500 font-mono">R$</span>
+            </button>
+            <button type="button" data-currency-option="ARS" onclick="setCurrency('ARS')" class="w-full px-4 py-2.5 text-left text-sm flex items-center gap-3 hover:bg-gray-100 transition-colors text-gray-900">
+              <span class="text-lg">🇦🇷</span>
+              <div class="flex-1">
+                <div class="font-medium">ARS</div>
+                <div class="text-xs text-gray-500">Peso Argentino</div>
+              </div>
+              <span class="text-gray-500 font-mono">$</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Language Switcher -->
+        <div class="relative">
+          <button id="lang-menu-btn" type="button" aria-label="Langue" class="nav-adaptive-pill flex items-center gap-1.5 px-3 py-2 rounded-full border backdrop-blur-sm text-sm font-medium transition-all duration-300 cursor-pointer border-white/40 text-white hover:bg-white/10 hover:border-white/70">
+            <span id="current-lang-flag" class="text-base leading-none">🇫🇷</span>
+            <span id="current-lang-code" class="hidden sm:inline">FR</span>
+            <svg class="w-3.5 h-3.5 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+
+          <div id="lang-dropdown" class="hidden absolute right-0 mt-2 w-44 rounded-2xl bg-white shadow-xl border border-gray-200 overflow-hidden py-1 z-50">
+            <button type="button" data-lang-option="fr" onclick="setLanguage('fr')" class="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-left text-gray-700 hover:bg-gray-100">
+              <span class="text-base leading-none">🇫🇷</span><span>Français</span>
+            </button>
+            <button type="button" data-lang-option="es" onclick="setLanguage('es')" class="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-left text-gray-700 hover:bg-gray-100">
+              <span class="text-base leading-none">🇵🇾</span><span>Español</span>
+            </button>
+            <button type="button" data-lang-option="castillano" onclick="setLanguage('castillano')" class="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-left text-gray-700 hover:bg-gray-100">
+              <span class="text-base leading-none">🇦🇷</span><span>Castellano</span>
+            </button>
+            <button type="button" data-lang-option="guarani" onclick="setLanguage('guarani')" class="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-left text-gray-700 hover:bg-gray-100">
+              <span class="text-base leading-none">🇵🇾</span><span>Guaraní</span>
+            </button>
+            <button type="button" data-lang-option="en" onclick="setLanguage('en')" class="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-left text-gray-700 hover:bg-gray-100">
+              <span class="text-base leading-none">🇬🇧</span><span>English</span>
+            </button>
+            <button type="button" data-lang-option="pt" onclick="setLanguage('pt')" class="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-left text-gray-700 hover:bg-gray-100">
+              <span class="text-base leading-none">🇧🇷</span><span>Português</span>
+            </button>
+            <button type="button" data-lang-option="de" onclick="setLanguage('de')" class="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-left text-gray-700 hover:bg-gray-100">
+              <span class="text-base leading-none">🇩🇪</span><span>Deutsch</span>
+            </button>
+            <button type="button" data-lang-option="it" onclick="setLanguage('it')" class="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-left text-gray-700 hover:bg-gray-100">
+              <span class="text-base leading-none">🇮🇹</span><span>Italiano</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Book Now CTA -->
+        <button type="button" onclick="openBookingModal()" data-i18n="nav_book" class="nav-adaptive-cta px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 bg-white text-black hover:bg-gray-100 cursor-pointer">
+          Réserver
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================================
+       FLOATING SCOOTER SCROLL ANIMATION & WHATSAPP BUTTON
+       ======================================================================== -->
+  <div id="flying-scooter" class="fixed top-1/2 -left-32 z-40 pointer-events-none transition-transform duration-75 ease-out">
+    <div class="text-7xl md:text-8xl">🛵</div>
+  </div>
+
+  <a href="https://wa.me/595995620416" target="_blank" rel="noopener noreferrer" aria-label="Contact us on WhatsApp" class="fixed bottom-6 right-6 z-50 bg-[#25D366] hover:bg-[#20BA5A] text-white p-4 rounded-full shadow-2xl transition-all duration-300 hover:scale-110 flex items-center justify-center group">
+    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+    </svg>
+  </a>
+
+  <main class="min-h-screen">
+
+    <!-- ======================================================================
+         SECTION 1: HERO (Fullscreen Video + Parallax + Price Tooltip)
+         ====================================================================== -->
+    <section class="relative min-h-screen flex items-center justify-center px-6 overflow-hidden">
+      <div id="hero-parallax-bg" class="absolute inset-0 z-0">
+        <video autoplay loop muted playsinline poster="assets/couple-scooter.jpg" class="w-full h-full object-cover">
+          <source src="assets/videos/hero-scooter.mp4" type="video/mp4" />
+        </video>
+        <div class="absolute inset-0 bg-black/50"></div>
+      </div>
+
+      <div class="max-w-5xl mx-auto text-center relative z-10 pt-16">
+        <h1 class="text-5xl md:text-7xl font-bold mb-6 text-white tracking-tight">
+          <span data-i18n="hero_title1">Parcourez Areguá &amp; Asunción</span><br />
+          <span data-i18n="hero_title2">en toute liberté.</span>
+        </h1>
+        <p data-i18n="hero_description" class="text-xl md:text-2xl text-gray-100 mb-6 max-w-2xl mx-auto font-light">
+          Location de motos 150cc prêtes pour travailler sur Bolt ou explorer la ville, visiter Areguá et profiter du lac Ypacaraí. Entretien 100% inclus.
+        </p>
+
+        <!-- Starting Price Pill with Hover Tooltip -->
+        <div class="mb-12">
+          <div class="inline-block bg-white/10 backdrop-blur-md border border-white/30 rounded-full px-6 py-2">
+            <p class="text-sm md:text-base text-white/90">
+              <span data-i18n="hero_starting_from">Motos à partir de seulement</span>
+              <span class="price-tooltip-trigger font-bold text-white cursor-help ml-1">
+                <span data-price="hero-daily">₲50.000/jour</span>
+                <span class="price-tooltip absolute bottom-full left-1/2 mb-2 px-3 py-1 bg-white text-black text-xs font-medium rounded-lg shadow-lg whitespace-nowrap z-50">
+                  <span data-price-tooltip="hero-daily">50.000 Gs / jour</span>
+                  <span class="absolute top-full left-1/2 -translate-x-1/2 -mt-1 border-4 border-transparent border-t-white"></span>
+                </span>
+              </span>
+            </p>
+          </div>
+          <p data-i18n="hero_monthly_note" class="text-xs text-white/60 mt-2">
+            *entretien mécanique 100% inclus dans notre propre garage
+          </p>
+        </div>
+
+        <!-- Hero CTAs -->
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <button type="button" onclick="openBookingModal()" data-i18n="hero_book" class="px-8 py-4 bg-white text-black rounded-full font-medium hover:bg-gray-100 transition-all shadow-lg cursor-pointer">
+            Réserver
+          </button>
+          <a href="#services" data-i18n="hero_view_pricing" class="px-8 py-4 border-2 border-white text-white rounded-full font-medium hover:bg-white/10 transition-all backdrop-blur-sm">
+            Voir les tarifs
+          </a>
+        </div>
+      </div>
+
+      <!-- Animated Scroll Mouse Indicator -->
+      <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 animate-bounce">
+        <div class="w-6 h-10 border-2 border-white rounded-full flex items-start justify-center p-2">
+          <div class="w-1 h-2 bg-white rounded-full"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SECTION 2: SCOOTERS / FLEET SHOWCASE (#scooters)
+         ====================================================================== -->
+    <section id="scooters" class="py-32 px-6 bg-gray-50 overflow-hidden">
+      <div class="max-w-7xl mx-auto">
+
+        <!-- Brand Story Header -->
+        <div class="text-center mb-24 max-w-3xl mx-auto">
+          <div class="mb-8 flex justify-center">
+            <div class="w-32 h-32 md:w-36 md:h-36 rounded-3xl bg-black text-white flex flex-col items-center justify-center shadow-xl border-4 border-white">
+              <span class="text-3xl font-black tracking-tighter leading-none">GORDO</span>
+              <span class="text-xs font-mono uppercase tracking-[0.25em] text-gray-300 mt-1">TALLER</span>
+              <span class="text-[10px] text-gray-400 mt-1">AREGUÁ • PY</span>
+            </div>
+          </div>
+          <p data-i18n="brand_story" class="text-lg md:text-xl text-gray-700 leading-relaxed italic font-light">
+            <strong>Gordo Taller</strong> — né de la passion mécanique et de l'appel de la route au Paraguay. Que vous cherchiez à générer des revenus immédiats comme chauffeur Bolt ou à parcourir les rues pavées d'Areguá jusqu'à Asunción et San Bernardino, notre propre atelier garantit des motos fiables, révisées et prêtes à rouler.
+          </p>
+          <p data-i18n="brand_tagline" class="text-xl md:text-2xl font-semibold text-gray-900 mt-6">
+            Roulez librement, travaillez sereinement !
+          </p>
+          <div class="mt-8 w-24 h-0.5 bg-gradient-to-r from-transparent via-gray-400 to-transparent mx-auto"></div>
+        </div>
+
+        <!-- Section Title -->
+        <div class="text-center mb-20">
+          <h2 data-i18n="scooters_title" class="text-4xl md:text-5xl font-bold mb-4">Choisissez votre évasion</h2>
+          <p data-i18n="scooters_subtitle" class="text-xl text-gray-600 max-w-2xl mx-auto">
+            Des motos urbaines économiques aux montures robustes pour travailler ou voyager, notre flotte 150cc entretenue sur place offre le compagnon parfait.
+          </p>
+        </div>
+
+        <!-- 4 Alternating Fleet Showcase Blocks -->
+        <div class="space-y-32">
+
+          <!-- Bike 1: Kenton 150cc -->
+          <div class="grid md:grid-cols-2 gap-12 items-center">
+            <div>
+              <h3 data-i18n="scooter1_essence" class="text-4xl font-bold mb-4 text-gray-900">L'agile économique</h3>
+              <p data-i18n="scooter1_desc" class="text-lg text-gray-700 mb-6 leading-relaxed">
+                Idéale pour enchaîner les courses en ville et réduire votre consommation de carburant au minimum. La Kenton 150cc se faufile partout dans le trafic d'Areguá et du Grand Asunción avec une souplesse exemplaire et une mécanique ultra-fiable.
+              </p>
+              <div class="border-l-4 border-black pl-6 mb-8">
+                <p data-i18n="scooter1_personality" class="text-gray-600 italic">
+                  Vous cherchez la rentabilité maximale et la simplicité au quotidien. Votre moto est taillée pour durer.
+                </p>
+              </div>
+              <p class="text-sm text-gray-400 uppercase tracking-wider">
+                <span data-i18n="model_label">Modèle :</span> <span data-i18n="scooter1_model">Kenton 150cc</span>
+              </p>
+            </div>
+            <div>
+              <div data-scooter-card class="aspect-[4/3] bg-gradient-to-br from-amber-50 via-stone-100 to-amber-100 rounded-3xl flex items-center justify-center relative overflow-hidden p-6 shadow-lg transition-transform duration-200 ease-out">
+                <svg class="absolute inset-0 w-full h-full opacity-20" viewBox="0 0 400 300" fill="none">
+                  <circle cx="320" cy="80" r="60" stroke="currentColor" stroke-width="1" class="text-amber-600" />
+                  <circle cx="320" cy="80" r="40" stroke="currentColor" stroke-width="1" class="text-amber-600" />
+                  <path d="M0 250 Q100 200 200 250 T400 250" stroke="currentColor" stroke-width="2" class="text-amber-700" />
+                </svg>
+                <div class="relative w-full h-full flex items-center justify-center">
+                  <img src="assets/images/kenton.jpg" alt="Kenton 150cc" class="max-h-full max-w-full object-contain rounded-2xl drop-shadow-2xl" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bike 2: Motostar 150 (Alternating Left Image / Right Text) -->
+          <div class="grid md:grid-cols-2 gap-12 items-center md:grid-flow-dense">
+            <div class="md:col-start-2">
+              <h3 data-i18n="scooter2_essence" class="text-4xl font-bold mb-4 text-gray-900">Le sprinteur urbain</h3>
+              <p data-i18n="scooter2_desc" class="text-lg text-gray-700 mb-6 leading-relaxed">
+                Maniable, nerveuse et confortable même sur les routes pavées. La Motostar 150 démarre au quart de tour, se gare partout et offre une position de conduite reposante pour les longues journées de travail sur Bolt ou les balades autour du lac.
+              </p>
+              <div class="border-l-4 border-black pl-6 mb-8">
+                <p data-i18n="scooter2_personality" class="text-gray-600 italic">
+                  Vous préférez investir dans vos projets plutôt que dans le carburant. Circulez vite, garez-vous partout et roulez l'esprit léger.
+                </p>
+              </div>
+              <p class="text-sm text-gray-400 uppercase tracking-wider">
+                <span data-i18n="model_label">Modèle :</span> <span data-i18n="scooter2_model">Motostar 150</span>
+              </p>
+            </div>
+            <div class="md:col-start-1 md:row-start-1">
+              <div data-scooter-card class="aspect-[4/3] bg-gradient-to-br from-sky-50 via-slate-100 to-cyan-100 rounded-3xl flex items-center justify-center relative overflow-hidden p-6 shadow-lg transition-transform duration-200 ease-out">
+                <svg class="absolute inset-0 w-full h-full opacity-20" viewBox="0 0 400 300" fill="none">
+                  <rect x="20" y="180" width="30" height="120" fill="currentColor" class="text-sky-400" />
+                  <rect x="60" y="140" width="40" height="160" fill="currentColor" class="text-sky-500" />
+                  <rect x="110" y="200" width="25" height="100" fill="currentColor" class="text-sky-400" />
+                  <rect x="300" y="160" width="35" height="140" fill="currentColor" class="text-sky-500" />
+                  <rect x="345" y="190" width="30" height="110" fill="currentColor" class="text-sky-400" />
+                </svg>
+                <div class="relative w-full h-full flex items-center justify-center">
+                  <img src="assets/images/motostar.jpg" alt="Motostar 150" class="max-h-full max-w-full object-contain rounded-2xl drop-shadow-2xl" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bike 3: Honda CG 150 -->
+          <div class="grid md:grid-cols-2 gap-12 items-center">
+            <div>
+              <h3 data-i18n="scooter3_essence" class="text-4xl font-bold mb-4 text-gray-900">Le conquérant urbain</h3>
+              <p data-i18n="scooter3_desc" class="text-lg text-gray-700 mb-6 leading-relaxed">
+                Pour celles et ceux qui règnent sur la route. Vous vous faufilez dans la circulation comme un pro, dénichant des raccourcis que d'autres ignorent. La mythique Honda CG est à la hauteur de votre énergie — indestructible, puissante et d'une fiabilité légendaire.
+              </p>
+              <div class="border-l-4 border-black pl-6 mb-8">
+                <p data-i18n="scooter3_personality" class="text-gray-600 italic">
+                  Vous êtes décidé, énergique et toujours en mouvement. La référence absolue pour travailler ou explorer sans limite.
+                </p>
+              </div>
+              <p class="text-sm text-gray-400 uppercase tracking-wider">
+                <span data-i18n="model_label">Modèle :</span> <span data-i18n="scooter3_model">Honda CG 150</span>
+              </p>
+            </div>
+            <div>
+              <div data-scooter-card class="aspect-[4/3] bg-gradient-to-br from-neutral-900 via-neutral-800 to-stone-900 rounded-3xl flex items-center justify-center relative overflow-hidden p-6 shadow-xl transition-transform duration-200 ease-out">
+                <svg class="absolute inset-0 w-full h-full opacity-15" viewBox="0 0 400 300" fill="none">
+                  <line x1="0" y1="50" x2="150" y2="50" stroke="white" stroke-width="3" />
+                  <line x1="30" y1="100" x2="200" y2="100" stroke="white" stroke-width="2" />
+                  <line x1="0" y1="150" x2="120" y2="150" stroke="white" stroke-width="4" />
+                  <polygon points="350,20 400,20 320,300 270,300" fill="url(#redGrad)" />
+                  <defs>
+                    <linearGradient id="redGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#ef4444" stop-opacity="0.6" />
+                      <stop offset="100%" stop-color="#dc2626" stop-opacity="0" />
+                    </linearGradient>
+                  </defs>
+                </svg>
+                <div class="relative w-full h-full flex items-center justify-center">
+                  <img src="assets/images/honda.jpg" alt="Honda CG 150" class="max-h-full max-w-full object-contain rounded-2xl drop-shadow-2xl" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bike 4: Leopard 150 (Alternating Left Image / Right Text) -->
+          <div class="grid md:grid-cols-2 gap-12 items-center md:grid-flow-dense">
+            <div class="md:col-start-2">
+              <h3 data-i18n="scooter4_essence" class="text-4xl font-bold mb-4 text-gray-900">La route ouverte</h3>
+              <p data-i18n="scooter4_desc" class="text-lg text-gray-700 mb-6 leading-relaxed">
+                Vous voulez de l'espace, une assise stable et un moteur 150cc souple qui répond présent aussi bien sur les collines d'Areguá que sur les grands axes d'Asunción. Révisée intégralement dans notre atelier Gordo Taller, la Leopard 150 vous porte tout simplement, jour après jour.
+              </p>
+              <div class="border-l-4 border-black pl-6 mb-8">
+                <p data-i18n="scooter4_personality" class="text-gray-600 italic">
+                  Robuste, équilibrée et polyvalente. Que ce soit pour enchaîner les trajets quotidiens ou filer vers San Bernardino le week-end.
+                </p>
+              </div>
+              <p class="text-sm text-gray-400 uppercase tracking-wider">
+                <span data-i18n="model_label">Modèle :</span> <span data-i18n="scooter4_model">Leopard 150</span>
+              </p>
+            </div>
+            <div class="md:col-start-1 md:row-start-1">
+              <div data-scooter-card class="aspect-[4/3] bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-100 rounded-3xl flex items-center justify-center relative overflow-hidden p-6 shadow-lg transition-transform duration-200 ease-out">
+                <svg class="absolute inset-0 w-full h-full opacity-20" viewBox="0 0 400 300" fill="none">
+                  <path d="M0 280 Q200 180 400 220" stroke="currentColor" stroke-width="40" class="text-teal-500" stroke-linecap="round" />
+                  <circle cx="80" cy="60" r="35" fill="currentColor" class="text-amber-400" opacity="0.5" />
+                </svg>
+                <div class="relative w-full h-full flex items-center justify-center">
+                  <img src="assets/images/leopard.jpg" alt="Leopard 150" class="max-h-full max-w-full object-contain rounded-2xl drop-shadow-2xl" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SECTION 3: SERVICES / PRICING (#services - exact target of /fr#services)
+         ====================================================================== -->
+    <section id="services" class="py-32 px-6 bg-white">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-20">
+          <h2 data-i18n="services_title" class="text-4xl md:text-5xl font-bold mb-4">Des tarifs simples et transparents</h2>
+          <p data-i18n="services_subtitle" class="text-xl text-gray-600 max-w-2xl mx-auto">
+            Choisissez la moto qui correspond à votre aventure ou à votre activité
+          </p>
+        </div>
+
+        <!-- 4 Pricing Cards Grid -->
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+
+          <!-- Card 1: Kenton -->
+          <div class="p-8 rounded-3xl border transition-all duration-300 flex flex-col bg-white border-gray-200 hover:border-gray-400 hover:shadow-xl">
+            <div class="mb-6">
+              <p data-i18n="card1_tagline" class="text-xs uppercase tracking-wider mb-1 text-gray-400">Agile et économique</p>
+              <div class="flex items-baseline justify-between">
+                <h3 data-i18n="card1_name" class="text-2xl font-semibold">Kenton</h3>
+                <span class="text-sm font-mono text-gray-400">150cc</span>
+              </div>
+            </div>
+
+            <div class="mb-6">
+              <p data-i18n="services_daily_title" class="text-xs uppercase tracking-wider mb-1 text-gray-400">Locations journalières</p>
+              <div class="price-tooltip-trigger text-4xl font-bold cursor-help">
+                <span data-price="daily">₲50.000/jour</span>
+                <span class="price-tooltip absolute bottom-full left-1/2 mb-2 px-3 py-1 bg-gray-900 text-white text-xs font-medium rounded-lg shadow-lg whitespace-nowrap z-50">
+                  <span data-price-tooltip="daily">50.000 Gs / jour</span>
+                  <span class="absolute top-full left-1/2 -translate-x-1/2 -mt-1 border-4 border-transparent border-t-gray-900"></span>
+                </span>
+              </div>
+            </div>
+
+            <div class="space-y-3 mb-8 pt-6 border-t border-gray-100">
+              <div class="flex justify-between items-baseline">
+                <span data-i18n="services_weekly_title" class="text-sm text-gray-500">Locations hebdomadaires</span>
+                <div class="price-tooltip-trigger text-lg font-semibold cursor-help">
+                  <span data-price="weekly">₲350.000</span>
+                  <span class="price-tooltip absolute bottom-full left-1/2 mb-2 px-3 py-1 bg-gray-900 text-white text-xs font-medium rounded-lg shadow-lg whitespace-nowrap z-50">
+                    <span data-price-tooltip="weekly">~₲50.000/jour</span>
+                    <span class="absolute top-full left-1/2 -translate-x-1/2 -mt-1 border-4 border-transparent border-t-gray-900"></span>
+                  </span>
+                </div>
+              </div>
+              <div class="flex justify-between items-baseline">
+                <span data-i18n="services_monthly_title" class="text-sm text-gray-500">Locations mensuelles</span>
+                <div class="price-tooltip-trigger text-lg font-semibold cursor-help">
+                  <span data-price="monthly">₲1.500.000</span>
+                  <span class="price-tooltip absolute bottom-full left-1/2 mb-2 px-3 py-1 bg-gray-900 text-white text-xs font-medium rounded-lg shadow-lg whitespace-nowrap z-50">
+                    <span data-price-tooltip="monthly">~₲50.000/jour</span>
+                    <span class="absolute top-full left-1/2 -translate-x-1/2 -mt-1 border-4 border-transparent border-t-gray-900"></span>
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <p data-i18n="card1_desc" class="text-sm mb-8 flex-grow text-gray-600">
+              Parfaite pour les trajets quotidiens à Areguá, Luque et Asunción avec une consommation minimale.
+            </p>
+
+            <button type="button" onclick="openBookingModal('Kenton 150cc')" data-i18n="services_get_started" class="block w-full py-4 rounded-full font-medium transition-colors text-center bg-black text-white hover:bg-gray-800 cursor-pointer">
+              Commencer
+            </button>
+          </div>
+
+          <!-- Card 2: Motostar -->
+          <div class="p-8 rounded-3xl border transition-all duration-300 flex flex-col bg-white border-gray-200 hover:border-gray-400 hover:shadow-xl">
+            <div class="mb-6">
+              <p data-i18n="card2_tagline" class="text-xs uppercase tracking-wider mb-1 text-gray-400">Croiseur urbain</p>
+              <div class="flex items-baseline justify-between">
+                <h3 data-i18n="card2_name" class="text-2xl font-semibold">Motostar</h3>
+                <span class="text-sm font-mono text-gray-400">150cc</span>
+              </div>
+            </div>
+
+            <div class="mb-6">
+              <p data-i18n="services_daily_title" class="text-xs uppercase tracking-wider mb-1 text-gray-400">Locations journalières</p>
+              <div class="price-tooltip-trigger text-4xl font-bold cursor-help">
+                <span data-price="daily">₲50.000/jour</span>
+                <span class="price-tooltip absolute bottom-full left-1/2 mb-2 px-3 py-1 bg-gray-900 text-white text-xs font-medium rounded-lg shadow-lg whitespace-nowrap z-50">
+                  <span data-price-tooltip="daily">50.000 Gs / jour</span>
+                  <span class="absolute top-full left-1/2 -translate-x-1/2 -mt-1 border-4 border-transparent border-t-gray-900"></span>
+                </span>
+              </div>
+            </div>
+
+            <div class="space-y-3 mb-8 pt-6 border-t border-gray-100">
+              <div class="flex justify-between items-baseline">
+                <span data-i18n="services_weekly_title" class="text-sm text-gray-500">Locations hebdomadaires</span>
+                <div class="price-tooltip-trigger text-lg font-semibold cursor-help">
+                  <span data-price="weekly">₲350.000</span>
+                  <span class="price-tooltip absolute bottom-full left-1/2 mb-2 px-3 py-1 bg-gray-900 text-white text-xs font-medium rounded-lg shadow-lg whitespace-nowrap z-50">
+                    <span data-price-tooltip="weekly">~₲50.000/jour</span>
+                    <span class="absolute top-full left-1/2 -translate-x-1/2 -mt-1 border-4 border-transparent border-t-gray-900"></span>
+                  </span>
+                </div>
+              </div>
+              <div class="flex justify-between items-baseline">
+                <span data-i18n="services_monthly_title" class="text-sm text-gray-500">Locations mensuelles</span>
+                <div class="price-tooltip-trigger text-lg font-semibold cursor-help">
+                  <span data-price="monthly">₲1.500.000</span>
+                  <span class="price-tooltip absolute bottom-full left-1/2 mb-2 px-3 py-1 bg-gray-900 text-white text-xs font-medium rounded-lg shadow-lg whitespace-nowrap z-50">
+                    <span data-price-tooltip="monthly">~₲50.000/jour</span>
+                    <span class="absolute top-full left-1/2 -translate-x-1/2 -mt-1 border-4 border-transparent border-t-gray-900"></span>
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <p data-i18n="card2_desc" class="text-sm mb-8 flex-grow text-gray-600">
+              Idéale pour travailler sur Bolt dès le premier jour ou explorer la région du lac Ypacaraí.
+            </p>
+
+            <button type="button" onclick="openBookingModal('Motostar 150')" data-i18n="services_get_started" class="block w-full py-4 rounded-full font-medium transition-colors text-center bg-black text-white hover:bg-gray-800 cursor-pointer">
+              Commencer
+            </button>
+          </div>
+
+          <!-- Card 3: Honda CG (Featured Dark Card - identical to Andaway's Road Power card) -->
+          <div class="p-8 rounded-3xl border transition-all duration-300 flex flex-col bg-black text-white border-gray-800 hover:border-gray-600 hover:shadow-2xl">
+            <div class="mb-6">
+              <p data-i18n="card3_tagline" class="text-xs uppercase tracking-wider mb-1 text-gray-400">Conquérant urbain</p>
+              <div class="flex items-baseline justify-between">
+                <h3 data-i18n="card3_name" class="text-2xl font-semibold">Honda CG</h3>
+                <span class="text-sm font-mono text-gray-500">150cc</span>
+              </div>
+            </div>
+
+            <div class="mb-6">
+              <p data-i18n="services_daily_title" class="text-xs uppercase tracking-wider mb-1 text-gray-400">Locations journalières</p>
+              <div class="price-tooltip-trigger text-4xl font-bold cursor-help">
+                <span data-price="daily">₲50.000/jour</span>
+                <span class="price-tooltip absolute bottom-full left-1/2 mb-2 px-3 py-1 bg-white text-black text-xs font-medium rounded-lg shadow-lg whitespace-nowrap z-50">
+                  <span data-price-tooltip="daily">50.000 Gs / jour</span>
+                  <span class="absolute top-full left-1/2 -translate-x-1/2 -mt-1 border-4 border-transparent border-t-white"></span>
+                </span>
+              </div>
+            </div>
+
+            <div class="space-y-3 mb-8 pt-6 border-t border-gray-800">
+              <div class="flex justify-between items-baseline">
+                <span data-i18n="services_weekly_title" class="text-sm text-gray-400">Locations hebdomadaires</span>
+                <div class="price-tooltip-trigger text-lg font-semibold cursor-help">
+                  <span data-price="weekly">₲350.000</span>
+                  <span class="price-tooltip absolute bottom-full left-1/2 mb-2 px-3 py-1 bg-white text-black text-xs font-medium rounded-lg shadow-lg whitespace-nowrap z-50">
+                    <span data-price-tooltip="weekly">~₲50.000/jour</span>
+                    <span class="absolute top-full left-1/2 -translate-x-1/2 -mt-1 border-4 border-transparent border-t-white"></span>
+                  </span>
+                </div>
+              </div>
+              <div class="flex justify-between items-baseline">
+                <span data-i18n="services_monthly_title" class="text-sm text-gray-400">Locations mensuelles</span>
+                <div class="price-tooltip-trigger text-lg font-semibold cursor-help">
+                  <span data-price="monthly">₲1.500.000</span>
+                  <span class="price-tooltip absolute bottom-full left-1/2 mb-2 px-3 py-1 bg-white text-black text-xs font-medium rounded-lg shadow-lg whitespace-nowrap z-50">
+                    <span data-price-tooltip="monthly">~₲50.000/jour</span>
+                    <span class="absolute top-full left-1/2 -translate-x-1/2 -mt-1 border-4 border-transparent border-t-white"></span>
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <p data-i18n="card3_desc" class="text-sm mb-8 flex-grow text-gray-400">
+              La référence absolue en fiabilité et confort pour les conducteurs exigeants et les longues journées.
+            </p>
+
+            <button type="button" onclick="openBookingModal('Honda CG 150')" data-i18n="services_get_started" class="block w-full py-4 rounded-full font-medium transition-colors text-center bg-white text-black hover:bg-gray-100 cursor-pointer">
+              Commencer
+            </button>
+          </div>
+
+          <!-- Card 4: Leopard -->
+          <div class="p-8 rounded-3xl border transition-all duration-300 flex flex-col bg-white border-gray-200 hover:border-gray-400 hover:shadow-xl">
+            <div class="mb-6">
+              <p data-i18n="card4_tagline" class="text-xs uppercase tracking-wider mb-1 text-gray-400">Conduite robuste</p>
+              <div class="flex items-baseline justify-between">
+                <h3 data-i18n="card4_name" class="text-2xl font-semibold">Leopard</h3>
+                <span class="text-sm font-mono text-gray-400">150cc</span>
+              </div>
+            </div>
+
+            <div class="mb-6">
+              <p data-i18n="services_daily_title" class="text-xs uppercase tracking-wider mb-1 text-gray-400">Locations journalières</p>
+              <div class="price-tooltip-trigger text-4xl font-bold cursor-help">
+                <span data-price="daily">₲50.000/jour</span>
+                <span class="price-tooltip absolute bottom-full left-1/2 mb-2 px-3 py-1 bg-gray-900 text-white text-xs font-medium rounded-lg shadow-lg whitespace-nowrap z-50">
+                  <span data-price-tooltip="daily">50.000 Gs / jour</span>
+                  <span class="absolute top-full left-1/2 -translate-x-1/2 -mt-1 border-4 border-transparent border-t-gray-900"></span>
+                </span>
+              </div>
+            </div>
+
+            <div class="space-y-3 mb-8 pt-6 border-t border-gray-100">
+              <div class="flex justify-between items-baseline">
+                <span data-i18n="services_weekly_title" class="text-sm text-gray-500">Locations hebdomadaires</span>
+                <div class="price-tooltip-trigger text-lg font-semibold cursor-help">
+                  <span data-price="weekly">₲350.000</span>
+                  <span class="price-tooltip absolute bottom-full left-1/2 mb-2 px-3 py-1 bg-gray-900 text-white text-xs font-medium rounded-lg shadow-lg whitespace-nowrap z-50">
+                    <span data-price-tooltip="weekly">~₲50.000/jour</span>
+                    <span class="absolute top-full left-1/2 -translate-x-1/2 -mt-1 border-4 border-transparent border-t-gray-900"></span>
+                  </span>
+                </div>
+              </div>
+              <div class="flex justify-between items-baseline">
+                <span data-i18n="services_monthly_title" class="text-sm text-gray-500">Locations mensuelles</span>
+                <div class="price-tooltip-trigger text-lg font-semibold cursor-help">
+                  <span data-price="monthly">₲1.500.000</span>
+                  <span class="price-tooltip absolute bottom-full left-1/2 mb-2 px-3 py-1 bg-gray-900 text-white text-xs font-medium rounded-lg shadow-lg whitespace-nowrap z-50">
+                    <span data-price-tooltip="monthly">~₲50.000/jour</span>
+                    <span class="absolute top-full left-1/2 -translate-x-1/2 -mt-1 border-4 border-transparent border-t-gray-900"></span>
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <p data-i18n="card4_desc" class="text-sm mb-8 flex-grow text-gray-600">
+              Le meilleur rapport qualité-prix pour rouler en toute sécurité avec entretien mécanique 100% inclus.
+            </p>
+
+            <button type="button" onclick="openBookingModal('Leopard 150')" data-i18n="services_get_started" class="block w-full py-4 rounded-full font-medium transition-colors text-center bg-black text-white hover:bg-gray-800 cursor-pointer">
+              Commencer
+            </button>
+          </div>
+
+        </div>
+
+        <!-- Accepted Payment Methods & Infinite Marquee -->
+        <div class="mt-20 text-center">
+          <p data-i18n="payment_methods" class="text-sm text-gray-500 uppercase tracking-wider mb-8">Moyens de paiement acceptés</p>
+          <div class="mb-10 flex justify-center">
+            <div class="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-orange-50 to-amber-50 border-2 border-orange-200 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+              <img src="assets/bitcoin-lightning.png" alt="Bitcoin Lightning Accepted Here" class="h-12 w-auto object-contain" />
+            </div>
+          </div>
+
+          <div class="relative overflow-hidden py-4">
+            <div class="animate-scroll-left flex items-center gap-12 whitespace-nowrap">
+              <!-- Set 1 -->
+              <div class="flex items-center gap-12 px-6">
+                <img src="assets/payment-logos/visa.png" alt="Visa" class="h-9 w-auto object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all" />
+                <img src="assets/payment-logos/mastercard.png" alt="Mastercard" class="h-9 w-auto object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all" />
+                <img src="assets/payment-logos/amex.png" alt="American Express" class="h-9 w-auto object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all" />
+                <img src="assets/payment-logos/diners-club.png" alt="Diners Club" class="h-9 w-auto object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all" />
+                <img src="assets/payment-logos/maestro.png" alt="Maestro" class="h-9 w-auto object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all" />
+                <img src="assets/payment-logos/discover.png" alt="Discover" class="h-9 w-auto object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all" />
+                <img src="assets/payment-logos/bancard-check.png" alt="Bancard" class="h-9 w-auto object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all" />
+                <img src="assets/payment-logos/cabal.png" alt="Cabal" class="h-9 w-auto object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all" />
+                <img src="assets/payment-logos/panal.png" alt="Panal" class="h-9 w-auto object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all" />
+                <img src="assets/payment-logos/unica.png" alt="Única" class="h-9 w-auto object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all" />
+                <img src="assets/payment-logos/zimple.png" alt="Zimple" class="h-9 w-auto object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all" />
+                <img src="assets/payment-logos/infonet.png" alt="Infonet" class="h-9 w-auto object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all" />
+                <div class="inline-flex items-center gap-2 text-gray-500 font-medium text-sm">
+                  <svg class="w-7 h-7 text-emerald-600" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                    <rect x="2" y="6" width="20" height="12" rx="2" />
+                    <circle cx="12" cy="12" r="3" />
+                    <path d="M6 12h.01M18 12h.01" />
+                  </svg>
+                  <span data-i18n="payment_cash">Espèces</span>
+                </div>
+              </div>
+              <!-- Set 2 (Duplicate for seamless infinite loop) -->
+              <div class="flex items-center gap-12 px-6" aria-hidden="true">
+                <img src="assets/payment-logos/visa.png" alt="Visa" class="h-9 w-auto object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all" />
+                <img src="assets/payment-logos/mastercard.png" alt="Mastercard" class="h-9 w-auto object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all" />
+                <img src="assets/payment-logos/amex.png" alt="American Express" class="h-9 w-auto object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all" />
+                <img src="assets/payment-logos/diners-club.png" alt="Diners Club" class="h-9 w-auto object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all" />
+                <img src="assets/payment-logos/maestro.png" alt="Maestro" class="h-9 w-auto object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all" />
+                <img src="assets/payment-logos/discover.png" alt="Discover" class="h-9 w-auto object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all" />
+                <img src="assets/payment-logos/bancard-check.png" alt="Bancard" class="h-9 w-auto object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all" />
+                <img src="assets/payment-logos/cabal.png" alt="Cabal" class="h-9 w-auto object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all" />
+                <img src="assets/payment-logos/panal.png" alt="Panal" class="h-9 w-auto object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all" />
+                <img src="assets/payment-logos/unica.png" alt="Única" class="h-9 w-auto object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all" />
+                <img src="assets/payment-logos/zimple.png" alt="Zimple" class="h-9 w-auto object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all" />
+                <img src="assets/payment-logos/infonet.png" alt="Infonet" class="h-9 w-auto object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all" />
+                <div class="inline-flex items-center gap-2 text-gray-500 font-medium text-sm">
+                  <svg class="w-7 h-7 text-emerald-600" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+                    <rect x="2" y="6" width="20" height="12" rx="2" />
+                    <circle cx="12" cy="12" r="3" />
+                    <path d="M6 12h.01M18 12h.01" />
+                  </svg>
+                  <span data-i18n="payment_cash">Espèces</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SECTION 4: ABOUT (Your city, our workshop + Parallax Photo)
+         ====================================================================== -->
+    <section class="py-32 px-6 bg-gray-50 overflow-hidden">
+      <div class="max-w-6xl mx-auto">
+        <div class="grid md:grid-cols-2 gap-16 items-center">
+          <div>
+            <div class="mb-8">
+              <div class="w-24 h-24 rounded-2xl bg-black text-white flex flex-col items-center justify-center shadow-md">
+                <span class="text-xl font-black tracking-tighter leading-none">GORDO</span>
+                <span class="text-[10px] font-mono uppercase tracking-[0.2em] text-gray-300 mt-1">TALLER</span>
+              </div>
+            </div>
+            <h2 class="text-5xl md:text-6xl font-bold mb-6 tracking-tight">
+              <span data-i18n="about_title1">Votre liberté,</span><br />
+              <span data-i18n="about_title2">notre atelier.</span>
+            </h2>
+            <p data-i18n="about_desc1" class="text-xl text-gray-600 mb-6 leading-relaxed">
+              Parcourez Areguá et les quartiers animés du Grand Asunción en évitant les embouteillages, ou lancez votre activité de chauffeur moto Bolt dès aujourd'hui. Nous vous créons votre compte Bolt sur place si vous n'en avez pas encore.
+            </p>
+            <p data-i18n="about_desc2" class="text-xl text-gray-600 mb-8 leading-relaxed">
+              Contrairement aux agences classiques, Gordo Taller possède son propre garage mécanique : chaque moto est contrôlée, entretenue et réparée par nos soins sans frais cachés pour l'usure normale.
+            </p>
+            <div class="space-y-4">
+              <div class="flex items-start gap-4">
+                <div class="w-1.5 h-1.5 bg-black rounded-full mt-3 flex-shrink-0"></div>
+                <div>
+                  <h4 data-i18n="about_b1_title" class="font-semibold text-lg mb-1">Atelier mécanique intégré</h4>
+                  <p data-i18n="about_b1_desc" class="text-gray-600">Entretien régulier, vidanges et suivi mécanique assurés directement dans notre garage Gordo Taller</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-4">
+                <div class="w-1.5 h-1.5 bg-black rounded-full mt-3 flex-shrink-0"></div>
+                <div>
+                  <h4 data-i18n="about_b2_title" class="font-semibold text-lg mb-1">Compte Bolt &amp; Conditions souples</h4>
+                  <p data-i18n="about_b2_desc" class="text-gray-600">50.000 Gs/jour, création immédiate de votre compte Bolt et formules à la journée, semaine ou mois</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-4">
+                <div class="w-1.5 h-1.5 bg-black rounded-full mt-3 flex-shrink-0"></div>
+                <div>
+                  <h4 data-i18n="about_b3_title" class="font-semibold text-lg mb-1">Toujours disponible</h4>
+                  <p data-i18n="about_b3_desc" class="text-gray-600">Assistance réactive sur WhatsApp et retrait rapide à Cacique Areguá</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="relative aspect-square rounded-3xl overflow-hidden shadow-2xl">
+            <img id="about-parallax-img" src="assets/couple-scooter.jpg" alt="Location de motos à Areguá et Asunción" class="w-full h-full object-cover scale-110 transition-transform duration-200 ease-out" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SECTION 5: VIDEO SHOWCASE (#video - 9:16 Vertical Video with Sound Toggle)
+         ====================================================================== -->
+    <section id="video" class="bg-neutral-950 px-6 py-32 text-white">
+      <div class="mx-auto max-w-5xl">
+        <div class="mb-14 text-center">
+          <h2 data-i18n="video_title" class="mb-4 text-4xl font-bold tracking-tight md:text-5xl">Semez les bouchons</h2>
+          <p data-i18n="video_subtitle" class="mx-auto max-w-xl text-lg text-neutral-400 md:text-xl">
+            Pendant que la ville est à l'arrêt, vous avancez et gagnez du temps.
+          </p>
+        </div>
+
+        <div class="relative mx-auto aspect-[9/16] w-full max-w-[380px] overflow-hidden rounded-3xl bg-neutral-900 shadow-2xl ring-1 ring-white/10">
+          <video id="showcase-video" src="assets/videos/skip-traffic-en.mp4" poster="assets/videos/skip-traffic-poster.jpg" autoplay loop muted playsinline preload="metadata" class="h-full w-full object-cover"></video>
+          <button type="button" onclick="toggleVideoSound()" aria-label="Toucher pour le son" class="absolute bottom-4 right-4 flex items-center gap-2 rounded-full bg-black/70 px-4 py-2 text-xs font-medium text-white backdrop-blur-md transition hover:bg-black/90 cursor-pointer">
+            <!-- Muted Icon -->
+            <svg id="video-icon-muted" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" />
+            </svg>
+            <!-- Unmuted Icon -->
+            <svg id="video-icon-unmuted" class="hidden h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+            </svg>
+            <span id="video-sound-label" data-i18n="video_tap_sound">Toucher pour le son</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SECTION 6: TESTIMONIALS (#testimonials - Google 5.0 Reviews Grid)
+         ====================================================================== -->
+    <section id="testimonials" class="bg-white px-6 py-32">
+      <div class="mx-auto max-w-7xl">
+        <div class="mb-16 text-center">
+          <h2 data-i18n="testimonials_title" class="mb-4 text-4xl font-bold tracking-tight md:text-5xl">Ce que disent les riders</h2>
+          <p data-i18n="testimonials_subtitle" class="mx-auto max-w-2xl text-xl text-gray-600">
+            De vrais avis de vrais pilotes sur les routes d'Areguá et d'Asunción.
+          </p>
+
+          <!-- Google Rating Summary -->
+          <div class="mt-8 inline-flex flex-wrap items-center justify-center gap-3 rounded-full border border-gray-200 bg-gray-50 px-5 py-2.5 text-sm">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" aria-hidden="true">
+              <path fill="#4285F4" d="M23.49 12.27c0-.79-.07-1.54-.19-2.27H12v4.51h6.47c-.29 1.48-1.14 2.73-2.4 3.58v3h3.86c2.26-2.09 3.56-5.17 3.56-8.82z" />
+              <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.86-3c-1.08.72-2.45 1.16-4.07 1.16-3.13 0-5.78-2.11-6.73-4.96H1.29v3.09C3.26 21.3 7.31 24 12 24z" />
+              <path fill="#FBBC05" d="M5.27 14.29c-.25-.72-.38-1.49-.38-2.29s.13-1.57.38-2.29V6.62H1.29C.47 8.24 0 10.06 0 12s.47 3.76 1.29 5.38l3.98-3.09z" />
+              <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.31 0 3.26 2.7 1.29 6.62l3.98 3.09c.95-2.85 3.6-4.96 6.73-4.96z" />
+            </svg>
+            <span class="font-semibold text-gray-900">5.0</span>
+            <div class="flex items-center gap-0.5 text-amber-400" aria-label="5 out of 5 stars">
+              <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.957a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.368 2.448a1 1 0 00-.364 1.118l1.287 3.957c.3.921-.755 1.688-1.54 1.118l-3.368-2.448a1 1 0 00-1.175 0l-3.368 2.448c-.784.57-1.838-.197-1.539-1.118l1.287-3.957a1 1 0 00-.364-1.118L2.05 9.384c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69l1.299-3.957z" /></svg>
+              <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.957a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.368 2.448a1 1 0 00-.364 1.118l1.287 3.957c.3.921-.755 1.688-1.54 1.118l-3.368-2.448a1 1 0 00-1.175 0l-3.368 2.448c-.784.57-1.838-.197-1.539-1.118l1.287-3.957a1 1 0 00-.364-1.118L2.05 9.384c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69l1.299-3.957z" /></svg>
+              <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.957a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.368 2.448a1 1 0 00-.364 1.118l1.287 3.957c.3.921-.755 1.688-1.54 1.118l-3.368-2.448a1 1 0 00-1.175 0l-3.368 2.448c-.784.57-1.838-.197-1.539-1.118l1.287-3.957a1 1 0 00-.364-1.118L2.05 9.384c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69l1.299-3.957z" /></svg>
+              <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.957a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.368 2.448a1 1 0 00-.364 1.118l1.287 3.957c.3.921-.755 1.688-1.54 1.118l-3.368-2.448a1 1 0 00-1.175 0l-3.368 2.448c-.784.57-1.838-.197-1.539-1.118l1.287-3.957a1 1 0 00-.364-1.118L2.05 9.384c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69l1.299-3.957z" /></svg>
+              <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.957a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.368 2.448a1 1 0 00-.364 1.118l1.287 3.957c.3.921-.755 1.688-1.54 1.118l-3.368-2.448a1 1 0 00-1.175 0l-3.368 2.448c-.784.57-1.838-.197-1.539-1.118l1.287-3.957a1 1 0 00-.364-1.118L2.05 9.384c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69l1.299-3.957z" /></svg>
+            </div>
+            <span data-i18n="testimonials_based_on" class="text-gray-500">D'après 27 avis Google</span>
+            <a href="https://maps.google.com/?q=Cacique+Aregua,+Paraguay" target="_blank" rel="noopener noreferrer" data-i18n="testimonials_read_google" class="font-medium text-gray-900 underline decoration-gray-300 underline-offset-4 hover:decoration-gray-900">
+              Lire tous les avis sur Google
+            </a>
+          </div>
+        </div>
+
+        <!-- 4 Review Cards -->
+        <div class="grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
+
+          <!-- Review 1: Luisa -->
+          <article class="flex flex-col overflow-hidden rounded-3xl border border-gray-200 bg-white shadow-sm transition-shadow duration-300 hover:shadow-xl">
+            <div class="relative h-56 w-full overflow-hidden bg-gray-100">
+              <img src="assets/testimonials/luisa-ride.jpg" alt="Luisa" class="h-full w-full object-cover" />
+            </div>
+            <div class="flex flex-1 flex-col p-6">
+              <div class="mb-3 flex items-center gap-0.5 text-amber-400">
+                <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.957a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.368 2.448a1 1 0 00-.364 1.118l1.287 3.957c.3.921-.755 1.688-1.54 1.118l-3.368-2.448a1 1 0 00-1.175 0l-3.368 2.448c-.784.57-1.838-.197-1.539-1.118l1.287-3.957a1 1 0 00-.364-1.118L2.05 9.384c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69l1.299-3.957z" /></svg>
+                <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.957a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.368 2.448a1 1 0 00-.364 1.118l1.287 3.957c.3.921-.755 1.688-1.54 1.118l-3.368-2.448a1 1 0 00-1.175 0l-3.368 2.448c-.784.57-1.838-.197-1.539-1.118l1.287-3.957a1 1 0 00-.364-1.118L2.05 9.384c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69l1.299-3.957z" /></svg>
+                <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.957a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.368 2.448a1 1 0 00-.364 1.118l1.287 3.957c.3.921-.755 1.688-1.54 1.118l-3.368-2.448a1 1 0 00-1.175 0l-3.368 2.448c-.784.57-1.838-.197-1.539-1.118l1.287-3.957a1 1 0 00-.364-1.118L2.05 9.384c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69l1.299-3.957z" /></svg>
+                <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.957a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.368 2.448a1 1 0 00-.364 1.118l1.287 3.957c.3.921-.755 1.688-1.54 1.118l-3.368-2.448a1 1 0 00-1.175 0l-3.368 2.448c-.784.57-1.838-.197-1.539-1.118l1.287-3.957a1 1 0 00-.364-1.118L2.05 9.384c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69l1.299-3.957z" /></svg>
+                <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.957a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.368 2.448a1 1 0 00-.364 1.118l1.287 3.957c.3.921-.755 1.688-1.54 1.118l-3.368-2.448a1 1 0 00-1.175 0l-3.368 2.448c-.784.57-1.838-.197-1.539-1.118l1.287-3.957a1 1 0 00-.364-1.118L2.05 9.384c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69l1.299-3.957z" /></svg>
+              </div>
+              <blockquote id="review-text-1" class="mb-4 flex-1 text-sm leading-relaxed text-gray-700">
+                "J'ai réservé ma moto à la dernière minute et tout s'est passé super facilement. L'équipe de Gordo Taller m'a même aidé à activer mon compte Bolt et 2 heures plus tard je roulais déjà."
+              </blockquote>
+              <p class="mb-4 text-xs text-gray-400">
+                <span data-i18n="testimonials_translated">Traduit de l'anglais</span> ·
+                <button id="review-toggle-1" type="button" onclick="toggleReviewOriginal(1)" class="underline hover:text-gray-600 cursor-pointer">Voir l'original</button>
+              </p>
+              <footer class="flex items-center gap-3 border-t border-gray-100 pt-4">
+                <img src="assets/testimonials/luisa.png" alt="Luisa" class="h-10 w-10 rounded-full object-cover" />
+                <div class="min-w-0 flex-1">
+                  <div class="flex items-center gap-1.5">
+                    <p class="truncate text-sm font-semibold text-gray-900">Luisa</p>
+                    <span data-i18n="testimonials_local_guide" class="rounded bg-blue-50 px-1.5 py-0.5 text-[10px] font-medium text-blue-700">Guide local</span>
+                  </div>
+                  <p class="text-xs text-gray-500">il y a 2 semaines</p>
+                </div>
+              </footer>
+            </div>
+          </article>
+
+          <!-- Review 2: Andrés -->
+          <article class="flex flex-col overflow-hidden rounded-3xl border border-gray-200 bg-white shadow-sm transition-shadow duration-300 hover:shadow-xl">
+            <div class="relative h-56 w-full overflow-hidden bg-gray-100">
+              <img src="assets/testimonials/andres-ride.jpg" alt="Andrés" class="h-full w-full object-cover" />
+            </div>
+            <div class="flex flex-1 flex-col p-6">
+              <div class="mb-3 flex items-center gap-0.5 text-amber-400">
+                <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.957a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.368 2.448a1 1 0 00-.364 1.118l1.287 3.957c.3.921-.755 1.688-1.54 1.118l-3.368-2.448a1 1 0 00-1.175 0l-3.368 2.448c-.784.57-1.838-.197-1.539-1.118l1.287-3.957a1 1 0 00-.364-1.118L2.05 9.384c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69l1.299-3.957z" /></svg>
+                <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.957a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.368 2.448a1 1 0 00-.364 1.118l1.287 3.957c.3.921-.755 1.688-1.54 1.118l-3.368-2.448a1 1 0 00-1.175 0l-3.368 2.448c-.784.57-1.838-.197-1.539-1.118l1.287-3.957a1 1 0 00-.364-1.118L2.05 9.384c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69l1.299-3.957z" /></svg>
+                <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.957a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.368 2.448a1 1 0 00-.364 1.118l1.287 3.957c.3.921-.755 1.688-1.54 1.118l-3.368-2.448a1 1 0 00-1.175 0l-3.368 2.448c-.784.57-1.838-.197-1.539-1.118l1.287-3.957a1 1 0 00-.364-1.118L2.05 9.384c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69l1.299-3.957z" /></svg>
+                <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.957a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.368 2.448a1 1 0 00-.364 1.118l1.287 3.957c.3.921-.755 1.688-1.54 1.118l-3.368-2.448a1 1 0 00-1.175 0l-3.368 2.448c-.784.57-1.838-.197-1.539-1.118l1.287-3.957a1 1 0 00-.364-1.118L2.05 9.384c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69l1.299-3.957z" /></svg>
+                <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.957a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.368 2.448a1 1 0 00-.364 1.118l1.287 3.957c.3.921-.755 1.688-1.54 1.118l-3.368-2.448a1 1 0 00-1.175 0l-3.368 2.448c-.784.57-1.838-.197-1.539-1.118l1.287-3.957a1 1 0 00-.364-1.118L2.05 9.384c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69l1.299-3.957z" /></svg>
+              </div>
+              <blockquote id="review-text-2" class="mb-4 flex-1 text-sm leading-relaxed text-gray-700">
+                "Je ne pensais pas que ce serait aussi simple de louer une 150cc à Areguá. À 50.000 Gs par jour avec l'entretien inclus dans leur propre garage, c'est imbattable pour se déplacer sans stress."
+              </blockquote>
+              <p class="mb-4 text-xs text-gray-400">
+                <span data-i18n="testimonials_translated">Traduit de l'espagnol</span> ·
+                <button id="review-toggle-2" type="button" onclick="toggleReviewOriginal(2)" class="underline hover:text-gray-600 cursor-pointer">Voir l'original</button>
+              </p>
+              <footer class="flex items-center gap-3 border-t border-gray-100 pt-4">
+                <img src="assets/testimonials/andres.png" alt="Andrés" class="h-10 w-10 rounded-full object-cover" />
+                <div class="min-w-0 flex-1">
+                  <div class="flex items-center gap-1.5">
+                    <p class="truncate text-sm font-semibold text-gray-900">Andrés</p>
+                    <span data-i18n="testimonials_local_guide" class="rounded bg-blue-50 px-1.5 py-0.5 text-[10px] font-medium text-blue-700">Guide local</span>
+                  </div>
+                  <p class="text-xs text-gray-500">il y a un mois</p>
+                </div>
+              </footer>
+            </div>
+          </article>
+
+          <!-- Review 3: Allen -->
+          <article class="flex flex-col overflow-hidden rounded-3xl border border-gray-200 bg-white shadow-sm transition-shadow duration-300 hover:shadow-xl">
+            <div class="relative h-56 w-full overflow-hidden bg-gray-100">
+              <img src="assets/testimonials/allen-ride.jpg" alt="Allen" class="h-full w-full object-cover" />
+            </div>
+            <div class="flex flex-1 flex-col p-6">
+              <div class="mb-3 flex items-center gap-0.5 text-amber-400">
+                <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.957a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.368 2.448a1 1 0 00-.364 1.118l1.287 3.957c.3.921-.755 1.688-1.54 1.118l-3.368-2.448a1 1 0 00-1.175 0l-3.368 2.448c-.784.57-1.838-.197-1.539-1.118l1.287-3.957a1 1 0 00-.364-1.118L2.05 9.384c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69l1.299-3.957z" /></svg>
+                <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.957a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.368 2.448a1 1 0 00-.364 1.118l1.287 3.957c.3.921-.755 1.688-1.54 1.118l-3.368-2.448a1 1 0 00-1.175 0l-3.368 2.448c-.784.57-1.838-.197-1.539-1.118l1.287-3.957a1 1 0 00-.364-1.118L2.05 9.384c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69l1.299-3.957z" /></svg>
+                <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.957a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.368 2.448a1 1 0 00-.364 1.118l1.287 3.957c.3.921-.755 1.688-1.54 1.118l-3.368-2.448a1 1 0 00-1.175 0l-3.368 2.448c-.784.57-1.838-.197-1.539-1.118l1.287-3.957a1 1 0 00-.364-1.118L2.05 9.384c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69l1.299-3.957z" /></svg>
+                <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.957a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.368 2.448a1 1 0 00-.364 1.118l1.287 3.957c.3.921-.755 1.688-1.54 1.118l-3.368-2.448a1 1 0 00-1.175 0l-3.368 2.448c-.784.57-1.838-.197-1.539-1.118l1.287-3.957a1 1 0 00-.364-1.118L2.05 9.384c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69l1.299-3.957z" /></svg>
+                <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.957a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.368 2.448a1 1 0 00-.364 1.118l1.287 3.957c.3.921-.755 1.688-1.54 1.118l-3.368-2.448a1 1 0 00-1.175 0l-3.368 2.448c-.784.57-1.838-.197-1.539-1.118l1.287-3.957a1 1 0 00-.364-1.118L2.05 9.384c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69l1.299-3.957z" /></svg>
+              </div>
+              <blockquote id="review-text-3" class="mb-4 flex-1 text-sm leading-relaxed text-gray-700">
+                "Très bonne expérience pour circuler entre Areguá et Asunción, surtout aux heures de pointe. Bonne moto Honda CG, super service mécanique. Il suffit de rouler tranquille, super pratique au quotidien."
+              </blockquote>
+              <p class="mb-4 text-xs text-gray-400">
+                <span data-i18n="testimonials_translated">Traduit de l'anglais</span> ·
+                <button id="review-toggle-3" type="button" onclick="toggleReviewOriginal(3)" class="underline hover:text-gray-600 cursor-pointer">Voir l'original</button>
+              </p>
+              <footer class="flex items-center gap-3 border-t border-gray-100 pt-4">
+                <img src="assets/testimonials/allen.png" alt="Allen" class="h-10 w-10 rounded-full object-cover" />
+                <div class="min-w-0 flex-1">
+                  <div class="flex items-center gap-1.5">
+                    <p class="truncate text-sm font-semibold text-gray-900">Allen</p>
+                    <span data-i18n="testimonials_local_guide" class="rounded bg-blue-50 px-1.5 py-0.5 text-[10px] font-medium text-blue-700">Guide local</span>
+                  </div>
+                  <p class="text-xs text-gray-500">il y a 2 mois</p>
+                </div>
+              </footer>
+            </div>
+          </article>
+
+          <!-- Review 4: Jihyuk -->
+          <article class="flex flex-col overflow-hidden rounded-3xl border border-gray-200 bg-white shadow-sm transition-shadow duration-300 hover:shadow-xl">
+            <div class="relative h-56 w-full overflow-hidden bg-gray-100">
+              <img src="assets/testimonials/jihyuk-ride.jpg" alt="Jihyuk" class="h-full w-full object-cover" />
+            </div>
+            <div class="flex flex-1 flex-col p-6">
+              <div class="mb-3 flex items-center gap-0.5 text-amber-400">
+                <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.957a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.368 2.448a1 1 0 00-.364 1.118l1.287 3.957c.3.921-.755 1.688-1.54 1.118l-3.368-2.448a1 1 0 00-1.175 0l-3.368 2.448c-.784.57-1.838-.197-1.539-1.118l1.287-3.957a1 1 0 00-.364-1.118L2.05 9.384c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69l1.299-3.957z" /></svg>
+                <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.957a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.368 2.448a1 1 0 00-.364 1.118l1.287 3.957c.3.921-.755 1.688-1.54 1.118l-3.368-2.448a1 1 0 00-1.175 0l-3.368 2.448c-.784.57-1.838-.197-1.539-1.118l1.287-3.957a1 1 0 00-.364-1.118L2.05 9.384c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69l1.299-3.957z" /></svg>
+                <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.957a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.368 2.448a1 1 0 00-.364 1.118l1.287 3.957c.3.921-.755 1.688-1.54 1.118l-3.368-2.448a1 1 0 00-1.175 0l-3.368 2.448c-.784.57-1.838-.197-1.539-1.118l1.287-3.957a1 1 0 00-.364-1.118L2.05 9.384c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69l1.299-3.957z" /></svg>
+                <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.957a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.368 2.448a1 1 0 00-.364 1.118l1.287 3.957c.3.921-.755 1.688-1.54 1.118l-3.368-2.448a1 1 0 00-1.175 0l-3.368 2.448c-.784.57-1.838-.197-1.539-1.118l1.287-3.957a1 1 0 00-.364-1.118L2.05 9.384c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69l1.299-3.957z" /></svg>
+                <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.957a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.368 2.448a1 1 0 00-.364 1.118l1.287 3.957c.3.921-.755 1.688-1.54 1.118l-3.368-2.448a1 1 0 00-1.175 0l-3.368 2.448c-.784.57-1.838-.197-1.539-1.118l1.287-3.957a1 1 0 00-.364-1.118L2.05 9.384c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69l1.299-3.957z" /></svg>
+              </div>
+              <blockquote id="review-text-4" class="mb-4 flex-1 text-sm leading-relaxed text-gray-700">
+                "Personnel très sympathique et la moto est en parfait état mécanique. Si vous les prévenez par WhatsApp de votre heure d'arrivée à Cacique Areguá, tout est prêt à l'heure !"
+              </blockquote>
+              <p class="mb-4 text-xs text-gray-400">
+                <span data-i18n="testimonials_translated">Traduit de l'anglais</span> ·
+                <button id="review-toggle-4" type="button" onclick="toggleReviewOriginal(4)" class="underline hover:text-gray-600 cursor-pointer">Voir l'original</button>
+              </p>
+              <footer class="flex items-center gap-3 border-t border-gray-100 pt-4">
+                <img src="assets/testimonials/jihyuk.png" alt="Jihyuk" class="h-10 w-10 rounded-full object-cover" />
+                <div class="min-w-0 flex-1">
+                  <div class="flex items-center gap-1.5">
+                    <p class="truncate text-sm font-semibold text-gray-900">Jihyuk</p>
+                  </div>
+                  <p class="text-xs text-gray-500">il y a 2 mois</p>
+                </div>
+              </footer>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SECTION 7: SOCIAL FOLLOW & SHARE (#follow)
+         ====================================================================== -->
+    <section id="follow" class="bg-gray-50 px-6 py-32">
+      <div class="mx-auto max-w-5xl">
+        <div class="mb-14 text-center">
+          <h2 data-i18n="social_follow_title" class="mb-4 text-4xl font-bold tracking-tight md:text-5xl">Prends la route avec nous</h2>
+          <p data-i18n="social_follow_subtitle" class="mx-auto max-w-xl text-lg text-gray-600 md:text-xl">
+            Motos disponibles, conseils mécaniques et histoires de la route — viens avec nous.
+          </p>
+        </div>
+
+        <!-- 3 Social Cards -->
+        <div class="mb-20 grid gap-6 sm:grid-cols-3">
+          <a href="https://wa.me/595995620416" target="_blank" rel="noopener noreferrer" class="group relative overflow-hidden rounded-3xl p-8 text-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl bg-gradient-to-br from-[#feda75] via-[#d62976] to-[#4f5bd5]">
+            <div class="flex flex-col justify-between h-44">
+              <svg class="h-10 w-10" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+              </svg>
+              <div>
+                <p class="text-xs uppercase tracking-wider opacity-80">Instagram</p>
+                <p class="text-xl font-bold">@gordotaller.py</p>
+              </div>
+              <div class="inline-flex items-center gap-2 text-sm font-medium">
+                <span data-i18n="social_follow_cta">Suivre</span>
+                <span class="transition-transform group-hover:translate-x-1">→</span>
+              </div>
+            </div>
+          </a>
+
+          <a href="https://wa.me/595995620416" target="_blank" rel="noopener noreferrer" class="group relative overflow-hidden rounded-3xl p-8 text-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl bg-black">
+            <div class="flex flex-col justify-between h-44">
+              <svg class="h-10 w-10" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.33 6.33 0 005 20.1a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1-.1z" />
+              </svg>
+              <div>
+                <p class="text-xs uppercase tracking-wider opacity-80">TikTok</p>
+                <p class="text-xl font-bold">@gordotaller.py</p>
+              </div>
+              <div class="inline-flex items-center gap-2 text-sm font-medium">
+                <span data-i18n="social_follow_cta">Suivre</span>
+                <span class="transition-transform group-hover:translate-x-1">→</span>
+              </div>
+            </div>
+          </a>
+
+          <a href="https://wa.me/595995620416" target="_blank" rel="noopener noreferrer" class="group relative overflow-hidden rounded-3xl p-8 text-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl bg-[#1877F2]">
+            <div class="flex flex-col justify-between h-44">
+              <svg class="h-10 w-10" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+              </svg>
+              <div>
+                <p class="text-xs uppercase tracking-wider opacity-80">Facebook</p>
+                <p class="text-xl font-bold">Gordo Taller</p>
+              </div>
+              <div class="inline-flex items-center gap-2 text-sm font-medium">
+                <span data-i18n="social_follow_cta">Suivre</span>
+                <span class="transition-transform group-hover:translate-x-1">→</span>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <!-- Share Widget -->
+        <div class="border-t border-gray-200 pt-16 text-center">
+          <h3 data-i18n="social_share_title" class="mb-2 text-2xl font-bold md:text-3xl">La balade te plaît ?</h3>
+          <p data-i18n="social_share_subtitle" class="mb-8 text-gray-600">Partage Gordo Taller avec un ami.</p>
+
+          <div class="mx-auto mb-8 flex max-w-xl flex-col gap-2.5 text-left">
+            <label data-share-option="0" onclick="selectShareMessage(0)" class="flex cursor-pointer items-center gap-3 rounded-2xl border px-4 py-3 text-sm transition-all border-black bg-black text-white">
+              <input type="radio" name="share-message" class="sr-only" checked />
+              <span class="flex h-4 w-4 flex-shrink-0 items-center justify-center rounded-full border border-white">
+                <span class="h-2 w-2 rounded-full bg-white"></span>
+              </span>
+              <span data-i18n="social_msg1" class="flex-1">Et si on louait des motos chez Gordo Taller à 50.000 Gs/jour ! 🏍️</span>
+            </label>
+
+            <label data-share-option="1" onclick="selectShareMessage(1)" class="flex cursor-pointer items-center gap-3 rounded-2xl border px-4 py-3 text-sm transition-all border-gray-200 bg-white text-gray-700 hover:border-gray-400">
+              <input type="radio" name="share-message" class="sr-only" />
+              <span class="flex h-4 w-4 flex-shrink-0 items-center justify-center rounded-full border border-gray-400"></span>
+              <span data-i18n="social_msg2" class="flex-1">J'ai trouvé le meilleur plan location de motos à Areguá — Gordo Taller (entretien inclus) 🏍️</span>
+            </label>
+
+            <label data-share-option="2" onclick="selectShareMessage(2)" class="flex cursor-pointer items-center gap-3 rounded-2xl border px-4 py-3 text-sm transition-all border-gray-200 bg-white text-gray-700 hover:border-gray-400">
+              <input type="radio" name="share-message" class="sr-only" />
+              <span class="flex h-4 w-4 flex-shrink-0 items-center justify-center rounded-full border border-gray-400"></span>
+              <span data-i18n="social_msg3" class="flex-1">Envie de bosser sur Bolt ou de bouger librement ? Loue ta 150cc chez Gordo Taller 🏍️</span>
+            </label>
+          </div>
+
+          <div class="flex flex-wrap items-center justify-center gap-3">
+            <button type="button" onclick="shareOnWhatsApp()" class="inline-flex items-center gap-2.5 rounded-full bg-[#25D366] px-7 py-3.5 font-medium text-white shadow-sm transition-all hover:bg-[#20BA5A] hover:shadow-md cursor-pointer">
+              <span data-i18n="social_share_whatsapp">Partager sur WhatsApp</span>
+            </button>
+            <button type="button" onclick="shareNativeOrCopy()" class="inline-flex items-center gap-2.5 rounded-full border-2 border-gray-900 bg-white px-7 py-3.5 font-medium text-gray-900 transition-all hover:bg-gray-900 hover:text-white cursor-pointer">
+              <span id="share-copy-label" data-i18n="social_share_btn">Partager</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SECTION 8: FAQ ACCORDION (#faq - 12 Questions)
+         ====================================================================== -->
+    <section id="faq" class="bg-white px-6 py-32">
+      <div class="mx-auto max-w-3xl">
+        <div class="mb-16 text-center">
+          <h2 data-i18n="faq_title" class="mb-4 text-4xl font-bold tracking-tight md:text-5xl">Questions fréquentes</h2>
+          <p data-i18n="faq_subtitle" class="mx-auto max-w-xl text-lg text-gray-600 md:text-xl">
+            Tout ce qu'il faut savoir avant de prendre la route. Encore un doute ? Nous sommes à un message près.
+          </p>
+        </div>
+
+        <div class="divide-y divide-gray-200 border-y border-gray-200">
+          <!-- FAQ 1 -->
+          <div class="faq-item">
+            <button type="button" onclick="toggleFaq(0)" aria-expanded="false" class="faq-trigger flex w-full items-center justify-between gap-6 py-6 text-left transition-colors hover:text-gray-600 cursor-pointer">
+              <span data-i18n="faq1_q" class="text-lg font-semibold text-gray-900 md:text-xl">Quels documents dois-je fournir pour louer une moto ?</span>
+              <span class="faq-icon flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full border border-gray-300 text-gray-700 transition-transform duration-300">
+                <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" /></svg>
+              </span>
+            </button>
+            <div class="faq-answer-wrapper"><div class="faq-answer-inner"><p data-i18n="faq1_a" class="pb-6 pr-12 text-base leading-relaxed text-gray-600">C'est simple et rapide : il vous faut votre Cédula de Identidad (ou passeport valide), votre permis de conduire moto, votre certificat d'Antecedentes Policiales à jour, ainsi que la caution (garantía) prévue au contrat.</p></div></div>
+          </div>
+
+          <!-- FAQ 2 -->
+          <div class="faq-item">
+            <button type="button" onclick="toggleFaq(1)" aria-expanded="false" class="faq-trigger flex w-full items-center justify-between gap-6 py-6 text-left transition-colors hover:text-gray-600 cursor-pointer">
+              <span data-i18n="faq2_q" class="text-lg font-semibold text-gray-900 md:text-xl">Je n'ai pas encore de compte Bolt, pouvez-vous m'aider ?</span>
+              <span class="faq-icon flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full border border-gray-300 text-gray-700 transition-transform duration-300">
+                <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" /></svg>
+              </span>
+            </button>
+            <div class="faq-answer-wrapper"><div class="faq-answer-inner"><p data-i18n="faq2_a" class="pb-6 pr-12 text-base leading-relaxed text-gray-600">Oui, absolument ! Si vous souhaitez louer une moto pour travailler et générer des revenus, nous créons et configurons votre compte chauffeur Bolt directement avec vous lors de la remise des clés.</p></div></div>
+          </div>
+
+          <!-- FAQ 3 -->
+          <div class="faq-item">
+            <button type="button" onclick="toggleFaq(2)" aria-expanded="false" class="faq-trigger flex w-full items-center justify-between gap-6 py-6 text-left transition-colors hover:text-gray-600 cursor-pointer">
+              <span data-i18n="faq3_q" class="text-lg font-semibold text-gray-900 md:text-xl">Faut-il réserver à l'avance ou puis-je louer le jour même ?</span>
+              <span class="faq-icon flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full border border-gray-300 text-gray-700 transition-transform duration-300">
+                <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" /></svg>
+              </span>
+            </button>
+            <div class="faq-answer-wrapper"><div class="faq-answer-inner"><p data-i18n="faq3_a" class="pb-6 pr-12 text-base leading-relaxed text-gray-600">Réserver à l'avance est le moyen le plus sûr d'avoir le modèle de votre choix. Cela dit, écrivez-nous sur WhatsApp même à la dernière minute : si une moto est disponible à l'atelier, vous repartez avec le jour même.</p></div></div>
+          </div>
+
+          <!-- FAQ 4 -->
+          <div class="faq-item">
+            <button type="button" onclick="toggleFaq(3)" aria-expanded="false" class="faq-trigger flex w-full items-center justify-between gap-6 py-6 text-left transition-colors hover:text-gray-600 cursor-pointer">
+              <span data-i18n="faq4_q" class="text-lg font-semibold text-gray-900 md:text-xl">Où puis-je récupérer et rendre la moto ?</span>
+              <span class="faq-icon flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full border border-gray-300 text-gray-700 transition-transform duration-300">
+                <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" /></svg>
+              </span>
+            </button>
+            <div class="faq-answer-wrapper"><div class="faq-answer-inner"><p data-i18n="faq4_a" class="pb-6 pr-12 text-base leading-relaxed text-gray-600">Le retrait et le retour se font directement à notre garage Gordo Taller situé à Cacique Areguá (Areguá, Paraguay). Écrivez-nous sur WhatsApp et nous vous enverrons la localisation exacte.</p></div></div>
+          </div>
+
+          <!-- FAQ 5 -->
+          <div class="faq-item">
+            <button type="button" onclick="toggleFaq(4)" aria-expanded="false" class="faq-trigger flex w-full items-center justify-between gap-6 py-6 text-left transition-colors hover:text-gray-600 cursor-pointer">
+              <span data-i18n="faq5_q" class="text-lg font-semibold text-gray-900 md:text-xl">Comment fonctionne l'entretien mécanique inclus ?</span>
+              <span class="faq-icon flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full border border-gray-300 text-gray-700 transition-transform duration-300">
+                <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" /></svg>
+              </span>
+            </button>
+            <div class="faq-answer-wrapper"><div class="faq-answer-inner"><p data-i18n="faq5_a" class="pb-6 pr-12 text-base leading-relaxed text-gray-600">C'est notre grand avantage : Gordo Taller est notre propre garage mécanique. Les révisions périodiques, vidanges et l'entretien lié à l'usure normale sont 100% pris en charge par notre atelier.</p></div></div>
+          </div>
+
+          <!-- FAQ 6 -->
+          <div class="faq-item">
+            <button type="button" onclick="toggleFaq(5)" aria-expanded="false" class="faq-trigger flex w-full items-center justify-between gap-6 py-6 text-left transition-colors hover:text-gray-600 cursor-pointer">
+              <span data-i18n="faq6_q" class="text-lg font-semibold text-gray-900 md:text-xl">Quel est le tarif exact de la location ?</span>
+              <span class="faq-icon flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full border border-gray-300 text-gray-700 transition-transform duration-300">
+                <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" /></svg>
+              </span>
+            </button>
+            <div class="faq-answer-wrapper"><div class="faq-answer-inner"><p data-i18n="faq6_a" class="pb-6 pr-12 text-base leading-relaxed text-gray-600">Notre tarif de base est de seulement 50.000 Gs par jour (soit 350.000 Gs par semaine ou 1.500.000 Gs pour 30 jours). Tout est clair et sans frais cachés.</p></div></div>
+          </div>
+
+          <!-- FAQ 7 -->
+          <div class="faq-item">
+            <button type="button" onclick="toggleFaq(6)" aria-expanded="false" class="faq-trigger flex w-full items-center justify-between gap-6 py-6 text-left transition-colors hover:text-gray-600 cursor-pointer">
+              <span data-i18n="faq7_q" class="text-lg font-semibold text-gray-900 md:text-xl">Quels modèles de motos proposez-vous ?</span>
+              <span class="faq-icon flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full border border-gray-300 text-gray-700 transition-transform duration-300">
+                <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" /></svg>
+              </span>
+            </button>
+            <div class="faq-answer-wrapper"><div class="faq-answer-inner"><p data-i18n="faq7_a" class="pb-6 pr-12 text-base leading-relaxed text-gray-600">Notre flotte est composée de motos 150cc robustes et économiques parfaitement adaptées aux routes du Paraguay : Kenton 150cc, Motostar 150, Honda CG et Leopard 150.</p></div></div>
+          </div>
+
+          <!-- FAQ 8 -->
+          <div class="faq-item">
+            <button type="button" onclick="toggleFaq(7)" aria-expanded="false" class="faq-trigger flex w-full items-center justify-between gap-6 py-6 text-left transition-colors hover:text-gray-600 cursor-pointer">
+              <span data-i18n="faq8_q" class="text-lg font-semibold text-gray-900 md:text-xl">Quels sont vos horaires d'ouverture ?</span>
+              <span class="faq-icon flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full border border-gray-300 text-gray-700 transition-transform duration-300">
+                <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" /></svg>
+              </span>
+            </button>
+            <div class="faq-answer-wrapper"><div class="faq-answer-inner"><p data-i18n="faq8_a" class="pb-6 pr-12 text-base leading-relaxed text-gray-600">Nous restons flexibles selon vos besoins. Envoyez-nous un message sur WhatsApp au +595 995 620 416 avant de passer afin que votre moto soit prête à votre arrivée.</p></div></div>
+          </div>
+
+          <!-- FAQ 9 -->
+          <div class="faq-item">
+            <button type="button" onclick="toggleFaq(8)" aria-expanded="false" class="faq-trigger flex w-full items-center justify-between gap-6 py-6 text-left transition-colors hover:text-gray-600 cursor-pointer">
+              <span data-i18n="faq9_q" class="text-lg font-semibold text-gray-900 md:text-xl">Et si la moto subit un problème mécanique ou un dommage ?</span>
+              <span class="faq-icon flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full border border-gray-300 text-gray-700 transition-transform duration-300">
+                <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" /></svg>
+              </span>
+            </button>
+            <div class="faq-answer-wrapper"><div class="faq-answer-inner"><p data-i18n="faq9_a" class="pb-6 pr-12 text-base leading-relaxed text-gray-600">En cas de souci mécanique lié à l'usure normale, notre garage s'en occupe immédiatement. Les dommages liés à une chute ou négligence restent couverts selon les conditions de garantie expliquées dans le contrat.</p></div></div>
+          </div>
+
+          <!-- FAQ 10 -->
+          <div class="faq-item">
+            <button type="button" onclick="toggleFaq(9)" aria-expanded="false" class="faq-trigger flex w-full items-center justify-between gap-6 py-6 text-left transition-colors hover:text-gray-600 cursor-pointer">
+              <span data-i18n="faq10_q" class="text-lg font-semibold text-gray-900 md:text-xl">Comment puis-je payer ma location ?</span>
+              <span class="faq-icon flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full border border-gray-300 text-gray-700 transition-transform duration-300">
+                <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" /></svg>
+              </span>
+            </button>
+            <div class="faq-answer-wrapper"><div class="faq-answer-inner"><p data-i18n="faq10_a" class="pb-6 pr-12 text-base leading-relaxed text-gray-600">Nous acceptons les paiements en espèces (Guaraníes), virements bancaires / QR, cartes via Bancard/Infonet ainsi que les principaux moyens de paiement locaux.</p></div></div>
+          </div>
+
+          <!-- FAQ 11 -->
+          <div class="faq-item">
+            <button type="button" onclick="toggleFaq(10)" aria-expanded="false" class="faq-trigger flex w-full items-center justify-between gap-6 py-6 text-left transition-colors hover:text-gray-600 cursor-pointer">
+              <span data-i18n="faq11_q" class="text-lg font-semibold text-gray-900 md:text-xl">Puis-je rouler à Asunción et dans tout le département Central ?</span>
+              <span class="faq-icon flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full border border-gray-300 text-gray-700 transition-transform duration-300">
+                <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" /></svg>
+              </span>
+            </button>
+            <div class="faq-answer-wrapper"><div class="faq-answer-inner"><p data-i18n="faq11_a" class="pb-6 pr-12 text-base leading-relaxed text-gray-600">Bien sûr ! Nos motos 150cc sont idéales pour circuler aussi bien dans Areguá, Luque, San Lorenzo et Asunción que pour vos escapades vers San Bernardino et le lac Ypacaraí.</p></div></div>
+          </div>
+
+          <!-- FAQ 12 -->
+          <div class="faq-item">
+            <button type="button" onclick="toggleFaq(11)" aria-expanded="false" class="faq-trigger flex w-full items-center justify-between gap-6 py-6 text-left transition-colors hover:text-gray-600 cursor-pointer">
+              <span data-i18n="faq12_q" class="text-lg font-semibold text-gray-900 md:text-xl">Y a-t-il une durée minimale de location ?</span>
+              <span class="faq-icon flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full border border-gray-300 text-gray-700 transition-transform duration-300">
+                <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" /></svg>
+              </span>
+            </button>
+            <div class="faq-answer-wrapper"><div class="faq-answer-inner"><p data-i18n="faq12_a" class="pb-6 pr-12 text-base leading-relaxed text-gray-600">Vous pouvez louer à la journée, à la semaine ou au mois selon vos objectifs (déplacement personnel, tourisme ou travail quotidien sur Bolt).</p></div></div>
+          </div>
+        </div>
+
+        <div class="mt-12 text-center">
+          <a href="https://wa.me/595995620416" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2.5 rounded-full bg-[#25D366] px-7 py-3.5 font-medium text-white shadow-sm transition-all hover:bg-[#20BA5A] hover:shadow-md">
+            <span data-i18n="faq_cta">D'autres questions ? Écrivez-nous sur WhatsApp</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SECTION 9: CONTACT, GOOGLE MAPS & FOOTER (#contact)
+         ====================================================================== -->
+    <section id="contact" class="py-32 px-6 bg-black text-white">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 data-i18n="contact_title" class="text-4xl md:text-6xl font-bold mb-6 tracking-tight">
+          Commencez votre voyage dès aujourd'hui.
+        </h2>
+        <p data-i18n="contact_subtitle" class="text-xl text-gray-400 mb-12 max-w-2xl mx-auto">
+          Réservez votre moto chez Gordo Taller et roulez à Areguá &amp; Asunción en toute liberté.
+        </p>
+
+        <!-- 6 Circular Social / Contact Icons -->
+        <div class="flex flex-wrap justify-center gap-5 mb-12">
+          <a href="mailto:contact@gordotaller.com" aria-label="E-mail" class="w-14 h-14 rounded-full border-2 border-white/40 flex items-center justify-center text-white hover:bg-white hover:text-black hover:border-white transition-all duration-300 hover:scale-110">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+            </svg>
+          </a>
+          <a href="https://wa.me/595995620416" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" class="w-14 h-14 rounded-full border-2 border-white/40 flex items-center justify-center text-white hover:bg-[#25D366] hover:text-white hover:border-[#25D366] transition-all duration-300 hover:scale-110">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+            </svg>
+          </a>
+          <a href="tel:+595995620416" aria-label="Téléphone" class="w-14 h-14 rounded-full border-2 border-white/40 flex items-center justify-center text-white hover:bg-white hover:text-black hover:border-white transition-all duration-300 hover:scale-110">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
+            </svg>
+          </a>
+          <a href="https://wa.me/595995620416" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="w-14 h-14 rounded-full border-2 border-white/40 flex items-center justify-center text-white hover:bg-gradient-to-tr hover:from-[#feda75] hover:via-[#d62976] hover:to-[#4f5bd5] hover:border-transparent transition-all duration-300 hover:scale-110">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+            </svg>
+          </a>
+          <a href="https://wa.me/595995620416" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="w-14 h-14 rounded-full border-2 border-white/40 flex items-center justify-center text-white hover:bg-[#1877F2] hover:border-[#1877F2] transition-all duration-300 hover:scale-110">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+            </svg>
+          </a>
+          <a href="https://wa.me/595995620416" target="_blank" rel="noopener noreferrer" aria-label="TikTok" class="w-14 h-14 rounded-full border-2 border-white/40 flex items-center justify-center text-white hover:bg-white hover:text-black hover:border-white transition-all duration-300 hover:scale-110">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.33 6.33 0 005 20.1a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1-.1z" />
+            </svg>
+          </a>
+        </div>
+
+        <button type="button" onclick="openBookingModal()" data-i18n="contact_book" class="inline-block px-12 py-5 bg-white text-black rounded-full font-medium text-lg hover:bg-gray-200 transition-colors cursor-pointer">
+          Réserver
+        </button>
+
+        <!-- Visit Us & Google Maps Embed -->
+        <div class="mt-20">
+          <h3 data-i18n="contact_visit" class="text-2xl font-semibold mb-4">Nous rendre visite</h3>
+          <p data-i18n="contact_address" class="text-gray-400 mb-6">Cacique Areguá, Areguá, Paraguay</p>
+          <div class="rounded-2xl overflow-hidden shadow-2xl border-2 border-white/10 max-w-3xl mx-auto">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3607.7289945196564!2d-57.3871408!3d-25.2813589!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x945da9b5f5f72365%3A0x6b74e64f0b2f56b5!2sCacique%20Aregua!5e0!3m2!1sen!2spy!4v1700000000000!5m2!1sen!2spy"
+              width="100%"
+              height="350"
+              style="border:0"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              class="w-full">
+            </iframe>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <footer class="mt-32 pt-8 border-t border-gray-800 text-center text-gray-500 space-y-2">
+        <p data-i18n="footer_disclaimer" class="text-xs text-gray-600">
+          *Les prix en devise étrangère sont des estimations basées sur le tarif officiel de 50.000 Gs/jour et peuvent varier selon le taux de change.
+        </p>
+        <p data-i18n="footer_copyright">© 2026 Gordo Taller - Areguá, Paraguay. Tous droits réservés.</p>
+      </footer>
+    </section>
+
+  </main>
+
+  <!-- ========================================================================
+       INTERACTIVE BOOKING MODAL (Direct WhatsApp Reservation)
+       ======================================================================== -->
+  <div id="booking-modal" class="booking-modal-backdrop fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4" onclick="if(event.target === this) closeBookingModal()">
+    <div class="booking-modal-panel relative w-full max-w-md rounded-3xl bg-white p-8 text-gray-900 shadow-2xl border border-gray-100">
+      <button type="button" onclick="closeBookingModal()" aria-label="Fermer" class="absolute top-5 right-5 w-9 h-9 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-gray-600 cursor-pointer">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+
+      <div class="mb-6">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gray-100 text-xs font-mono uppercase tracking-wider text-gray-700 mb-3">
+          <span>🏍️ Gordo Taller</span>
+        </div>
+        <h3 data-i18n="modal_title" class="text-2xl font-bold">Réserver votre moto</h3>
+        <p data-i18n="modal_subtitle" class="text-sm text-gray-500 mt-1">
+          Choisissez votre modèle et votre date de début pour réserver instantanément sur WhatsApp.
+        </p>
+      </div>
+
+      <form onsubmit="submitBookingModal(event)" class="space-y-4">
+        <div>
+          <label for="booking-bike-select" data-i18n="modal_select_bike" class="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-1.5">Modèle souhaité</label>
+          <select id="booking-bike-select" class="w-full rounded-2xl border border-gray-300 bg-gray-50 px-4 py-3 text-sm font-medium focus:border-black focus:outline-none">
+            <option value="Honda CG 150">Honda CG 150 (150cc)</option>
+            <option value="Kenton 150cc">Kenton 150cc (150cc)</option>
+            <option value="Motostar 150">Motostar 150 (150cc)</option>
+            <option value="Leopard 150">Leopard 150 (150cc)</option>
           </select>
         </div>
-      </div>
-    </div>
-  </nav>
 
-  <!-- Hero Section -->
-  <section class="hero-bg pt-24 pb-16 lg:pt-32 lg:pb-24 flex items-center justify-center min-h-[80vh] text-center px-4">
-    <div class="hero-content max-w-4xl mx-auto animate-on-scroll">
-      <h1 class="text-5xl md:text-7xl font-black text-white mb-6 leading-tight" data-i18n="hero_title">
-        Activá tu cuenta Bolt hoy. Tu moto ya está lista.
-      </h1>
-      <p class="text-xl md:text-2xl text-gray-300 mb-10 max-w-2xl mx-auto font-medium" data-i18n="hero_subtitle">
-        Llevá tu moto por 50.000 Gs al día. Sin vueltas. Retirás hoy mismo de Gordo Taller en Areguá.
-      </p>
-      <a href="#garage" class="btn-pulse inline-block bg-green-500 hover:bg-green-400 text-white font-bold text-xl py-4 px-10 rounded-full shadow-lg shadow-green-500/50 transition-all uppercase tracking-wide" data-i18n="hero_btn">
-        Ver motos disponibles
-      </a>
-    </div>
-  </section>
-
-  <!-- Social Proof / Trust -->
-  <section class="py-12 bg-white shadow-sm relative z-10 border-b border-gray-100 animate-on-scroll">
-    <div class="max-w-7xl mx-auto px-4 text-center">
-      <div class="inline-flex items-center justify-center space-x-3 mb-2">
-        <svg class="w-8 h-8 text-blue-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.243-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-        <h2 class="text-3xl font-black text-blue-900 uppercase" data-i18n="trust_title">Gordo Taller - Areguá</h2>
-      </div>
-      <p class="text-lg font-bold text-gray-600 mb-6" data-i18n="trust_text">Mantenimiento mecánico 100% incluido. Taller propio, motos de confianza.</p>
-      
-      <!-- Map Section -->
-      <div class="max-w-2xl mx-auto rounded-2xl overflow-hidden shadow-md mb-6 border border-gray-200">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3607.7289945196564!2d-57.3871408!3d-25.2813589!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x945da9b5f5f72365%3A0x6b74e64f0b2f56b5!2sCacique%20Aregua!5e0!3m2!1sen!2spy!4v1700000000000!5m2!1sen!2spy" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-      </div>
-      
-      <a href="https://maps.google.com/?q=Cacique+Aregua,+Paraguay" target="_blank" class="inline-flex items-center space-x-2 bg-blue-900 hover:bg-blue-800 text-white font-bold py-3 px-8 rounded-full shadow-lg transition-colors">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path></svg>
-        <span data-i18n="map_btn">Tocá acá para que el GPS te lleve al taller</span>
-      </a>
-    </div>
-  </section>
-
-  <!-- Offer & Conditions -->
-  <section class="py-16 bg-gray-50 animate-on-scroll delay-100">
-    <div class="max-w-5xl mx-auto px-4">
-      <h2 class="text-3xl font-black text-center mb-10 text-gray-800" data-i18n="offer_title">Condiciones Claras</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-start space-x-4">
-          <div class="text-4xl">🚀</div>
-          <div>
-            <p class="font-bold text-lg text-gray-800" data-i18n="offer_bolt">Te creamos la cuenta Bolt en el acto si no tenés.</p>
-          </div>
-        </div>
-        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-start space-x-4">
-          <div class="text-4xl">🏍️</div>
-          <div>
-            <p class="font-bold text-lg text-gray-800" data-i18n="offer_mante">Mantenimiento mecánico a nuestro cargo (no incluye combustible ni casco).</p>
-          </div>
-        </div>
-        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-start space-x-4">
-          <div class="text-4xl">💰</div>
-          <div>
-            <p class="font-bold text-lg text-gray-800" data-i18n="offer_price">50.000 Gs por día.</p>
-          </div>
-        </div>
-        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-start space-x-4 border-l-4 border-l-blue-900">
-          <div class="text-4xl">📋</div>
-          <div>
-            <p class="font-bold text-lg text-gray-800" data-i18n="offer_req">Requisitos: Cédula de Identidad, Certificado de Antecedentes Policiales y Garantía.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- The Garage / Calendar -->
-  <section id="garage" class="py-20 bg-white">
-    <div class="max-w-7xl mx-auto px-4">
-      <h2 class="text-4xl font-black text-center mb-12 text-blue-900 animate-on-scroll" data-i18n="fleet_title">Elegí tu moto y mirá las fechas libres</h2>
-      
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-        
-        <!-- Moto Card 1 -->
-        <div class="moto-card bg-gray-50 rounded-2xl overflow-hidden shadow-md border border-gray-200 flex flex-col animate-on-scroll delay-100">
-          <div class="h-48 overflow-hidden bg-gray-200">
-            <img src="assets/images/kenton.jpg" alt="Kenton" class="w-full h-full object-cover">
-          </div>
-          <div class="p-5 flex-grow flex flex-col justify-between">
-            <div>
-              <h3 class="text-2xl font-black mb-1">Kenton 150cc</h3>
-              <p class="text-gray-500 font-bold mb-4">50.000 Gs/día</p>
-            </div>
-            <button class="btn-dispo w-full bg-blue-900 hover:bg-blue-800 text-white font-bold py-3 rounded-xl transition-colors text-center" data-moto="Kenton 150cc" data-i18n="btn_dispo">
-              Ver Disponibilidad
-            </button>
-          </div>
+        <div>
+          <label for="booking-plan-select" data-i18n="modal_select_plan" class="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-1.5">Formule</label>
+          <select id="booking-plan-select" class="w-full rounded-2xl border border-gray-300 bg-gray-50 px-4 py-3 text-sm font-medium focus:border-black focus:outline-none">
+            <option value="Journalier (50.000 Gs/jour)" data-i18n="modal_plan_daily">Journalier (50.000 Gs/jour)</option>
+            <option value="Hebdomadaire (350.000 Gs/semaine)" data-i18n="modal_plan_weekly">Hebdomadaire (350.000 Gs/semaine)</option>
+            <option value="Mensuel (1.500.000 Gs/mois)" data-i18n="modal_plan_monthly">Mensuel (1.500.000 Gs/mois)</option>
+          </select>
         </div>
 
-        <!-- Moto Card 2 -->
-        <div class="moto-card bg-gray-50 rounded-2xl overflow-hidden shadow-md border border-gray-200 flex flex-col animate-on-scroll delay-200">
-          <div class="h-48 overflow-hidden bg-gray-200">
-            <img src="assets/images/motostar.jpg" alt="Motostar" class="w-full h-full object-cover">
-          </div>
-          <div class="p-5 flex-grow flex flex-col justify-between">
-            <div>
-              <h3 class="text-2xl font-black mb-1">Motostar 150</h3>
-              <p class="text-gray-500 font-bold mb-4">50.000 Gs/día</p>
-            </div>
-            <button class="btn-dispo w-full bg-blue-900 hover:bg-blue-800 text-white font-bold py-3 rounded-xl transition-colors text-center" data-moto="Motostar 150" data-i18n="btn_dispo">
-              Ver Disponibilidad
-            </button>
-          </div>
+        <div>
+          <label for="booking-date-input" data-i18n="modal_date" class="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-1.5">Date de retrait souhaitée</label>
+          <input id="booking-date-input" type="date" required class="w-full rounded-2xl border border-gray-300 bg-gray-50 px-4 py-3 text-sm font-medium focus:border-black focus:outline-none" />
         </div>
 
-        <!-- Moto Card 3 -->
-        <div class="moto-card bg-gray-50 rounded-2xl overflow-hidden shadow-md border border-gray-200 flex flex-col animate-on-scroll delay-300">
-          <div class="h-48 overflow-hidden bg-gray-200">
-            <img src="assets/images/honda.jpg" alt="Honda" class="w-full h-full object-cover">
-          </div>
-          <div class="p-5 flex-grow flex flex-col justify-between">
-            <div>
-              <h3 class="text-2xl font-black mb-1">Honda CG</h3>
-              <p class="text-gray-500 font-bold mb-4">50.000 Gs/día</p>
-            </div>
-            <button class="btn-dispo w-full bg-blue-900 hover:bg-blue-800 text-white font-bold py-3 rounded-xl transition-colors text-center" data-moto="Honda CG" data-i18n="btn_dispo">
-              Ver Disponibilidad
-            </button>
-          </div>
-        </div>
+        <label class="flex items-center gap-3 pt-1 cursor-pointer">
+          <input id="booking-bolt-checkbox" type="checkbox" class="h-4 w-4 rounded border-gray-300 text-black focus:ring-black" />
+          <span data-i18n="modal_bolt_check" class="text-sm text-gray-700">J'ai besoin d'aide pour créer mon compte Bolt</span>
+        </label>
 
-        <!-- Moto Card 4 -->
-        <div class="moto-card bg-gray-50 rounded-2xl overflow-hidden shadow-md border border-gray-200 flex flex-col animate-on-scroll delay-400">
-          <div class="h-48 overflow-hidden bg-gray-200">
-            <img src="assets/images/leopard.jpg" alt="Leopard" class="w-full h-full object-cover">
-          </div>
-          <div class="p-5 flex-grow flex flex-col justify-between">
-            <div>
-              <h3 class="text-2xl font-black mb-1">Leopard 150</h3>
-              <p class="text-gray-500 font-bold mb-4">50.000 Gs/día</p>
-            </div>
-            <button class="btn-dispo w-full bg-blue-900 hover:bg-blue-800 text-white font-bold py-3 rounded-xl transition-colors text-center" data-moto="Leopard 150" data-i18n="btn_dispo">
-              Ver Disponibilidad
-            </button>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- Modal Calendar -->
-  <div id="calendar-modal" class="fixed inset-0 bg-black bg-opacity-60 z-[100] hidden items-center justify-center p-4 backdrop-blur-sm transition-opacity">
-    <div class="bg-white rounded-3xl p-6 w-full max-w-md shadow-2xl relative">
-      <button id="close-modal" class="absolute top-4 right-4 text-gray-400 hover:text-gray-800 transition-colors">
-        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-      </button>
-      <h3 class="text-2xl font-black mb-6 pr-8 text-blue-900" data-i18n="modal_title">Seleccioná una fecha libre</h3>
-      
-      <!-- Grid Calendar JS -->
-      <div id="calendar-grid" class="grid grid-cols-4 gap-2 mb-6">
-        <!-- JS will populate -->
-      </div>
-      
-      <p class="text-center text-sm text-gray-500 font-bold mt-4">Los días en verde están disponibles. Tocá uno para reservar por WhatsApp.</p>
+        <button type="submit" class="w-full mt-4 py-4 rounded-full bg-[#25D366] hover:bg-[#20BA5A] text-white font-semibold text-sm shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer">
+          <span data-i18n="modal_submit">Confirmer sur WhatsApp</span>
+        </button>
+      </form>
     </div>
   </div>
 
-  <footer class="bg-blue-900 py-8 text-center text-white">
-    <p class="font-bold">© 2026 Gordo Taller - Areguá, Paraguay</p>
-  </footer>
-
   <script src="translations.js"></script>
   <script src="script.js"></script>
-  <script defer src="/_vercel/speed-insights/script.js"></script>
 </body>
 </html>
