@@ -8,6 +8,9 @@
   <meta property="og:title" content="G&amp;L MOTORS - Location de motos 150cc à Areguá &amp; Asunción" />
   <meta property="og:description" content="Parcourez les environs ou générez de l'argent en toute liberté. Motos 150cc dès 50.000 Gs/jour avec création de compte Bolt GRATUITE et entretien mécanique 100% inclus." />
   <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://agence-de-loc.vercel.app/assets/images/logo-gl-motors.jpg" />
+  <link rel="icon" type="image/png" href="assets/images/favicon.png" />
+  <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -59,8 +62,11 @@
   <header class="fixed inset-x-0 top-4 z-50 px-4">
     <div class="mx-auto flex max-w-6xl items-center justify-between gap-2">
       
-      <!-- Left: Desktop Nav Pills + Mobile Hamburger -->
+      <!-- Left: Brand Logo + Desktop Nav Pills + Mobile Hamburger -->
       <div class="relative flex items-center gap-2">
+        <a href="#" aria-label="G&amp;L MOTORS" class="flex items-center gap-2 pr-1">
+          <img src="assets/images/favicon.png" alt="G&amp;L MOTORS" class="w-9 h-9 rounded-full border border-white/50 shadow-md object-cover" />
+        </a>
         <nav aria-label="Primary" class="hidden md:flex items-center gap-1.5">
           <a href="#services" data-i18n="nav_pricing" class="nav-adaptive-pill px-3.5 py-2 rounded-full border backdrop-blur-sm text-sm font-medium transition-all duration-300 border-white/40 text-white hover:bg-white/10 hover:border-white/70">Tarifs</a>
           <a href="#testimonials" data-i18n="nav_reviews" class="nav-adaptive-pill px-3.5 py-2 rounded-full border backdrop-blur-sm text-sm font-medium transition-all duration-300 border-white/40 text-white hover:bg-white/10 hover:border-white/70">Avis</a>
@@ -270,11 +276,7 @@
         <!-- Brand Story Header -->
         <div class="text-center mb-24 max-w-4xl mx-auto">
           <div class="mb-8 flex justify-center">
-            <div class="w-32 h-32 md:w-36 md:h-36 rounded-3xl bg-black text-white flex flex-col items-center justify-center shadow-xl border-4 border-white">
-              <span class="text-3xl font-black tracking-tighter leading-none">G&amp;L</span>
-              <span class="text-xs font-sans uppercase tracking-[0.22em] text-[#34D186] mt-1 font-bold">MOTORS</span>
-              <span class="text-[10px] text-gray-400 mt-1">AREGUÁ • PY</span>
-            </div>
+            <img src="assets/images/logo-gl-motors.jpg" alt="G&amp;L MOTORS - Premium Motorcycle Fleet" class="w-40 h-40 md:w-48 md:h-48 rounded-3xl object-cover shadow-2xl border-4 border-white" />
           </div>
 
           <h2 data-i18n="brand_intro_title" class="text-3xl md:text-4xl font-bold text-gray-900 mb-8 tracking-tight">
@@ -893,6 +895,132 @@
 
           </div>
 
+          <!-- ================================================================
+               DIRECT PAYMENT MODULE:
+               1) QR CODE TRANSFERENCIA PARAGUAY (SIPAP / SPI 24/7)
+               2) AUTOMATIC RECURRING CARD DEBIT (DAILY / WEEKLY / MONTHLY)
+               ================================================================ -->
+          <div id="payment-direct-hub" class="mt-10 mb-12 grid md:grid-cols-2 gap-6 max-w-5xl mx-auto text-left">
+
+            <!-- Card 1: QR Code Transferencia Bancaria Paraguay (SIPAP) -->
+            <div class="rounded-3xl border-2 border-gray-200 bg-gray-50/80 p-6 sm:p-8 shadow-sm flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between gap-2 mb-4">
+                  <span class="inline-flex items-center gap-1.5 rounded-full bg-emerald-100 px-3 py-1 text-xs font-bold text-emerald-900">
+                    🇵🇾 QR SIPAP / SPI PARAGUAY • 0% FRAIS
+                  </span>
+                  <span class="text-xs font-semibold text-gray-500">24h/24 • 7j/7</span>
+                </div>
+                <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-2">
+                  Payer par Transferencia (QR Code)
+                </h3>
+                <p class="text-xs sm:text-sm text-gray-600 mb-5">
+                  Scannez directement le QR Code depuis votre application bancaire (ueno bank, Itaú, Mango, Continental, Familiar, Atlas, BNF) ou copiez notre Alias SIPAP :
+                </p>
+
+                <!-- Amount Selector for QR -->
+                <div class="grid grid-cols-3 gap-2 mb-5">
+                  <button type="button" data-qr-plan="daily" onclick="selectQrAmount('daily')" class="py-2 px-2 rounded-xl border text-xs font-semibold transition-all cursor-pointer bg-black text-white border-black text-center">
+                    Jour<br /><span data-price="daily">₲50.000</span>
+                  </button>
+                  <button type="button" data-qr-plan="weekly" onclick="selectQrAmount('weekly')" class="py-2 px-2 rounded-xl border text-xs font-semibold transition-all cursor-pointer bg-white text-gray-800 border-gray-300 hover:border-black text-center">
+                    Semaine<br /><span data-price="weekly">₲350.000</span>
+                  </button>
+                  <button type="button" data-qr-plan="monthly" onclick="selectQrAmount('monthly')" class="py-2 px-2 rounded-xl border text-xs font-semibold transition-all cursor-pointer bg-white text-gray-800 border-gray-300 hover:border-black text-center">
+                    Mois<br /><span data-price="monthly">₲1.400.000</span>
+                  </button>
+                </div>
+
+                <!-- QR Code Box + Beneficiary Details -->
+                <div class="flex flex-col sm:flex-row items-center gap-5 bg-white p-4 rounded-2xl border border-gray-200 shadow-sm mb-5">
+                  <div class="relative flex-shrink-0 bg-white p-2 rounded-xl border border-gray-200">
+                    <img id="sipap-qr-img" src="assets/images/qr-sipap.png" alt="QR Code Transferencia SIPAP G&amp;L MOTORS" class="w-36 h-36 object-contain" />
+                  </div>
+                  <div class="space-y-2 text-xs sm:text-sm w-full">
+                    <div>
+                      <span class="text-gray-400 block text-[11px] uppercase">Bénéficiaire :</span>
+                      <span class="font-bold text-gray-900">G&amp;L MOTORS E.A.S</span>
+                    </div>
+                    <div>
+                      <span class="text-gray-400 block text-[11px] uppercase">Montant sélectionné :</span>
+                      <span id="sipap-qr-amount-display" class="font-bold text-base text-[#199E5E]">₲ 50.000 / jour</span>
+                    </div>
+                    <div>
+                      <span class="text-gray-400 block text-[11px] uppercase">Alias SIPAP / Celular :</span>
+                      <div class="flex items-center gap-2 mt-0.5">
+                        <span id="sipap-alias-value" class="font-bold text-gray-900">+595 995 620 416</span>
+                        <button type="button" onclick="copySipapAlias()" id="copy-alias-btn" class="px-2.5 py-1 rounded-lg bg-gray-100 hover:bg-gray-200 text-[11px] font-semibold text-gray-800 cursor-pointer">
+                          Copier
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <button type="button" onclick="confirmQrPaymentOnWhatsApp()" class="w-full py-3.5 px-5 rounded-full bg-black hover:bg-gray-800 text-white font-semibold text-sm transition-all flex items-center justify-center gap-2 cursor-pointer">
+                <span>J'ai payé par QR — Envoyer le reçu</span>
+                <span>→</span>
+              </button>
+            </div>
+
+            <!-- Card 2: Automatic Recurring Card Debit (Daily / Weekly / Monthly) -->
+            <div class="rounded-3xl border-2 border-indigo-200 bg-gradient-to-br from-indigo-50/70 via-white to-slate-50 p-6 sm:p-8 shadow-sm flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between gap-2 mb-4">
+                  <span class="inline-flex items-center gap-1.5 rounded-full bg-indigo-100 px-3 py-1 text-xs font-bold text-indigo-950">
+                    💳 DÉBIT AUTOMATIQUE CARTE BLEUE
+                  </span>
+                  <span class="text-xs font-semibold text-indigo-700">Jour • Semaine • Mois</span>
+                </div>
+                <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-2">
+                  Prélèvement Automatique par Carte
+                </h3>
+                <p class="text-xs sm:text-sm text-gray-600 mb-5">
+                  Configurez votre carte bancaire (Visa, Mastercard, Débito/Crédito) pour être débité automatiquement selon votre rythme, sans avoir à repayer manuellement chaque période :
+                </p>
+
+                <!-- Auto-Debit Frequency Selector (Every Day / Every Week / Every Month) -->
+                <p class="text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">
+                  Choisissez votre fréquence de débit automatique :
+                </p>
+                <div class="grid grid-cols-3 gap-2 mb-5">
+                  <button type="button" data-autodebit-cycle="daily" onclick="selectAutoDebitCycle('daily')" class="py-2.5 px-2 rounded-xl border text-xs font-semibold transition-all cursor-pointer bg-indigo-600 text-white border-indigo-600 text-center">
+                    Chaque Jour<br /><span data-price="daily">₲50.000</span>/j
+                  </button>
+                  <button type="button" data-autodebit-cycle="weekly" onclick="selectAutoDebitCycle('weekly')" class="py-2.5 px-2 rounded-xl border text-xs font-semibold transition-all cursor-pointer bg-white text-gray-800 border-gray-300 hover:border-indigo-600 text-center">
+                    Chaque Semaine<br /><span data-price="weekly">₲350.000</span>/sem
+                  </button>
+                  <button type="button" data-autodebit-cycle="monthly" onclick="selectAutoDebitCycle('monthly')" class="py-2.5 px-2 rounded-xl border text-xs font-semibold transition-all cursor-pointer bg-white text-gray-800 border-gray-300 hover:border-indigo-600 text-center">
+                    Chaque Mois<br /><span data-price="monthly">₲1.400.000</span>/mois
+                  </button>
+                </div>
+
+                <!-- Summary of Recurring Mandate -->
+                <div class="rounded-2xl bg-white p-4 border border-indigo-100 shadow-sm space-y-2.5 mb-5 text-xs sm:text-sm">
+                  <div class="flex justify-between items-center">
+                    <span class="text-gray-500">Fréquence choisie :</span>
+                    <span id="autodebit-cycle-label" class="font-bold text-gray-900">Débit automatique chaque jour (24h)</span>
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <span class="text-gray-500">Montant prélevé :</span>
+                    <span id="autodebit-amount-label" class="font-bold text-base text-indigo-700">₲ 50.000 / jour</span>
+                  </div>
+                  <div class="flex justify-between items-center pt-2 border-t border-gray-100 text-[11px] text-gray-500">
+                    <span>Processeur sécurisé (3D Secure / Tokenisation)</span>
+                    <span class="font-semibold text-gray-700">Visa • Mastercard • Bancard / Stripe</span>
+                  </div>
+                </div>
+              </div>
+
+              <button type="button" onclick="openAutoDebitModal()" class="w-full py-3.5 px-5 rounded-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-sm shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer">
+                <span>Activer le prélèvement automatique par Carte</span>
+                <span>→</span>
+              </button>
+            </div>
+
+          </div>
+
           <div class="relative overflow-hidden py-4">
             <div class="animate-scroll-left flex items-center gap-12 whitespace-nowrap">
               <!-- Set 1 -->
@@ -960,10 +1088,7 @@
           <div>
             <!-- Logo Badge + Bolt Pill -->
             <div class="mb-6 flex flex-wrap items-center gap-3 sm:gap-4">
-              <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-black text-white flex flex-col items-center justify-center shadow-md border border-gray-800">
-                <span class="text-lg sm:text-xl font-black tracking-tighter leading-none">G&amp;L</span>
-                <span class="text-[8px] sm:text-[9px] font-sans uppercase tracking-[0.2em] text-[#34D186] mt-1 font-bold">MOTORS</span>
-              </div>
+              <img src="assets/images/logo-gl-motors.jpg" alt="G&amp;L MOTORS - Premium Motorcycle Fleet" class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl object-cover shadow-md border border-gray-800" />
               <span data-i18n="bolt_badge" class="inline-flex items-center gap-2 rounded-full bg-[#34D186]/15 border border-[#34D186] px-3.5 py-1.5 text-[11px] sm:text-xs font-bold uppercase tracking-wider text-emerald-900">
                 OPTION COMPTE BOLT 100% GRATUITE
               </span>
@@ -1184,7 +1309,7 @@
         </div>
 
         <div class="relative mx-auto aspect-[9/16] w-full max-w-[380px] overflow-hidden rounded-3xl bg-neutral-900 shadow-2xl ring-1 ring-white/10">
-          <video id="showcase-video" src="assets/videos/skip-traffic-en.mp4" poster="assets/videos/skip-traffic-poster.jpg" autoplay loop muted playsinline preload="metadata" class="h-full w-full object-cover"></video>
+          <video id="showcase-video" src="assets/videos/gl-motors-reel.mp4" autoplay loop muted playsinline preload="metadata" class="h-full w-full object-cover"></video>
           <button type="button" onclick="toggleVideoSound()" aria-label="Toucher pour le son" class="absolute bottom-4 right-4 flex items-center gap-2 rounded-full bg-black/70 px-4 py-2 text-xs font-medium text-white backdrop-blur-md transition hover:bg-black/90 cursor-pointer">
             <!-- Muted Icon -->
             <svg id="video-icon-muted" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -1726,7 +1851,10 @@
       </div>
 
       <!-- Footer -->
-      <footer class="mt-24 md:mt-32 pt-8 border-t border-gray-800 text-center text-gray-500 space-y-2">
+      <footer class="mt-24 md:mt-32 pt-8 border-t border-gray-800 text-center text-gray-500 space-y-3">
+        <div class="flex justify-center mb-3">
+          <img src="assets/images/logo-gl-motors.jpg" alt="G&amp;L MOTORS - Premium Motorcycle Fleet" class="w-20 h-20 rounded-2xl object-cover border border-white/20 shadow-lg" />
+        </div>
         <p data-i18n="footer_disclaimer" class="text-xs text-gray-600">
           *Les prix en devise étrangère sont des estimations basées sur le tarif officiel de 50.000 PYG/jour (350.000 PYG/semaine, 1.400.000 PYG/mois) et peuvent varier selon le taux de change.
         </p>
@@ -1737,7 +1865,7 @@
   </main>
 
   <!-- ========================================================================
-       INTERACTIVE BOOKING MODAL (Direct WhatsApp Reservation + Payment Processor)
+       INTERACTIVE BOOKING MODAL (Direct WhatsApp Reservation + QR SIPAP + Auto-Debit Card)
        ======================================================================== -->
   <div id="booking-modal" class="booking-modal-backdrop fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4" onclick="if(event.target === this) closeBookingModal()">
     <div class="booking-modal-panel relative w-full max-w-md max-h-[92vh] overflow-y-auto rounded-3xl bg-white p-6 sm:p-8 text-gray-900 shadow-2xl border border-gray-100">
@@ -1749,7 +1877,8 @@
 
       <div class="mb-5">
         <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gray-100 text-xs font-sans uppercase tracking-wider text-gray-700 mb-3">
-          <span>🏍️ G&amp;L MOTORS</span>
+          <img src="assets/images/favicon.png" alt="G&amp;L MOTORS" class="w-4 h-4 rounded-sm object-cover" />
+          <span>G&amp;L MOTORS</span>
         </div>
         <h3 data-i18n="modal_title" class="text-xl sm:text-2xl font-bold">Réserver votre moto</h3>
         <p data-i18n="modal_subtitle" class="text-xs sm:text-sm text-gray-500 mt-1">
@@ -1770,8 +1899,8 @@
         </div>
 
         <div>
-          <label for="booking-plan-select" data-i18n="modal_select_plan" class="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-1.5">Formule</label>
-          <select id="booking-plan-select" class="w-full rounded-2xl border border-gray-300 bg-gray-50 px-4 py-3 text-sm font-medium focus:border-black focus:outline-none">
+          <label for="booking-plan-select" data-i18n="modal_select_plan" class="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-1.5">Formule &amp; Fréquence</label>
+          <select id="booking-plan-select" onchange="updatePaymentProcessorNote()" class="w-full rounded-2xl border border-gray-300 bg-gray-50 px-4 py-3 text-sm font-medium focus:border-black focus:outline-none">
             <option value="Journalier (₲50.000/jour)" data-i18n="modal_plan_daily">Journalier (₲50.000/jour)</option>
             <option value="Hebdomadaire (₲350.000/semaine)" data-i18n="modal_plan_weekly">Hebdomadaire (₲350.000/semaine)</option>
             <option value="Mensuel (₲1.400.000/mois)" data-i18n="modal_plan_monthly">Mensuel (₲1.400.000/mois)</option>
@@ -1781,14 +1910,48 @@
         <div>
           <label for="booking-payment-select" data-i18n="modal_select_payment" class="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-1.5">Moyen de paiement</label>
           <select id="booking-payment-select" onchange="updatePaymentProcessorNote()" class="w-full rounded-2xl border border-gray-300 bg-gray-50 px-4 py-3 text-sm font-medium focus:border-black focus:outline-none">
-            <option value="SIPAP" data-i18n="modal_pay_sipap">Transferencia Bancaria Paraguay (SIPAP / Alias - 0% frais)</option>
+            <option value="SIPAP" data-i18n="modal_pay_sipap">Transferencia Bancaria Paraguay (QR Code SIPAP / Alias - 0% frais)</option>
+            <option value="CARD" data-i18n="modal_pay_card">Carte Bleue — Débit Automatique (Chaque Jour / Semaine / Mois)</option>
             <option value="CRYPTO" data-i18n="modal_pay_crypto">Crypto : USDT / USD-C / Solana / Bitcoin (0% frais)</option>
-            <option value="CARD" data-i18n="modal_pay_card">Carte bancaire classique (Lien sécurisé uPay / Pagopar / Bancard)</option>
             <option value="CASH" data-i18n="modal_pay_cash">Cash / Efectivo (Guaraníes ou USD à l'atelier)</option>
           </select>
+
           <p id="payment-processor-note" class="mt-2 rounded-xl border border-emerald-200 bg-emerald-50 px-3 py-2 text-xs text-emerald-900">
-            ⚡ <strong>SIPAP 24/7 / SPI Paraguay (0% de commission) :</strong> Virement bancaire local instantané par Alias ou QR depuis ueno bank, Itaú, Continental, Familiar, Atlas, BNF ou Mango.
+            ⚡ <strong>SIPAP 24/7 / SPI Paraguay (0% de commission) :</strong> Scannez le QR Code ci-dessous ou transférez vers notre Alias SIPAP.
           </p>
+
+          <!-- Dynamic QR Code Panel inside Modal (shown when SIPAP is selected) -->
+          <div id="modal-sipap-qr-box" class="mt-3 rounded-2xl border border-gray-200 bg-gray-50 p-3.5 flex items-center gap-3.5">
+            <img src="assets/images/qr-sipap.png" alt="QR SIPAP G&amp;L MOTORS" class="w-24 h-24 rounded-xl border border-gray-200 bg-white p-1 object-contain flex-shrink-0" />
+            <div class="text-xs space-y-1">
+              <div class="font-bold text-gray-900">QR Transferencia SIPAP</div>
+              <div class="text-gray-600">Bénéficiaire : <strong>G&amp;L MOTORS E.A.S</strong></div>
+              <div class="text-gray-600">Alias : <strong>+595 995 620 416</strong></div>
+              <div id="modal-qr-amount" class="font-bold text-[#199E5E]">Montant : ₲ 50.000 / jour</div>
+            </div>
+          </div>
+
+          <!-- Dynamic Auto-Debit Card Panel inside Modal (shown when CARD is selected) -->
+          <div id="modal-card-autodebit-box" class="hidden mt-3 rounded-2xl border border-indigo-200 bg-indigo-50/70 p-3.5 space-y-2.5 text-xs">
+            <div class="font-bold text-indigo-950 flex items-center justify-between">
+              <span>💳 Prélèvement Automatique Carte Bleue</span>
+              <span class="rounded bg-indigo-200 px-1.5 py-0.5 text-[10px] font-bold text-indigo-900">AUTO-DEBIT</span>
+            </div>
+            <p class="text-indigo-900 leading-relaxed">
+              Votre carte (Visa / Mastercard) sera débitée automatiquement selon la périodicité choisie (annulable à tout moment lors de la restitution de la moto) :
+            </p>
+            <div class="grid grid-cols-3 gap-1.5">
+              <button type="button" onclick="setModalPlanIndex(0)" id="modal-cycle-btn-0" class="py-1.5 px-2 rounded-lg border text-[11px] font-semibold bg-indigo-600 text-white border-indigo-600 cursor-pointer">
+                Chaque Jour<br />₲50.000
+              </button>
+              <button type="button" onclick="setModalPlanIndex(1)" id="modal-cycle-btn-1" class="py-1.5 px-2 rounded-lg border text-[11px] font-semibold bg-white text-gray-700 border-gray-300 cursor-pointer">
+                Chaque Sem.<br />₲350.000
+              </button>
+              <button type="button" onclick="setModalPlanIndex(2)" id="modal-cycle-btn-2" class="py-1.5 px-2 rounded-lg border text-[11px] font-semibold bg-white text-gray-700 border-gray-300 cursor-pointer">
+                Chaque Mois<br />₲1.400.000
+              </button>
+            </div>
+          </div>
         </div>
 
         <div>

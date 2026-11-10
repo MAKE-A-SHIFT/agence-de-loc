@@ -236,6 +236,9 @@ function updateCurrencyDisplay() {
     el.textContent = monthlyTooltip;
   });
 
+  if (typeof selectQrAmount === "function") selectQrAmount(currentQrPlan);
+  if (typeof selectAutoDebitCycle === "function") selectAutoDebitCycle(currentAutoDebitCycle);
+
   // Update Booking Modal Plan Options dynamically with active currency
   const planSelect = document.getElementById("booking-plan-select");
   if (planSelect && planSelect.options.length >= 3) {
@@ -503,21 +506,150 @@ function toggleFaq(index) {
   });
 }
 
-// 9. Booking & Payment Processor Modal
+// 9. Booking, QR Transferencia SIPAP & Automatic Card Debit System
+let currentQrPlan = "daily";
+let currentAutoDebitCycle = "daily";
+
+function selectQrAmount(planKey) {
+  currentQrPlan = planKey;
+  document.querySelectorAll("[data-qr-plan]").forEach((btn) => {
+    const isSelected = btn.getAttribute("data-qr-plan") === planKey;
+    if (isSelected) {
+      btn.classList.remove("bg-white", "text-gray-800", "border-gray-300");
+      btn.classList.add("bg-black", "text-white", "border-black");
+    } else {
+      btn.classList.add("bg-white", "text-gray-800", "border-gray-300");
+      btn.classList.remove("bg-black", "text-white", "border-black");
+    }
+  });
+
+  const amountEl = document.getElementById("sipap-qr-amount-display");
+  if (amountEl) {
+    if (planKey === "daily") {
+      amountEl.textContent = `${formatPygAmount(BASE_PRICES_PYG.daily, currentCurrency, true)} / jour (₲ 50.000)`;
+    } else if (planKey === "weekly") {
+      amountEl.textContent = `${formatPygAmount(BASE_PRICES_PYG.weekly, currentCurrency, true)} / semaine (₲ 350.000)`;
+    } else {
+      amountEl.textContent = `${formatPygAmount(BASE_PRICES_PYG.monthly, currentCurrency, true)} / mois (₲ 1.400.000)`;
+    }
+  }
+}
+
+async function copySipapAlias() {
+  const btn = document.getElementById("copy-alias-btn");
+  try {
+    await navigator.clipboard.writeText("+595995620416");
+    if (btn) {
+      const orig = btn.textContent;
+      btn.textContent = "Copié !";
+      setTimeout(() => {
+        btn.textContent = orig;
+      }, 2000);
+    }
+  } catch (_) {}
+}
+
+function confirmQrPaymentOnWhatsApp() {
+  const planMap = {
+    daily: "Journalier (₲ 50.000 / jour)",
+    weekly: "Hebdomadaire (₲ 350.000 / semaine)",
+    monthly: "Mensuel (₲ 1.400.000 / mois)"
+  };
+  const label = planMap[currentQrPlan] || planMap.daily;
+  const msg = `Bonjour G&L MOTORS ! 🇵🇾\nJe viens d'effectuer un virement SIPAP (QR Code) pour la formule : ${label}.\nVoici mon reçu de transfert :`;
+  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, "_blank", "noopener,noreferrer");
+}
+
+function selectAutoDebitCycle(cycleKey) {
+  currentAutoDebitCycle = cycleKey;
+  document.querySelectorAll("[data-autodebit-cycle]").forEach((btn) => {
+    const isSelected = btn.getAttribute("data-autodebit-cycle") === cycleKey;
+    if (isSelected) {
+      btn.classList.remove("bg-white", "text-gray-800", "border-gray-300");
+      btn.classList.add("bg-indigo-600", "text-white", "border-indigo-600");
+    } else {
+      btn.classList.add("bg-white", "text-gray-800", "border-gray-300");
+      btn.classList.remove("bg-indigo-600", "text-white", "border-indigo-600");
+    }
+  });
+
+  const cycleLabel = document.getElementById("autodebit-cycle-label");
+  const amountLabel = document.getElementById("autodebit-amount-label");
+  if (cycleKey === "daily") {
+    if (cycleLabel) cycleLabel.textContent = "Débit automatique chaque jour (24h)";
+    if (amountLabel) amountLabel.textContent = `${formatPygAmount(BASE_PRICES_PYG.daily, currentCurrency, true)} / jour`;
+  } else if (cycleKey === "weekly") {
+    if (cycleLabel) cycleLabel.textContent = "Débit automatique chaque semaine (7j)";
+    if (amountLabel) amountLabel.textContent = `${formatPygAmount(BASE_PRICES_PYG.weekly, currentCurrency, true)} / semaine`;
+  } else {
+    if (cycleLabel) cycleLabel.textContent = "Débit automatique chaque mois (30j)";
+    if (amountLabel) amountLabel.textContent = `${formatPygAmount(BASE_PRICES_PYG.monthly, currentCurrency, true)} / mois`;
+  }
+}
+
+function openAutoDebitModal() {
+  const planSelect = document.getElementById("booking-plan-select");
+  if (planSelect) {
+    if (currentAutoDebitCycle === "daily") planSelect.selectedIndex = 0;
+    else if (currentAutoDebitCycle === "weekly") planSelect.selectedIndex = 1;
+    else planSelect.selectedIndex = 2;
+  }
+  openBookingModal("", false, "CARD");
+}
+
+function setModalPlanIndex(idx) {
+  const planSelect = document.getElementById("booking-plan-select");
+  if (planSelect) {
+    planSelect.selectedIndex = idx;
+    updatePaymentProcessorNote();
+  }
+}
+
 function updatePaymentProcessorNote() {
   const paySelect = document.getElementById("booking-payment-select");
+  const planSelect = document.getElementById("booking-plan-select");
   const noteEl = document.getElementById("payment-processor-note");
+  const qrBox = document.getElementById("modal-sipap-qr-box");
+  const cardBox = document.getElementById("modal-card-autodebit-box");
+  const modalQrAmount = document.getElementById("modal-qr-amount");
   if (!paySelect || !noteEl) return;
+
+  const planIdx = planSelect ? planSelect.selectedIndex : 0;
+  const planAmounts = ["₲ 50.000 / jour", "₲ 350.000 / semaine", "₲ 1.400.000 / mois"];
+  if (modalQrAmount) {
+    modalQrAmount.textContent = `Montant : ${planAmounts[planIdx] || planAmounts[0]}`;
+  }
+
+  [0, 1, 2].forEach((i) => {
+    const btn = document.getElementById(`modal-cycle-btn-${i}`);
+    if (btn) {
+      if (i === planIdx) {
+        btn.classList.remove("bg-white", "text-gray-700", "border-gray-300");
+        btn.classList.add("bg-indigo-600", "text-white", "border-indigo-600");
+      } else {
+        btn.classList.add("bg-white", "text-gray-700", "border-gray-300");
+        btn.classList.remove("bg-indigo-600", "text-white", "border-indigo-600");
+      }
+    }
+  });
 
   const val = paySelect.value;
   if (val === "SIPAP") {
-    noteEl.textContent = "✓ Virement instantané SIPAP 24/7 / Alias au Paraguay (0% de frais bancaires).";
+    noteEl.textContent = "✓ Virement instantané SIPAP 24/7 / QR Code au Paraguay (0% de frais bancaires). Scannez le QR ci-dessous :";
+    qrBox?.classList.remove("hidden");
+    cardBox?.classList.add("hidden");
+  } else if (val === "CARD") {
+    noteEl.textContent = "✓ Prélèvement automatique sécurisé par Carte Bleue (Visa / Mastercard) débité automatiquement chaque jour, semaine ou mois selon votre choix.";
+    qrBox?.classList.add("hidden");
+    cardBox?.classList.remove("hidden");
   } else if (val === "CRYPTO") {
     noteEl.textContent = "✓ Paiement direct sans frais via Solana (USDC / USDT / SOL) ou Bitcoin Lightning.";
-  } else if (val === "CARD") {
-    noteEl.textContent = "✓ Lien de paiement sécurisé uPay (Pagopar / ueno) & Bancard : accepte Visa, Mastercard, Débito & QR.";
+    qrBox?.classList.add("hidden");
+    cardBox?.classList.add("hidden");
   } else {
     noteEl.textContent = "✓ Paiement en espèces (Guaraníes PYG ou USD) directement à l'atelier lors de la remise des clés.";
+    qrBox?.classList.add("hidden");
+    cardBox?.classList.add("hidden");
   }
 }
 
