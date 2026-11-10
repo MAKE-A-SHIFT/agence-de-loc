@@ -172,7 +172,9 @@ const translations = {
     contact_subtitle: "Réservez votre moto chez G&L MOTORS et roulez à Areguá & Asunción en toute liberté.",
     contact_book: "Réserver",
     contact_visit: "Nous rendre visite",
-    contact_address: "Cacique Areguá, Areguá, Paraguay",
+    contact_address: "Av. Gobernador Irala, Areguá, Paraguay",
+    contact_open_gmaps: "Ouvrir dans Google Maps",
+    contact_open_waze: "Ouvrir dans Waze",
     footer_disclaimer: "*Les prix en devise étrangère sont des estimations basées sur nos tarifs officiels (50.000 PYG/jour, 350.000 PYG/semaine, 1.400.000 PYG/mois) et peuvent varier selon le taux de change.",
     footer_copyright: "© 2026 G&L MOTORS - Areguá, Paraguay. Tous droits réservés.",
     modal_title: "Réserver votre moto",
@@ -359,7 +361,9 @@ const translations = {
     contact_subtitle: "Reserva tu moto en G&L MOTORS y recorre Areguá y Asunción como nunca antes.",
     contact_book: "Reservar",
     contact_visit: "Visítanos",
-    contact_address: "Cacique Areguá, Areguá, Paraguay",
+    contact_address: "Av. Gobernador Irala, Areguá, Paraguay",
+    contact_open_gmaps: "Abrir en Google Maps",
+    contact_open_waze: "Abrir en Waze",
     footer_disclaimer: "*Los precios en moneda extranjera son estimaciones basadas en nuestras tarifas oficiales (50.000 PYG/día, 350.000 PYG/semana, 1.400.000 PYG/mes) y pueden variar según el tipo de cambio.",
     footer_copyright: "© 2026 G&L MOTORS - Areguá, Paraguay. Todos los derechos reservados.",
     modal_title: "Reservar tu moto",
@@ -546,7 +550,9 @@ const translations = {
     contact_subtitle: "Book your motorcycle at G&L MOTORS and explore Areguá & Asunción like never before.",
     contact_book: "Book Now",
     contact_visit: "Visit Us",
-    contact_address: "Cacique Areguá, Areguá, Paraguay",
+    contact_address: "Av. Gobernador Irala, Areguá, Paraguay",
+    contact_open_gmaps: "Open in Google Maps",
+    contact_open_waze: "Open in Waze",
     footer_disclaimer: "*Foreign currency prices are estimates based on our official rates (50,000 PYG/day, 350,000 PYG/week, 1,400,000 PYG/month) and may vary.",
     footer_copyright: "© 2026 G&L MOTORS - Areguá, Paraguay. All rights reserved.",
     modal_title: "Book Your Motorcycle",
@@ -606,7 +612,9 @@ translations.pt = {
   services_title: "Preços simples e transparentes",
   services_get_started: "Começar",
   video_title: "Fuja do trânsito",
-  contact_title: "Comece sua jornada hoje."
+  contact_title: "Comece sua jornada hoje.",
+  contact_open_gmaps: "Abrir no Google Maps",
+  contact_open_waze: "Abrir no Waze"
 };
 
 translations.de = {
@@ -626,7 +634,9 @@ translations.de = {
   services_title: "Einfache, transparente Preise",
   services_get_started: "Loslegen",
   video_title: "Stau einfach umfahren",
-  contact_title: "Starte deine Fahrt noch heute."
+  contact_title: "Starte deine Fahrt noch heute.",
+  contact_open_gmaps: "In Google Maps öffnen",
+  contact_open_waze: "In Waze öffnen"
 };
 
 translations.it = {
@@ -646,5 +656,7 @@ translations.it = {
   services_title: "Prezzi semplici e trasparenti",
   services_get_started: "Inizia",
   video_title: "Salta il traffico",
-  contact_title: "Inizia il tuo viaggio oggi."
+  contact_title: "Inizia il tuo viaggio oggi.",
+  contact_open_gmaps: "Apri in Google Maps",
+  contact_open_waze: "Apri in Waze"
 };

@@ -15,11 +15,39 @@
         extend: {
           fontFamily: {
             sans: ['Geist', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
-            mono: ['Geist Mono', 'ui-monospace', 'SFMono-Regular', 'monospace']
+            mono: ['Geist', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif']
           }
         }
       }
     };
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "AutoRental",
+    "name": "G&L MOTORS",
+    "description": "Location de motos 150cc à Areguá et Grand Asunción, Paraguay (50.000 PYG/jour, 350.000 PYG/semaine, 1.400.000 PYG/mois) avec création de compte chauffeur Bolt GRATUITE et entretien mécanique 100% inclus.",
+    "url": "https://agence-de-loc.vercel.app",
+    "telephone": "+595995620416",
+    "priceRange": "₲50.000 - ₲1.400.000",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Avenida Gobernador Irala",
+      "addressLocality": "Areguá",
+      "addressRegion": "Central",
+      "addressCountry": "PY"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": -25.302387,
+      "longitude": -57.403957
+    },
+    "hasMap": "https://maps.app.goo.gl/qwPeBmJQ6Aks47R29",
+    "sameAs": [
+      "https://maps.app.goo.gl/qwPeBmJQ6Aks47R29",
+      "https://wa.me/595995620416"
+    ]
+  }
   </script>
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -77,7 +105,7 @@
                 <div class="font-medium">PYG</div>
                 <div class="text-xs text-gray-500">Guaraní</div>
               </div>
-              <span class="text-gray-500 font-mono">₲</span>
+              <span class="text-gray-500 font-sans">₲</span>
             </button>
             <button type="button" data-currency-option="USD" onclick="setCurrency('USD')" class="w-full px-4 py-2.5 text-left text-sm flex items-center gap-3 hover:bg-gray-100 transition-colors text-gray-900">
               <span class="text-lg">🇺🇸</span>
@@ -85,7 +113,7 @@
                 <div class="font-medium">USD</div>
                 <div class="text-xs text-gray-500">US Dollar</div>
               </div>
-              <span class="text-gray-500 font-mono">$</span>
+              <span class="text-gray-500 font-sans">$</span>
             </button>
             <button type="button" data-currency-option="EUR" onclick="setCurrency('EUR')" class="w-full px-4 py-2.5 text-left text-sm flex items-center gap-3 hover:bg-gray-100 transition-colors text-gray-900">
               <span class="text-lg">🇪🇺</span>
@@ -93,7 +121,7 @@
                 <div class="font-medium">EUR</div>
                 <div class="text-xs text-gray-500">Euro</div>
               </div>
-              <span class="text-gray-500 font-mono">€</span>
+              <span class="text-gray-500 font-sans">€</span>
             </button>
             <button type="button" data-currency-option="BRL" onclick="setCurrency('BRL')" class="w-full px-4 py-2.5 text-left text-sm flex items-center gap-3 hover:bg-gray-100 transition-colors text-gray-900">
               <span class="text-lg">🇧🇷</span>
@@ -101,7 +129,7 @@
                 <div class="font-medium">BRL</div>
                 <div class="text-xs text-gray-500">Real</div>
               </div>
-              <span class="text-gray-500 font-mono">R$</span>
+              <span class="text-gray-500 font-sans">R$</span>
             </button>
             <button type="button" data-currency-option="ARS" onclick="setCurrency('ARS')" class="w-full px-4 py-2.5 text-left text-sm flex items-center gap-3 hover:bg-gray-100 transition-colors text-gray-900">
               <span class="text-lg">🇦🇷</span>
@@ -109,7 +137,7 @@
                 <div class="font-medium">ARS</div>
                 <div class="text-xs text-gray-500">Peso Argentino</div>
               </div>
-              <span class="text-gray-500 font-mono">$</span>
+              <span class="text-gray-500 font-sans">$</span>
             </button>
           </div>
         </div>
@@ -244,7 +272,7 @@
           <div class="mb-8 flex justify-center">
             <div class="w-32 h-32 md:w-36 md:h-36 rounded-3xl bg-black text-white flex flex-col items-center justify-center shadow-xl border-4 border-white">
               <span class="text-3xl font-black tracking-tighter leading-none">G&amp;L</span>
-              <span class="text-xs font-mono uppercase tracking-[0.22em] text-[#34D186] mt-1 font-bold">MOTORS</span>
+              <span class="text-xs font-sans uppercase tracking-[0.22em] text-[#34D186] mt-1 font-bold">MOTORS</span>
               <span class="text-[10px] text-gray-400 mt-1">AREGUÁ • PY</span>
             </div>
           </div>
@@ -298,7 +326,7 @@
             </div>
           </div>
 
-          <p data-i18n="brand_story" class="text-lg md:text-xl text-gray-700 leading-relaxed italic font-light max-w-3xl mx-auto">
+          <p data-i18n="brand_story" class="text-lg md:text-xl text-gray-700 leading-relaxed font-normal max-w-3xl mx-auto">
             <strong>G&amp;L MOTORS</strong> — né de la passion mécanique et de l'appel de la route au Paraguay. Que vous cherchiez à générer des revenus immédiats comme chauffeur Bolt ou à parcourir les rues pavées d'Areguá jusqu'à Asunción et San Bernardino, notre propre atelier garantit des motos fiables, révisées et prêtes à rouler.
           </p>
           <p data-i18n="brand_tagline" class="text-xl md:text-2xl font-semibold text-gray-900 mt-6">
@@ -326,7 +354,7 @@
                 Modèle 2025 au look néo-rétro sportif avec phare rond LED, saute-vent fumé, jantes alliage noires et moteur 150cc nerveux. La Buler Faiter Rojo combine style affirmé, maniabilité urbaine et consommation réduite pour vos journées sur Bolt ou vos sorties autour d'Areguá.
               </p>
               <div class="border-l-4 border-black pl-6 mb-8">
-                <p data-i18n="scooter1_personality" class="text-gray-600 italic">
+                <p data-i18n="scooter1_personality" class="text-gray-600 font-medium">
                   Vous aimez rouler sur une moto récente (2025), réactive et élégante qui se démarque dans le trafic.
                 </p>
               </div>
@@ -356,7 +384,7 @@
                 Avec sa garde au sol surélevée, ses protège-mains et ses suspensions souples à grand débattement, la Star New Desert Rojo 150cc absorbe sans effort les rues pavées d'Areguá, les pistes sablonneuses et les avenues du Grand Asunción.
               </p>
               <div class="border-l-4 border-black pl-6 mb-8">
-                <p data-i18n="scooter2_personality" class="text-gray-600 italic">
+                <p data-i18n="scooter2_personality" class="text-gray-600 font-medium">
                   Vous voulez passer partout avec un confort royal, quelle que soit la qualité de la route.
                 </p>
               </div>
@@ -385,7 +413,7 @@
                 Look furtif full black, jantes alliage à bâtons renforcées et position de conduite haute ultra-confortable. L'Enduro Star Negra 150cc est taillée pour encaisser les longues journées de travail sur Bolt et les routes exigeantes du Paraguay.
               </p>
               <div class="border-l-4 border-black pl-6 mb-8">
-                <p data-i18n="scooter3_personality" class="text-gray-600 italic">
+                <p data-i18n="scooter3_personality" class="text-gray-600 font-medium">
                   Vous êtes décidé, endurant et cherchez une monture solide qui ne craint aucun nid-de-poule.
                 </p>
               </div>
@@ -416,7 +444,7 @@
                 Équipée de freins à disque avant/arrière, d'une fourche inversée Luxury, de crash-bars avec feux additionnels LED et d'un porte-bagages robuste, la XVR Grise et Verte 150cc est la reine du confort et de la sécurité de jour comme de nuit.
               </p>
               <div class="border-l-4 border-black pl-6 mb-8">
-                <p data-i18n="scooter4_personality" class="text-gray-600 italic">
+                <p data-i18n="scooter4_personality" class="text-gray-600 font-medium">
                   Vous voulez un équipement complet, une visibilité maximale et une tenue de route irréprochable.
                 </p>
               </div>
@@ -445,7 +473,7 @@
                 Réputée pour son économie de carburant exceptionnelle, sa selle longue ultra-confortable, son porte-bagages arrière et sa mécanique increvable. La Boxer Azul 150cc est l'alliée numéro 1 pour maximiser vos revenus nets quotidiens sur Bolt.
               </p>
               <div class="border-l-4 border-black pl-6 mb-8">
-                <p data-i18n="scooter5_personality" class="text-gray-600 italic">
+                <p data-i18n="scooter5_personality" class="text-gray-600 font-medium">
                   Vous visez la rentabilité maximale, la simplicité mécanique et l'endurance au quotidien.
                 </p>
               </div>
@@ -496,7 +524,7 @@
               <p data-i18n="card1_tagline" class="text-[11px] uppercase tracking-wider mb-1 text-rose-600 font-semibold">Roadster 2025</p>
               <div class="flex items-baseline justify-between gap-1">
                 <h3 data-i18n="card1_name" class="text-xl font-bold leading-tight">Buler Faiter Rojo</h3>
-                <span class="text-xs font-mono text-gray-400 flex-shrink-0">150cc</span>
+                <span class="text-xs font-sans text-gray-400 flex-shrink-0">150cc</span>
               </div>
             </div>
 
@@ -552,7 +580,7 @@
               <p data-i18n="card2_tagline" class="text-[11px] uppercase tracking-wider mb-1 text-amber-700 font-semibold">Trail polyvalent</p>
               <div class="flex items-baseline justify-between gap-1">
                 <h3 data-i18n="card2_name" class="text-xl font-bold leading-tight">Star New Desert Rojo</h3>
-                <span class="text-xs font-mono text-gray-400 flex-shrink-0">150cc</span>
+                <span class="text-xs font-sans text-gray-400 flex-shrink-0">150cc</span>
               </div>
             </div>
 
@@ -608,7 +636,7 @@
               <p data-i18n="card3_tagline" class="text-[11px] uppercase tracking-wider mb-1 text-[#34D186] font-semibold">Enduro robuste</p>
               <div class="flex items-baseline justify-between gap-1">
                 <h3 data-i18n="card3_name" class="text-xl font-bold leading-tight">Enduro Star Negra</h3>
-                <span class="text-xs font-mono text-gray-400 flex-shrink-0">150cc</span>
+                <span class="text-xs font-sans text-gray-400 flex-shrink-0">150cc</span>
               </div>
             </div>
 
@@ -664,7 +692,7 @@
               <p data-i18n="card4_tagline" class="text-[11px] uppercase tracking-wider mb-1 text-emerald-700 font-semibold">Trail Full Équipé</p>
               <div class="flex items-baseline justify-between gap-1">
                 <h3 data-i18n="card4_name" class="text-xl font-bold leading-tight">XVR Grise &amp; Verte</h3>
-                <span class="text-xs font-mono text-gray-400 flex-shrink-0">150cc</span>
+                <span class="text-xs font-sans text-gray-400 flex-shrink-0">150cc</span>
               </div>
             </div>
 
@@ -720,7 +748,7 @@
               <p data-i18n="card5_tagline" class="text-[11px] uppercase tracking-wider mb-1 text-blue-700 font-semibold">Reine de rentabilité</p>
               <div class="flex items-baseline justify-between gap-1">
                 <h3 data-i18n="card5_name" class="text-xl font-bold leading-tight">Boxer Azul</h3>
-                <span class="text-xs font-mono text-gray-400 flex-shrink-0">150cc</span>
+                <span class="text-xs font-sans text-gray-400 flex-shrink-0">150cc</span>
               </div>
             </div>
 
@@ -790,7 +818,7 @@
               </svg>
               <div class="text-left">
                 <div class="text-sm font-bold text-blue-950 leading-tight">USD-C</div>
-                <div class="text-[10px] font-mono text-blue-700">USDC • 0% frais</div>
+                <div class="text-[10px] font-sans text-blue-700">USDC • 0% frais</div>
               </div>
             </button>
 
@@ -802,7 +830,7 @@
               </svg>
               <div class="text-left">
                 <div class="text-sm font-bold text-emerald-950 leading-tight">USDT</div>
-                <div class="text-[10px] font-mono text-emerald-700">Tether • 0% frais</div>
+                <div class="text-[10px] font-sans text-emerald-700">Tether • 0% frais</div>
               </div>
             </button>
 
@@ -821,7 +849,7 @@
               </svg>
               <div class="text-left">
                 <div class="text-sm font-bold text-slate-900 leading-tight">Solana</div>
-                <div class="text-[10px] font-mono text-purple-700">SOL / SPL • Instant</div>
+                <div class="text-[10px] font-sans text-purple-700">SOL / SPL • Instant</div>
               </div>
             </button>
 
@@ -830,7 +858,7 @@
               <span class="flex h-8 w-8 items-center justify-center rounded-full bg-slate-900 text-white text-sm font-bold flex-shrink-0">🇵🇾</span>
               <div class="text-left">
                 <div data-i18n="pay_transfer" class="text-sm font-bold text-gray-900 leading-tight">Transferencia de Paraguay</div>
-                <div class="text-[10px] font-mono text-emerald-700 font-semibold">SIPAP 24/7 • Alias • 0% frais</div>
+                <div class="text-[10px] font-sans text-emerald-700 font-semibold">SIPAP 24/7 • Alias • 0% frais</div>
               </div>
             </button>
 
@@ -844,7 +872,7 @@
               </span>
               <div class="text-left">
                 <div data-i18n="pay_card" class="text-sm font-bold text-gray-900 leading-tight">Paiement par carte classique</div>
-                <div class="text-[10px] font-mono text-indigo-700">Visa / MC • uPay Pagopar &amp; Bancard</div>
+                <div class="text-[10px] font-sans text-indigo-700">Visa / MC • uPay Pagopar &amp; Bancard</div>
               </div>
             </button>
 
@@ -859,7 +887,7 @@
               </span>
               <div class="text-left">
                 <div data-i18n="pay_cash" class="text-sm font-bold text-emerald-950 leading-tight">Cash (Efectivo)</div>
-                <div class="text-[10px] font-mono text-emerald-700">PYG / USD • 0% frais</div>
+                <div class="text-[10px] font-sans text-emerald-700">PYG / USD • 0% frais</div>
               </div>
             </button>
 
@@ -934,7 +962,7 @@
             <div class="mb-6 flex flex-wrap items-center gap-3 sm:gap-4">
               <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-black text-white flex flex-col items-center justify-center shadow-md border border-gray-800">
                 <span class="text-lg sm:text-xl font-black tracking-tighter leading-none">G&amp;L</span>
-                <span class="text-[8px] sm:text-[9px] font-mono uppercase tracking-[0.2em] text-[#34D186] mt-1 font-bold">MOTORS</span>
+                <span class="text-[8px] sm:text-[9px] font-sans uppercase tracking-[0.2em] text-[#34D186] mt-1 font-bold">MOTORS</span>
               </div>
               <span data-i18n="bolt_badge" class="inline-flex items-center gap-2 rounded-full bg-[#34D186]/15 border border-[#34D186] px-3.5 py-1.5 text-[11px] sm:text-xs font-bold uppercase tracking-wider text-emerald-900">
                 OPTION COMPTE BOLT 100% GRATUITE
@@ -1012,7 +1040,7 @@
              ================================================================== -->
         <div class="mt-20 rounded-3xl bg-neutral-950 text-white p-8 md:p-12 shadow-2xl border border-neutral-800">
           <div class="text-center max-w-3xl mx-auto mb-10">
-            <span data-i18n="est_badge" class="inline-block rounded-full bg-[#34D186]/15 border border-[#34D186]/50 px-4 py-1 text-xs font-mono uppercase tracking-wider text-[#34D186] mb-3">
+            <span data-i18n="est_badge" class="inline-block rounded-full bg-[#34D186]/15 border border-[#34D186]/50 px-4 py-1 text-xs font-sans uppercase tracking-wider text-[#34D186] mb-3">
               SIMULATEUR BASÉ SUR LES DONNÉES RÉELLES À ASUNCIÓN
             </span>
             <h3 data-i18n="est_title" class="text-3xl md:text-4xl font-bold tracking-tight mb-3">
@@ -1033,7 +1061,7 @@
                   <label for="bolt-hours-slider" data-i18n="est_hours_label" class="text-sm font-medium text-neutral-300">
                     Heures passées par jour :
                   </label>
-                  <div class="text-3xl font-bold text-[#34D186] font-mono">
+                  <div class="text-3xl font-bold text-[#34D186] font-sans">
                     <span id="est-hours-value">8</span> <span data-i18n="est_hours_unit" class="text-base font-normal text-neutral-400">h / jour</span>
                   </div>
                 </div>
@@ -1047,7 +1075,7 @@
                   oninput="setEstimatorHours(this.value)"
                   class="w-full h-3 bg-neutral-800 rounded-lg appearance-none cursor-pointer accent-[#34D186]"
                 />
-                <div class="flex justify-between text-xs text-neutral-500 mt-2 font-mono">
+                <div class="flex justify-between text-xs text-neutral-500 mt-2 font-sans">
                   <span>2h (Complément)</span>
                   <span>6h (Mi-temps)</span>
                   <span>8h (Temps plein)</span>
@@ -1088,11 +1116,11 @@
               <div class="pt-4 border-t border-neutral-800 space-y-2 text-xs md:text-sm">
                 <div class="flex justify-between text-neutral-400">
                   <span data-i18n="est_gross_day_label">Recette brute / jour</span>
-                  <span id="est-gross-day" class="font-mono text-white">₲ 260.000</span>
+                  <span id="est-gross-day" class="font-sans text-white">₲ 260.000</span>
                 </div>
                 <div class="flex justify-between text-neutral-400">
                   <span data-i18n="est_deductions_label">Frais déduits (Location 50k + Nafta + Com. Bolt ~17%)</span>
-                  <span id="est-deductions-day" class="font-mono text-rose-400">- ₲ 118.000</span>
+                  <span id="est-deductions-day" class="font-sans text-rose-400">- ₲ 118.000</span>
                 </div>
               </div>
             </div>
@@ -1103,7 +1131,7 @@
                 <p data-i18n="est_net_day_label" class="text-xs uppercase tracking-wider text-neutral-400 mb-1">
                   Revenu NET / jour (dans votre poche)
                 </p>
-                <div id="est-net-day" class="text-3xl md:text-4xl font-bold text-white font-mono">
+                <div id="est-net-day" class="text-3xl md:text-4xl font-bold text-white font-sans">
                   ₲ 142.000
                 </div>
               </div>
@@ -1112,7 +1140,7 @@
                 <p data-i18n="est_net_week_label" class="text-xs uppercase tracking-wider text-neutral-400 mb-1">
                   Revenu NET / semaine
                 </p>
-                <div id="est-net-week" class="text-2xl md:text-3xl font-bold text-neutral-200 font-mono">
+                <div id="est-net-week" class="text-2xl md:text-3xl font-bold text-neutral-200 font-sans">
                   ₲ 852.000
                 </div>
               </div>
@@ -1122,10 +1150,10 @@
                   Revenu NET / mois estimé
                 </p>
                 <div class="flex items-baseline gap-2 flex-wrap">
-                  <span id="est-net-month" class="text-3xl md:text-4xl font-black text-[#34D186] font-mono">
+                  <span id="est-net-month" class="text-3xl md:text-4xl font-black text-[#34D186] font-sans">
                     ₲ 3.690.000
                   </span>
-                  <span id="est-net-month-pyg-sub" class="hidden text-xs text-neutral-400 font-mono"></span>
+                  <span id="est-net-month-pyg-sub" class="hidden text-xs text-neutral-400 font-sans"></span>
                 </div>
                 <p data-i18n="est_min_wage_note" class="text-[11px] text-neutral-300 mt-2">
                   Salaire minimum légal au Paraguay (réf. MTESS) : ~2.798.309 Gs / mois
@@ -1201,7 +1229,7 @@
               <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.957a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.368 2.448a1 1 0 00-.364 1.118l1.287 3.957c.3.921-.755 1.688-1.54 1.118l-3.368-2.448a1 1 0 00-1.175 0l-3.368 2.448c-.784.57-1.838-.197-1.539-1.118l1.287-3.957a1 1 0 00-.364-1.118L2.05 9.384c-.783-.57-.38-1.81.588-1.81h4.162a1 1 0 00.95-.69l1.299-3.957z" /></svg>
             </div>
             <span data-i18n="testimonials_based_on" class="text-gray-500">D'après 34 avis Google</span>
-            <a href="https://maps.google.com/?q=Cacique+Aregua,+Paraguay" target="_blank" rel="noopener noreferrer" data-i18n="testimonials_read_google" class="font-medium text-gray-900 underline decoration-gray-300 underline-offset-4 hover:decoration-gray-900">
+            <a href="https://maps.app.goo.gl/qwPeBmJQ6Aks47R29" target="_blank" rel="noopener noreferrer" data-i18n="testimonials_read_google" class="font-medium text-gray-900 underline decoration-gray-300 underline-offset-4 hover:decoration-gray-900">
               Lire tous les avis sur Google
             </a>
           </div>
@@ -1654,10 +1682,10 @@
         <!-- Visit Us & Google Maps Embed -->
         <div class="mt-20">
           <h3 data-i18n="contact_visit" class="text-2xl font-semibold mb-4">Nous rendre visite</h3>
-          <p data-i18n="contact_address" class="text-gray-400 mb-6">Cacique Areguá, Areguá, Paraguay</p>
+          <p data-i18n="contact_address" class="text-gray-400 mb-6">Av. Gobernador Irala, Areguá, Paraguay</p>
           <div class="rounded-2xl overflow-hidden shadow-2xl border-2 border-white/10 max-w-3xl mx-auto">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3607.7289945196564!2d-57.3871408!3d-25.2813589!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x945da9b5f5f72365%3A0x6b74e64f0b2f56b5!2sCacique%20Aregua!5e0!3m2!1sen!2spy!4v1700000000000!5m2!1sen!2spy"
+              src="https://maps.google.com/maps?q=-25.302387,-57.403957&hl=es&z=17&output=embed"
               width="100%"
               height="350"
               style="border:0"
@@ -1666,6 +1694,33 @@
               referrerpolicy="no-referrer-when-downgrade"
               class="w-full">
             </iframe>
+          </div>
+
+          <!-- Direct GPS Navigation Buttons: Google Maps & Waze -->
+          <div class="mt-6 flex flex-wrap items-center justify-center gap-4">
+            <a
+              href="https://maps.app.goo.gl/qwPeBmJQ6Aks47R29"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full bg-white text-black font-semibold text-sm sm:text-base hover:bg-gray-200 transition-all shadow-lg hover:scale-105 cursor-pointer"
+            >
+              <svg class="w-5 h-5 text-[#EA4335] flex-shrink-0" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+              </svg>
+              <span data-i18n="contact_open_gmaps">Ouvrir dans Google Maps</span>
+            </a>
+
+            <a
+              href="https://waze.com/ul?ll=-25.302387,-57.403957&navigate=yes"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full bg-[#33CCFF] text-black font-semibold text-sm sm:text-base hover:bg-[#1fc2f8] transition-all shadow-lg hover:scale-105 cursor-pointer"
+            >
+              <svg class="w-5 h-5 text-black flex-shrink-0" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M19.54 11.48c.26-.88.4-1.82.4-2.8 0-4.97-4.25-9-9.5-9S.94 3.71.94 8.68c0 1.66.48 3.22 1.31 4.56-.37.98-.97 1.77-1.78 2.34-.22.15-.31.43-.22.68.09.25.33.42.6.42 1.54 0 2.91-.41 4.08-1.11.79.35 1.63.61 2.51.77.26 1.55 1.61 2.73 3.23 2.73 1.48 0 2.74-.98 3.14-2.33.89-.05 1.75-.22 2.56-.49.28 1.44 1.55 2.53 3.07 2.53 1.73 0 3.13-1.4 3.13-3.13 0-1.69-1.34-3.07-3.03-3.13v-1.04zm-11.4-3.8c.69 0 1.25.56 1.25 1.25s-.56 1.25-1.25 1.25-1.25-.56-1.25-1.25.56-1.25 1.25-1.25zm5.5 0c.69 0 1.25.56 1.25 1.25s-.56 1.25-1.25 1.25-1.25-.56-1.25-1.25.56-1.25 1.25-1.25zm-2.75 5.45c-1.78 0-3.28-1.04-3.79-2.48h7.58c-.51 1.44-2.01 2.48-3.79 2.48z"/>
+              </svg>
+              <span data-i18n="contact_open_waze">Ouvrir dans Waze</span>
+            </a>
           </div>
         </div>
       </div>
@@ -1693,7 +1748,7 @@
       </button>
 
       <div class="mb-5">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gray-100 text-xs font-mono uppercase tracking-wider text-gray-700 mb-3">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gray-100 text-xs font-sans uppercase tracking-wider text-gray-700 mb-3">
           <span>🏍️ G&amp;L MOTORS</span>
         </div>
         <h3 data-i18n="modal_title" class="text-xl sm:text-2xl font-bold">Réserver votre moto</h3>
