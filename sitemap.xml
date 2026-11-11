@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://glmotors.vercel.app/</loc>
+    <lastmod>2026-11-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://glmotors.vercel.app/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://glmotors.vercel.app/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://glmotors.vercel.app/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://glmotors.vercel.app/" />
+    <image:image>
+      <image:loc>https://glmotors.vercel.app/assets/facebook-banner/facebook-cover-glmotors.png</image:loc>
+      <image:title>G&amp;L MOTORS - Alquiler de Motos 150cc en Asunción &amp; Areguá Paraguay</image:title>
+      <image:caption>Flota de motos 150cc para Bolt y turismo con mantenimiento incluido.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://glmotors.vercel.app/assets/images/logo-gl-motors.jpg</image:loc>
+      <image:title>Logo Oficial G&amp;L MOTORS</image:title>
+    </image:image>
+  </url>
+</urlset>

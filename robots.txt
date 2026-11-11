@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Host
+Host: https://glmotors.vercel.app
+
+# Sitemaps
+Sitemap: https://glmotors.vercel.app/sitemap.xml
