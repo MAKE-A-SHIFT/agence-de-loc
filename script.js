@@ -84,8 +84,101 @@ const ORIGINAL_REVIEWS = {
   4: "Gente muy seria y mecánica de primera con la Star New Desert Rojo 150cc. Ya sea que pagues en efectivo, tarjeta o transferencia bancaria, todo es transparente. Avisas por WhatsApp antes de llegar a Areguá y en 15 minutos ya salís andando."
 };
 
-let currentLang = localStorage.getItem("gl_lang") || "fr";
-let currentCurrency = localStorage.getItem("gl_currency") || "PYG";
+// Automatic Language & Currency Detection with Defaults (Castellano & PYG)
+function detectVisitorLanguage() {
+  const manual = localStorage.getItem("gl_lang_manual");
+  if (manual && translations[manual]) {
+    return manual;
+  }
+
+  const navLangs = (navigator.languages && navigator.languages.length)
+    ? navigator.languages
+    : [navigator.language || navigator.userLanguage || ""];
+
+  for (let raw of navLangs) {
+    if (!raw) continue;
+    const l = raw.toLowerCase().trim();
+    if (l.startsWith("fr")) return "fr";
+    if (l.startsWith("en")) return "en";
+    if (l.startsWith("pt")) return "pt";
+    if (l.startsWith("de")) return "de";
+    if (l.startsWith("it")) return "it";
+    if (l.startsWith("gn") || l.startsWith("gug")) return "guarani";
+    if (l.startsWith("es")) {
+      if (l === "es-es") return "es";
+      return "castillano";
+    }
+  }
+
+  return "castillano"; // Default fallback
+}
+
+function detectVisitorCurrency() {
+  const manual = localStorage.getItem("gl_currency_manual");
+  if (manual && CURRENCIES[manual]) {
+    return manual;
+  }
+
+  let tz = "";
+  try {
+    tz = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
+  } catch (_) {}
+
+  const navLang = (navigator.language || navigator.userLanguage || "").toLowerCase().trim();
+
+  // 1. Argentina -> ARS
+  if (tz.includes("Argentina") || tz.includes("Buenos_Aires") || navLang === "es-ar") {
+    return "ARS";
+  }
+
+  // 2. Brazil -> BRL
+  if (
+    tz.includes("Sao_Paulo") ||
+    tz.includes("Fortaleza") ||
+    tz.includes("Recife") ||
+    tz.includes("Manaus") ||
+    tz.includes("Belem") ||
+    tz.includes("Cuiaba") ||
+    tz.includes("Porto_Velho") ||
+    navLang.startsWith("pt-br")
+  ) {
+    return "BRL";
+  }
+
+  // 3. Eurozone -> EUR
+  if (
+    tz.startsWith("Europe/") &&
+    !tz.includes("London") &&
+    !tz.includes("Zurich") &&
+    !tz.includes("Moscow") &&
+    !tz.includes("Kiev") &&
+    !tz.includes("Istanbul")
+  ) {
+    return "EUR";
+  }
+
+  // 4. USA / Expat -> USD
+  if (
+    (tz.startsWith("America/") &&
+      (tz.includes("New_York") ||
+        tz.includes("Chicago") ||
+        tz.includes("Los_Angeles") ||
+        tz.includes("Denver") ||
+        tz.includes("Phoenix") ||
+        tz.includes("Detroit") ||
+        tz.includes("Anchorage") ||
+        tz.includes("Honolulu"))) ||
+    navLang === "en-us"
+  ) {
+    return "USD";
+  }
+
+  // 5. Paraguay & Default -> PYG
+  return "PYG";
+}
+
+let currentLang = detectVisitorLanguage();
+let currentCurrency = detectVisitorCurrency();
 let selectedShareIndex = 0;
 const reviewShowingOriginal = { 1: false, 2: false, 3: false, 4: false };
 
@@ -108,10 +201,13 @@ function formatPygAmount(pygAmount, currencyCode = currentCurrency, compact = fa
 }
 
 // 1. Language Switching
-function setLanguage(lang) {
-  if (!translations[lang]) lang = "fr";
+function setLanguage(lang, isManual = false) {
+  if (!translations[lang]) lang = "castillano";
   currentLang = lang;
   localStorage.setItem("gl_lang", lang);
+  if (isManual) {
+    localStorage.setItem("gl_lang_manual", lang);
+  }
   document.documentElement.lang = lang === "castillano" ? "es" : lang === "guarani" ? "gn" : lang;
 
   const t = translations[lang];
@@ -128,7 +224,7 @@ function setLanguage(lang) {
   });
 
   // Update navbar language badge
-  const langInfo = LANGUAGES[lang] || LANGUAGES.fr;
+  const langInfo = LANGUAGES[lang] || LANGUAGES.castillano;
   const flagEl = document.getElementById("current-lang-flag");
   const codeEl = document.getElementById("current-lang-code");
   if (flagEl) flagEl.textContent = langInfo.flag;
@@ -159,10 +255,13 @@ function setLanguage(lang) {
 }
 
 // 2. Currency Switching (adapts 50k / 350k / 1.4M PYG across the entire site)
-function setCurrency(code) {
+function setCurrency(code, isManual = false) {
   if (!CURRENCIES[code]) code = "PYG";
   currentCurrency = code;
   localStorage.setItem("gl_currency", code);
+  if (isManual) {
+    localStorage.setItem("gl_currency_manual", code);
+  }
   updateCurrencyDisplay();
   updateBoltEstimator();
 }

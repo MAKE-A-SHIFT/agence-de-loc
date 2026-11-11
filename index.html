@@ -11,19 +11,24 @@
   <meta property="og:image" content="https://agence-de-loc.vercel.app/assets/images/logo-gl-motors.jpg" />
   <link rel="icon" type="image/png" href="assets/images/favicon.png" />
   <link rel="apple-touch-icon" href="assets/images/apple-touch-icon.png" />
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['Geist', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
-            mono: ['Geist', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif']
+    tailwind = {
+      config: {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Geist', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+              mono: ['Geist', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif']
+            }
           }
         }
       }
     };
   </script>
+  <script src="https://cdn.tailwindcss.com"></script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -106,45 +111,45 @@
           </button>
 
           <div id="currency-dropdown" class="hidden absolute right-0 mt-2 w-48 rounded-2xl bg-white shadow-xl border border-gray-200 py-1.5 z-50">
-            <button type="button" data-currency-option="PYG" onclick="setCurrency('PYG')" class="w-full px-4 py-2.5 text-left text-sm flex items-center gap-3 hover:bg-gray-100 transition-colors text-gray-900">
+            <button type="button" data-currency-option="PYG" onclick="setCurrency('PYG', true)" class="w-full px-4 py-2.5 text-left text-sm flex items-center gap-3 hover:bg-gray-100 transition-colors text-gray-900">
               <span class="text-lg">🇵🇾</span>
               <div class="flex-1">
                 <div class="font-medium">PYG</div>
                 <div class="text-xs text-gray-500">Guaraní</div>
               </div>
-              <span class="text-gray-500 font-sans">₲</span>
+              <span class="text-gray-500">₲</span>
             </button>
-            <button type="button" data-currency-option="USD" onclick="setCurrency('USD')" class="w-full px-4 py-2.5 text-left text-sm flex items-center gap-3 hover:bg-gray-100 transition-colors text-gray-900">
+            <button type="button" data-currency-option="USD" onclick="setCurrency('USD', true)" class="w-full px-4 py-2.5 text-left text-sm flex items-center gap-3 hover:bg-gray-100 transition-colors text-gray-900">
               <span class="text-lg">🇺🇸</span>
               <div class="flex-1">
                 <div class="font-medium">USD</div>
                 <div class="text-xs text-gray-500">US Dollar</div>
               </div>
-              <span class="text-gray-500 font-sans">$</span>
+              <span class="text-gray-500">$</span>
             </button>
-            <button type="button" data-currency-option="EUR" onclick="setCurrency('EUR')" class="w-full px-4 py-2.5 text-left text-sm flex items-center gap-3 hover:bg-gray-100 transition-colors text-gray-900">
+            <button type="button" data-currency-option="EUR" onclick="setCurrency('EUR', true)" class="w-full px-4 py-2.5 text-left text-sm flex items-center gap-3 hover:bg-gray-100 transition-colors text-gray-900">
               <span class="text-lg">🇪🇺</span>
               <div class="flex-1">
                 <div class="font-medium">EUR</div>
                 <div class="text-xs text-gray-500">Euro</div>
               </div>
-              <span class="text-gray-500 font-sans">€</span>
+              <span class="text-gray-500">€</span>
             </button>
-            <button type="button" data-currency-option="BRL" onclick="setCurrency('BRL')" class="w-full px-4 py-2.5 text-left text-sm flex items-center gap-3 hover:bg-gray-100 transition-colors text-gray-900">
+            <button type="button" data-currency-option="BRL" onclick="setCurrency('BRL', true)" class="w-full px-4 py-2.5 text-left text-sm flex items-center gap-3 hover:bg-gray-100 transition-colors text-gray-900">
               <span class="text-lg">🇧🇷</span>
               <div class="flex-1">
                 <div class="font-medium">BRL</div>
                 <div class="text-xs text-gray-500">Real</div>
               </div>
-              <span class="text-gray-500 font-sans">R$</span>
+              <span class="text-gray-500">R$</span>
             </button>
-            <button type="button" data-currency-option="ARS" onclick="setCurrency('ARS')" class="w-full px-4 py-2.5 text-left text-sm flex items-center gap-3 hover:bg-gray-100 transition-colors text-gray-900">
+            <button type="button" data-currency-option="ARS" onclick="setCurrency('ARS', true)" class="w-full px-4 py-2.5 text-left text-sm flex items-center gap-3 hover:bg-gray-100 transition-colors text-gray-900">
               <span class="text-lg">🇦🇷</span>
               <div class="flex-1">
                 <div class="font-medium">ARS</div>
                 <div class="text-xs text-gray-500">Peso Argentino</div>
               </div>
-              <span class="text-gray-500 font-sans">$</span>
+              <span class="text-gray-500">$</span>
             </button>
           </div>
         </div>
@@ -152,36 +157,36 @@
         <!-- Language Switcher -->
         <div class="relative">
           <button id="lang-menu-btn" type="button" aria-label="Langue" class="nav-adaptive-pill flex items-center gap-1.5 px-3 py-2 rounded-full border backdrop-blur-sm text-sm font-medium transition-all duration-300 cursor-pointer border-white/40 text-white hover:bg-white/10 hover:border-white/70">
-            <span id="current-lang-flag" class="text-base leading-none">🇫🇷</span>
-            <span id="current-lang-code" class="hidden sm:inline">FR</span>
+            <span id="current-lang-flag" class="text-base leading-none">🇦🇷</span>
+            <span id="current-lang-code" class="hidden sm:inline">AR</span>
             <svg class="w-3.5 h-3.5 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
             </svg>
           </button>
 
           <div id="lang-dropdown" class="hidden absolute right-0 mt-2 w-44 rounded-2xl bg-white shadow-xl border border-gray-200 overflow-hidden py-1 z-50">
-            <button type="button" data-lang-option="fr" onclick="setLanguage('fr')" class="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-left text-gray-700 hover:bg-gray-100">
-              <span class="text-base leading-none">🇫🇷</span><span>Français</span>
-            </button>
-            <button type="button" data-lang-option="es" onclick="setLanguage('es')" class="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-left text-gray-700 hover:bg-gray-100">
-              <span class="text-base leading-none">🇵🇾</span><span>Español</span>
-            </button>
-            <button type="button" data-lang-option="castillano" onclick="setLanguage('castillano')" class="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-left text-gray-700 hover:bg-gray-100">
+            <button type="button" data-lang-option="castillano" onclick="setLanguage('castillano', true)" class="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-left text-gray-700 hover:bg-gray-100">
               <span class="text-base leading-none">🇦🇷</span><span>Castellano</span>
             </button>
-            <button type="button" data-lang-option="guarani" onclick="setLanguage('guarani')" class="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-left text-gray-700 hover:bg-gray-100">
+            <button type="button" data-lang-option="es" onclick="setLanguage('es', true)" class="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-left text-gray-700 hover:bg-gray-100">
+              <span class="text-base leading-none">🇵🇾</span><span>Español</span>
+            </button>
+            <button type="button" data-lang-option="fr" onclick="setLanguage('fr', true)" class="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-left text-gray-700 hover:bg-gray-100">
+              <span class="text-base leading-none">🇫🇷</span><span>Français</span>
+            </button>
+            <button type="button" data-lang-option="guarani" onclick="setLanguage('guarani', true)" class="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-left text-gray-700 hover:bg-gray-100">
               <span class="text-base leading-none">🇵🇾</span><span>Guaraní</span>
             </button>
-            <button type="button" data-lang-option="en" onclick="setLanguage('en')" class="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-left text-gray-700 hover:bg-gray-100">
+            <button type="button" data-lang-option="en" onclick="setLanguage('en', true)" class="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-left text-gray-700 hover:bg-gray-100">
               <span class="text-base leading-none">🇬🇧</span><span>English</span>
             </button>
-            <button type="button" data-lang-option="pt" onclick="setLanguage('pt')" class="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-left text-gray-700 hover:bg-gray-100">
+            <button type="button" data-lang-option="pt" onclick="setLanguage('pt', true)" class="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-left text-gray-700 hover:bg-gray-100">
               <span class="text-base leading-none">🇧🇷</span><span>Português</span>
             </button>
-            <button type="button" data-lang-option="de" onclick="setLanguage('de')" class="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-left text-gray-700 hover:bg-gray-100">
+            <button type="button" data-lang-option="de" onclick="setLanguage('de', true)" class="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-left text-gray-700 hover:bg-gray-100">
               <span class="text-base leading-none">🇩🇪</span><span>Deutsch</span>
             </button>
-            <button type="button" data-lang-option="it" onclick="setLanguage('it')" class="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-left text-gray-700 hover:bg-gray-100">
+            <button type="button" data-lang-option="it" onclick="setLanguage('it', true)" class="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-left text-gray-700 hover:bg-gray-100">
               <span class="text-base leading-none">🇮🇹</span><span>Italiano</span>
             </button>
           </div>
@@ -509,7 +514,7 @@
               <p data-i18n="card1_tagline" class="text-[11px] uppercase tracking-wider mb-1 text-rose-600 font-semibold">Roadster 2025</p>
               <div class="flex items-baseline justify-between gap-1">
                 <h3 data-i18n="card1_name" class="text-xl font-bold leading-tight">Buler Faiter Rojo</h3>
-                <span class="text-xs font-sans text-gray-400 flex-shrink-0">150cc</span>
+                <span class="text-xs text-gray-400 flex-shrink-0">150cc</span>
               </div>
             </div>
 
@@ -565,7 +570,7 @@
               <p data-i18n="card2_tagline" class="text-[11px] uppercase tracking-wider mb-1 text-amber-700 font-semibold">Trail polyvalent</p>
               <div class="flex items-baseline justify-between gap-1">
                 <h3 data-i18n="card2_name" class="text-xl font-bold leading-tight">Star New Desert Rojo</h3>
-                <span class="text-xs font-sans text-gray-400 flex-shrink-0">150cc</span>
+                <span class="text-xs text-gray-400 flex-shrink-0">150cc</span>
               </div>
             </div>
 
@@ -621,7 +626,7 @@
               <p data-i18n="card3_tagline" class="text-[11px] uppercase tracking-wider mb-1 text-[#34D186] font-semibold">Enduro robuste</p>
               <div class="flex items-baseline justify-between gap-1">
                 <h3 data-i18n="card3_name" class="text-xl font-bold leading-tight">Enduro Star Negra</h3>
-                <span class="text-xs font-sans text-gray-400 flex-shrink-0">150cc</span>
+                <span class="text-xs text-gray-400 flex-shrink-0">150cc</span>
               </div>
             </div>
 
@@ -677,7 +682,7 @@
               <p data-i18n="card4_tagline" class="text-[11px] uppercase tracking-wider mb-1 text-emerald-700 font-semibold">Trail Full Équipé</p>
               <div class="flex items-baseline justify-between gap-1">
                 <h3 data-i18n="card4_name" class="text-xl font-bold leading-tight">XVR Grise &amp; Verte</h3>
-                <span class="text-xs font-sans text-gray-400 flex-shrink-0">150cc</span>
+                <span class="text-xs text-gray-400 flex-shrink-0">150cc</span>
               </div>
             </div>
 
@@ -733,7 +738,7 @@
               <p data-i18n="card5_tagline" class="text-[11px] uppercase tracking-wider mb-1 text-blue-700 font-semibold">Reine de rentabilité</p>
               <div class="flex items-baseline justify-between gap-1">
                 <h3 data-i18n="card5_name" class="text-xl font-bold leading-tight">Boxer Azul</h3>
-                <span class="text-xs font-sans text-gray-400 flex-shrink-0">150cc</span>
+                <span class="text-xs text-gray-400 flex-shrink-0">150cc</span>
               </div>
             </div>
 
@@ -803,7 +808,7 @@
               </svg>
               <div class="text-left">
                 <div class="text-sm font-bold text-blue-950 leading-tight">USD-C</div>
-                <div class="text-[10px] font-sans text-blue-700">USDC • 0% frais</div>
+                <div class="text-[10px] text-blue-700">USDC • 0% frais</div>
               </div>
             </button>
 
@@ -815,7 +820,7 @@
               </svg>
               <div class="text-left">
                 <div class="text-sm font-bold text-emerald-950 leading-tight">USDT</div>
-                <div class="text-[10px] font-sans text-emerald-700">Tether • 0% frais</div>
+                <div class="text-[10px] text-emerald-700">Tether • 0% frais</div>
               </div>
             </button>
 
@@ -834,7 +839,7 @@
               </svg>
               <div class="text-left">
                 <div class="text-sm font-bold text-slate-900 leading-tight">Solana</div>
-                <div class="text-[10px] font-sans text-purple-700">SOL / SPL • Instant</div>
+                <div class="text-[10px] text-purple-700">SOL / SPL • Instant</div>
               </div>
             </button>
 
@@ -843,7 +848,7 @@
               <span class="flex h-8 w-8 items-center justify-center rounded-full bg-slate-900 text-white text-sm font-bold flex-shrink-0">🇵🇾</span>
               <div class="text-left">
                 <div data-i18n="pay_transfer" class="text-sm font-bold text-gray-900 leading-tight">Transferencia</div>
-                <div data-i18n="pay_transfer_sub" class="text-[10px] font-sans text-emerald-700 font-semibold">SIPAP 24/7 • Alias • 0% frais</div>
+                <div data-i18n="pay_transfer_sub" class="text-[10px] text-emerald-700 font-semibold">SIPAP 24/7 • Alias • 0% frais</div>
               </div>
             </button>
 
@@ -857,7 +862,7 @@
               </span>
               <div class="text-left">
                 <div data-i18n="pay_card" class="text-sm font-bold text-gray-900 leading-tight">Carte bancaire</div>
-                <div data-i18n="pay_card_sub" class="text-[10px] font-sans text-indigo-700">Visa / MC • Pagopar &amp; Bancard</div>
+                <div data-i18n="pay_card_sub" class="text-[10px] text-indigo-700">Visa / MC • Pagopar &amp; Bancard</div>
               </div>
             </button>
 
@@ -872,7 +877,7 @@
               </span>
               <div class="text-left">
                 <div data-i18n="pay_cash" class="text-sm font-bold text-emerald-950 leading-tight">Cash</div>
-                <div data-i18n="pay_cash_sub" class="text-[10px] font-sans text-emerald-700">PYG / USD • 0% frais</div>
+                <div data-i18n="pay_cash_sub" class="text-[10px] text-emerald-700">PYG / USD • 0% frais</div>
               </div>
             </button>
 
@@ -1192,7 +1197,7 @@
              ================================================================== -->
         <div class="mt-20 rounded-3xl bg-neutral-950 text-white p-8 md:p-12 shadow-2xl border border-neutral-800">
           <div class="text-center max-w-3xl mx-auto mb-10">
-            <span data-i18n="est_badge" class="inline-block rounded-full bg-[#34D186]/15 border border-[#34D186]/50 px-4 py-1 text-xs font-sans uppercase tracking-wider text-[#34D186] mb-3">
+            <span data-i18n="est_badge" class="inline-block rounded-full bg-[#34D186]/15 border border-[#34D186]/50 px-4 py-1 text-xs uppercase tracking-wider text-[#34D186] mb-3">
               SIMULATEUR BASÉ SUR LES DONNÉES RÉELLES À ASUNCIÓN
             </span>
             <h3 data-i18n="est_title" class="text-3xl md:text-4xl font-bold tracking-tight mb-3">
@@ -1213,7 +1218,7 @@
                   <label for="bolt-hours-slider" data-i18n="est_hours_label" class="text-sm font-medium text-neutral-300">
                     Heures passées par jour :
                   </label>
-                  <div class="text-3xl font-bold text-[#34D186] font-sans">
+                  <div class="text-3xl font-bold text-[#34D186]">
                     <span id="est-hours-value">8</span> <span data-i18n="est_hours_unit" class="text-base font-normal text-neutral-400">h / jour</span>
                   </div>
                 </div>
@@ -1227,7 +1232,7 @@
                   oninput="setEstimatorHours(this.value)"
                   class="w-full h-3 bg-neutral-800 rounded-lg appearance-none cursor-pointer accent-[#34D186]"
                 />
-                <div class="flex justify-between text-xs text-neutral-500 mt-2 font-sans">
+                <div class="flex justify-between text-xs text-neutral-500 mt-2">
                   <span>2h (Complément)</span>
                   <span>6h (Mi-temps)</span>
                   <span>8h (Temps plein)</span>
@@ -1268,11 +1273,11 @@
               <div class="pt-4 border-t border-neutral-800 space-y-2 text-xs md:text-sm">
                 <div class="flex justify-between text-neutral-400">
                   <span data-i18n="est_gross_day_label">Recette brute / jour</span>
-                  <span id="est-gross-day" class="font-sans text-white">₲ 260.000</span>
+                  <span id="est-gross-day" class="text-white">₲ 260.000</span>
                 </div>
                 <div class="flex justify-between text-neutral-400">
                   <span data-i18n="est_deductions_label">Frais déduits (Location 50k + Nafta + Com. Bolt ~17%)</span>
-                  <span id="est-deductions-day" class="font-sans text-rose-400">- ₲ 118.000</span>
+                  <span id="est-deductions-day" class="text-rose-400">- ₲ 118.000</span>
                 </div>
               </div>
             </div>
@@ -1283,7 +1288,7 @@
                 <p data-i18n="est_net_day_label" class="text-xs uppercase tracking-wider text-neutral-400 mb-1">
                   Revenu NET / jour (dans votre poche)
                 </p>
-                <div id="est-net-day" class="text-3xl md:text-4xl font-bold text-white font-sans">
+                <div id="est-net-day" class="text-3xl md:text-4xl font-bold text-white">
                   ₲ 142.000
                 </div>
               </div>
@@ -1292,7 +1297,7 @@
                 <p data-i18n="est_net_week_label" class="text-xs uppercase tracking-wider text-neutral-400 mb-1">
                   Revenu NET / semaine
                 </p>
-                <div id="est-net-week" class="text-2xl md:text-3xl font-bold text-neutral-200 font-sans">
+                <div id="est-net-week" class="text-2xl md:text-3xl font-bold text-neutral-200">
                   ₲ 852.000
                 </div>
               </div>
@@ -1302,10 +1307,10 @@
                   Revenu NET / mois estimé
                 </p>
                 <div class="flex items-baseline gap-2 flex-wrap">
-                  <span id="est-net-month" class="text-3xl md:text-4xl font-black text-[#34D186] font-sans">
+                  <span id="est-net-month" class="text-3xl md:text-4xl font-black text-[#34D186]">
                     ₲ 3.690.000
                   </span>
-                  <span id="est-net-month-pyg-sub" class="hidden text-xs text-neutral-400 font-sans"></span>
+                  <span id="est-net-month-pyg-sub" class="hidden text-xs text-neutral-400"></span>
                 </div>
                 <p data-i18n="est_min_wage_note" class="text-[11px] text-neutral-300 mt-2">
                   Salaire minimum légal au Paraguay (réf. MTESS) : ~2.798.309 Gs / mois
@@ -1892,7 +1897,7 @@
       </button>
 
       <div class="mb-5">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gray-100 text-xs font-sans uppercase tracking-wider text-gray-700 mb-3">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gray-100 text-xs uppercase tracking-wider text-gray-700 mb-3">
           <img src="assets/images/favicon.png" alt="G&amp;L MOTORS" class="w-4 h-4 rounded-sm object-cover" />
           <span>G&amp;L MOTORS</span>
         </div>
@@ -2075,7 +2080,7 @@
             </div>
           </div>
           <div class="relative">
-            <input id="autodebit-cardnumber" type="text" required maxlength="19" placeholder="4000 0000 0000 0000" oninput="formatCardNumberInput(this)" class="w-full rounded-2xl border border-gray-300 bg-gray-50 px-4 py-3 text-sm font-mono tracking-wider focus:border-indigo-600 focus:outline-none pr-10" />
+            <input id="autodebit-cardnumber" type="text" required maxlength="19" placeholder="4000 0000 0000 0000" oninput="formatCardNumberInput(this)" class="w-full rounded-2xl border border-gray-300 bg-gray-50 px-4 py-3 text-sm tracking-wider focus:border-indigo-600 focus:outline-none pr-10" />
             <span class="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                 <rect x="2" y="5" width="20" height="14" rx="2" />
@@ -2089,11 +2094,11 @@
         <div class="grid grid-cols-2 gap-3">
           <div>
             <label for="autodebit-expiry" class="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-1.5">Vencimiento (MM/AA)</label>
-            <input id="autodebit-expiry" type="text" required maxlength="5" placeholder="MM/AA" oninput="formatExpiryInput(this)" class="w-full rounded-2xl border border-gray-300 bg-gray-50 px-4 py-3 text-sm font-mono text-center focus:border-indigo-600 focus:outline-none" />
+            <input id="autodebit-expiry" type="text" required maxlength="5" placeholder="MM/AA" oninput="formatExpiryInput(this)" class="w-full rounded-2xl border border-gray-300 bg-gray-50 px-4 py-3 text-sm text-center focus:border-indigo-600 focus:outline-none" />
           </div>
           <div>
             <label for="autodebit-cvv" class="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-1.5">Código CVV / CVC</label>
-            <input id="autodebit-cvv" type="password" required maxlength="4" placeholder="123" class="w-full rounded-2xl border border-gray-300 bg-gray-50 px-4 py-3 text-sm font-mono text-center focus:border-indigo-600 focus:outline-none" />
+            <input id="autodebit-cvv" type="password" required maxlength="4" placeholder="123" class="w-full rounded-2xl border border-gray-300 bg-gray-50 px-4 py-3 text-sm text-center focus:border-indigo-600 focus:outline-none" />
           </div>
         </div>
 
@@ -2264,7 +2269,7 @@
             </div>
             <div class="flex justify-between border-b border-gray-200 pb-1.5">
               <span class="font-semibold text-gray-600">Cédula de Identidad (C.I.) :</span>
-              <span class="font-mono text-gray-900 font-bold">4.274.384</span>
+              <span class="text-gray-900 font-bold">4.274.384</span>
             </div>
             <div class="flex justify-between border-b border-gray-200 pb-1.5">
               <span class="font-semibold text-gray-600">Domicilio Legal y Taller :</span>
@@ -2276,11 +2281,11 @@
             </div>
             <div class="flex justify-between border-b border-gray-200 pb-1.5">
               <span class="font-semibold text-gray-600">Teléfono / WhatsApp :</span>
-              <span class="font-mono text-gray-900 font-bold">+595 995 620 416</span>
+              <span class="text-gray-900 font-bold">+595 995 620 416</span>
             </div>
             <div class="flex justify-between">
               <span class="font-semibold text-gray-600">Correo Electrónico Oficial :</span>
-              <span class="font-mono text-gray-900">contact@glmotors.py</span>
+              <span class="text-gray-900">contact@glmotors.py</span>
             </div>
           </div>
           <div>

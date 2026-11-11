@@ -7,17 +7,20 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  --font-geist-sans: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-geist-mono: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-geist: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 }
 
-html, body, *, *::before, *::after {
-  font-family: var(--font-geist-sans);
+*, *::before, *::after,
+html, body,
+h1, h2, h3, h4, h5, h6,
+p, span, a, div, label, li, ul, ol, strong, b, em, i,
+button, input, select, textarea, optgroup,
+.font-sans, .font-mono, .font-serif {
+  font-family: var(--font-geist) !important;
 }
 
 html {
   scroll-behavior: smooth;
-  font-family: var(--font-geist-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -25,7 +28,6 @@ html {
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-geist-sans);
   overflow-x: hidden;
 }
 
