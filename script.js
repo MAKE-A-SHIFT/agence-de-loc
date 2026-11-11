@@ -567,6 +567,7 @@ function confirmQrPaymentOnWhatsApp() {
 let modalAutoDebitCycle = "daily";
 
 function selectAutoDebitCycle(cycleKey) {
+  if (cycleKey !== "weekly") cycleKey = "daily";
   currentAutoDebitCycle = cycleKey;
   modalAutoDebitCycle = cycleKey;
   document.querySelectorAll("[data-autodebit-cycle]").forEach((btn) => {
@@ -582,15 +583,13 @@ function selectAutoDebitCycle(cycleKey) {
 
   const cycleLabel = document.getElementById("autodebit-cycle-label");
   const amountLabel = document.getElementById("autodebit-amount-label");
+  const t = translations[currentLang] || translations.fr;
   if (cycleKey === "daily") {
-    if (cycleLabel) cycleLabel.textContent = "Débito automático cada día (24h)";
+    if (cycleLabel) cycleLabel.textContent = t.hub_cycle_daily || "Débito automático cada día (24h)";
     if (amountLabel) amountLabel.textContent = `${formatPygAmount(BASE_PRICES_PYG.daily, currentCurrency, true)} / día`;
-  } else if (cycleKey === "weekly") {
-    if (cycleLabel) cycleLabel.textContent = "Débito automático cada semana (7 días)";
-    if (amountLabel) amountLabel.textContent = `${formatPygAmount(BASE_PRICES_PYG.weekly, currentCurrency, true)} / semana`;
   } else {
-    if (cycleLabel) cycleLabel.textContent = "Débito automático cada mes (30 días)";
-    if (amountLabel) amountLabel.textContent = `${formatPygAmount(BASE_PRICES_PYG.monthly, currentCurrency, true)} / mes`;
+    if (cycleLabel) cycleLabel.textContent = t.hub_cycle_weekly || "Débito automático cada semana (7 días)";
+    if (amountLabel) amountLabel.textContent = `${formatPygAmount(BASE_PRICES_PYG.weekly, currentCurrency, true)} / semana`;
   }
 }
 
@@ -616,6 +615,7 @@ function closeAutoDebitModal() {
 }
 
 function selectModalAutoDebitCycle(cycleKey) {
+  if (cycleKey !== "weekly") cycleKey = "daily";
   modalAutoDebitCycle = cycleKey;
   document.querySelectorAll("[data-modal-cycle]").forEach((btn) => {
     const isSelected = btn.getAttribute("data-modal-cycle") === cycleKey;
@@ -632,10 +632,8 @@ function selectModalAutoDebitCycle(cycleKey) {
   if (submitText) {
     if (cycleKey === "daily") {
       submitText.textContent = `Confirmar y Activar Débito Automático (${formatPygAmount(BASE_PRICES_PYG.daily, currentCurrency, true)} / día)`;
-    } else if (cycleKey === "weekly") {
-      submitText.textContent = `Confirmar y Activar Débito Automático (${formatPygAmount(BASE_PRICES_PYG.weekly, currentCurrency, true)} / semana)`;
     } else {
-      submitText.textContent = `Confirmar y Activar Débito Automático (${formatPygAmount(BASE_PRICES_PYG.monthly, currentCurrency, true)} / mes)`;
+      submitText.textContent = `Confirmar y Activar Débito Automático (${formatPygAmount(BASE_PRICES_PYG.weekly, currentCurrency, true)} / semana)`;
     }
   }
 }
@@ -675,8 +673,7 @@ function submitAutoDebitMandate(e) {
 
   const cycleLabels = {
     daily: `Cada Día (${formatPygAmount(BASE_PRICES_PYG.daily, currentCurrency, true)} / día)`,
-    weekly: `Cada Semana (${formatPygAmount(BASE_PRICES_PYG.weekly, currentCurrency, true)} / semana)`,
-    monthly: `Cada Mes (${formatPygAmount(BASE_PRICES_PYG.monthly, currentCurrency, true)} / mes)`
+    weekly: `Cada Semana (${formatPygAmount(BASE_PRICES_PYG.weekly, currentCurrency, true)} / semana)`
   };
   const cycleName = cycleLabels[modalAutoDebitCycle] || cycleLabels.daily;
 
@@ -709,7 +706,7 @@ function updatePaymentProcessorNote() {
     modalQrAmount.textContent = `Montant : ${planAmounts[planIdx] || planAmounts[0]}`;
   }
 
-  [0, 1, 2].forEach((i) => {
+  [0, 1].forEach((i) => {
     const btn = document.getElementById(`modal-cycle-btn-${i}`);
     if (btn) {
       if (i === planIdx) {
@@ -728,7 +725,7 @@ function updatePaymentProcessorNote() {
     qrBox?.classList.remove("hidden");
     cardBox?.classList.add("hidden");
   } else if (val === "CARD") {
-    noteEl.textContent = "✓ Prélèvement automatique sécurisé par Carte Bleue (Visa / Mastercard) débité automatiquement chaque jour, semaine ou mois selon votre choix.";
+    noteEl.textContent = "✓ Prélèvement automatique sécurisé par Carte Bancaire (Visa / Mastercard) débité chaque jour ou chaque semaine selon votre choix (sans engagement).";
     qrBox?.classList.add("hidden");
     cardBox?.classList.remove("hidden");
   } else if (val === "CRYPTO") {
@@ -740,6 +737,51 @@ function updatePaymentProcessorNote() {
     qrBox?.classList.add("hidden");
     cardBox?.classList.add("hidden");
   }
+}
+
+// 9b. Paraguay Legal Policies Modal Controller
+function openLegalModal(tab = "terms") {
+  const modal = document.getElementById("legal-modal");
+  if (modal) {
+    modal.classList.remove("hidden");
+    modal.classList.add("active");
+    document.body.style.overflow = "hidden";
+    switchLegalTab(tab);
+  }
+}
+
+function closeLegalModal() {
+  const modal = document.getElementById("legal-modal");
+  if (modal) {
+    modal.classList.remove("active");
+    modal.classList.add("hidden");
+    document.body.style.overflow = "";
+  }
+}
+
+function switchLegalTab(tab) {
+  const tabs = ["terms", "privacy", "company"];
+  tabs.forEach((t) => {
+    const btn = document.getElementById(`legal-tab-btn-${t}`);
+    const content = document.getElementById(`legal-content-${t}`);
+    const isSelected = t === tab;
+    if (btn) {
+      if (isSelected) {
+        btn.classList.add("border-black", "text-gray-900");
+        btn.classList.remove("border-transparent", "text-gray-500");
+      } else {
+        btn.classList.remove("border-black", "text-gray-900");
+        btn.classList.add("border-transparent", "text-gray-500");
+      }
+    }
+    if (content) {
+      if (isSelected) {
+        content.classList.remove("hidden");
+      } else {
+        content.classList.add("hidden");
+      }
+    }
+  });
 }
 
 function openBookingModal(defaultBike = "", precheckBolt = false, defaultPayment = "") {
