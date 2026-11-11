@@ -903,119 +903,173 @@
                ================================================================ -->
           <div id="payment-direct-hub" class="mt-10 mb-12 grid md:grid-cols-2 gap-6 max-w-5xl mx-auto text-left">
 
-            <!-- Card 1: QR Code Transferencia Bancaria Paraguay (SIPAP) -->
-            <div class="rounded-3xl border-2 border-gray-200 bg-gray-50/80 p-6 sm:p-8 shadow-sm flex flex-col justify-between">
+            <!-- Card 1: Transferencia Bancaria Paraguay (SIPAP / Mango) -->
+            <div class="rounded-3xl border-2 border-emerald-300 bg-gradient-to-br from-emerald-50/60 via-white to-teal-50/40 p-6 sm:p-8 shadow-sm flex flex-col justify-between">
               <div>
                 <div class="flex items-center justify-between gap-2 mb-4">
-                  <span class="inline-flex items-center gap-1.5 rounded-full bg-emerald-100 px-3 py-1 text-xs font-bold text-emerald-900">
-                    🇵🇾 QR SIPAP / SPI PARAGUAY • 0% FRAIS
+                  <span class="inline-flex items-center gap-1.5 rounded-full bg-emerald-100 border border-emerald-300 px-3 py-1 text-xs font-bold text-emerald-900">
+                    🇵🇾 TRANSFERENCIA SIPAP / SPI • 0% COMISIÓN
                   </span>
-                  <span class="text-xs font-semibold text-gray-500">24h/24 • 7j/7</span>
+                  <span class="text-xs font-bold text-emerald-700 bg-white px-2.5 py-0.5 rounded-full border border-emerald-200">24/7 En Vivo</span>
                 </div>
                 <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-2">
-                  Payer par Transferencia (QR Code)
+                  Transferencia Bancaria & QR Mango
                 </h3>
-                <p class="text-xs sm:text-sm text-gray-600 mb-5">
-                  Scannez directement le QR Code depuis votre application bancaire (ueno bank, Itaú, Mango, Continental, Familiar, Atlas, BNF) ou copiez notre Alias SIPAP :
+                <p class="text-xs sm:text-sm text-gray-600 mb-5 leading-relaxed">
+                  Pague al instante sin comisiones desde cualquier aplicación bancaria de Paraguay (<strong>Mango, ueno bank, Banco Itaú, Continental, Familiar, Atlas, BNF</strong>) usando nuestro <strong>Alias SIPAP</strong> o escaneando el código:
                 </p>
 
-                <!-- Amount Selector for QR -->
+                <!-- Amount Selector for QR & Transfer -->
                 <div class="grid grid-cols-3 gap-2 mb-5">
-                  <button type="button" data-qr-plan="daily" onclick="selectQrAmount('daily')" class="py-2 px-2 rounded-xl border text-xs font-semibold transition-all cursor-pointer bg-black text-white border-black text-center">
-                    Jour<br /><span data-price="daily">₲50.000</span>
+                  <button type="button" data-qr-plan="daily" onclick="selectQrAmount('daily')" class="py-2.5 px-2 rounded-xl border text-xs font-semibold transition-all cursor-pointer bg-black text-white border-black text-center shadow-sm">
+                    Por Día<br /><span data-price="daily">₲50.000</span>
                   </button>
-                  <button type="button" data-qr-plan="weekly" onclick="selectQrAmount('weekly')" class="py-2 px-2 rounded-xl border text-xs font-semibold transition-all cursor-pointer bg-white text-gray-800 border-gray-300 hover:border-black text-center">
-                    Semaine<br /><span data-price="weekly">₲350.000</span>
+                  <button type="button" data-qr-plan="weekly" onclick="selectQrAmount('weekly')" class="py-2.5 px-2 rounded-xl border text-xs font-semibold transition-all cursor-pointer bg-white text-gray-800 border-gray-300 hover:border-black text-center">
+                    Por Semana<br /><span data-price="weekly">₲350.000</span>
                   </button>
-                  <button type="button" data-qr-plan="monthly" onclick="selectQrAmount('monthly')" class="py-2 px-2 rounded-xl border text-xs font-semibold transition-all cursor-pointer bg-white text-gray-800 border-gray-300 hover:border-black text-center">
-                    Mois<br /><span data-price="monthly">₲1.400.000</span>
+                  <button type="button" data-qr-plan="monthly" onclick="selectQrAmount('monthly')" class="py-2.5 px-2 rounded-xl border text-xs font-semibold transition-all cursor-pointer bg-white text-gray-800 border-gray-300 hover:border-black text-center">
+                    Por Mes<br /><span data-price="monthly">₲1.400.000</span>
                   </button>
                 </div>
 
-                <!-- QR Code Box + Beneficiary Details -->
-                <div class="flex flex-col sm:flex-row items-center gap-5 bg-white p-4 rounded-2xl border border-gray-200 shadow-sm mb-5">
-                  <div class="relative flex-shrink-0 bg-white p-2 rounded-xl border border-gray-200">
-                    <img id="sipap-qr-img" src="assets/images/qr-sipap.png" alt="QR Code Transferencia SIPAP G&amp;L MOTORS" class="w-36 h-36 object-contain" />
-                  </div>
-                  <div class="space-y-2 text-xs sm:text-sm w-full">
-                    <div>
-                      <span class="text-gray-400 block text-[11px] uppercase">Bénéficiaire :</span>
-                      <span class="font-bold text-gray-900">G&amp;L MOTORS E.A.S</span>
+                <!-- QR Code Box + Beneficiary Details (Mango / Adán Pereira / Alias CI 4274384) -->
+                <div class="bg-white p-4 sm:p-5 rounded-2xl border-2 border-emerald-100 shadow-sm mb-5 space-y-4">
+                  <div class="flex flex-col sm:flex-row items-center gap-5">
+                    <div class="relative flex-shrink-0 bg-white p-2 rounded-2xl border border-gray-200 shadow-sm text-center">
+                      <img id="sipap-qr-img" src="assets/images/qr-sipap.png" alt="QR Interoperable Bancard Mango - G&amp;L MOTORS" class="w-32 h-32 sm:w-36 sm:h-36 object-contain mx-auto" />
+                      <span class="inline-block mt-1 text-[10px] font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded-md">Red Bancard / Dinelco</span>
                     </div>
-                    <div>
-                      <span class="text-gray-400 block text-[11px] uppercase">Montant sélectionné :</span>
-                      <span id="sipap-qr-amount-display" class="font-bold text-base text-[#199E5E]">₲ 50.000 / jour</span>
-                    </div>
-                    <div>
-                      <span class="text-gray-400 block text-[11px] uppercase">Alias SIPAP / Celular :</span>
-                      <div class="flex items-center gap-2 mt-0.5">
-                        <span id="sipap-alias-value" class="font-bold text-gray-900">+595 995 620 416</span>
-                        <button type="button" onclick="copySipapAlias()" id="copy-alias-btn" class="px-2.5 py-1 rounded-lg bg-gray-100 hover:bg-gray-200 text-[11px] font-semibold text-gray-800 cursor-pointer">
-                          Copier
-                        </button>
+
+                    <div class="space-y-2.5 text-xs sm:text-sm w-full">
+                      <!-- Entidad Bancaria -->
+                      <div class="flex items-center justify-between border-b border-gray-100 pb-1.5">
+                        <span class="text-gray-400 text-[11px] uppercase font-medium">Banco / Billetera :</span>
+                        <span class="font-bold text-gray-900 flex items-center gap-1.5">
+                          <span class="inline-block w-2.5 h-2.5 rounded-full bg-amber-500"></span>
+                          Mango (Dinelco / SIPAP)
+                        </span>
+                      </div>
+
+                      <!-- Titular -->
+                      <div class="flex items-center justify-between border-b border-gray-100 pb-1.5">
+                        <span class="text-gray-400 text-[11px] uppercase font-medium">Titular :</span>
+                        <span class="font-bold text-gray-900 text-right">Adán Pereira<br /><span class="text-[11px] font-normal text-gray-500">(Adán Andrés Pereira E.)</span></span>
+                      </div>
+
+                      <!-- Documento CI -->
+                      <div class="flex items-center justify-between border-b border-gray-100 pb-1.5">
+                        <span class="text-gray-400 text-[11px] uppercase font-medium">C.I. Titular :</span>
+                        <span class="font-bold text-gray-900">4.274.384</span>
+                      </div>
+
+                      <!-- Alias SIPAP avec bouton Copier -->
+                      <div class="bg-emerald-50/80 p-2.5 rounded-xl border border-emerald-200">
+                        <div class="flex items-center justify-between">
+                          <span class="text-emerald-900 text-[11px] uppercase font-bold">Alias C.I. (SIPAP 24/7) :</span>
+                          <button type="button" onclick="copySipapAlias()" id="copy-alias-btn" class="px-3 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold transition-all shadow-sm cursor-pointer">
+                            Copiar Alias
+                          </button>
+                        </div>
+                        <div class="text-base sm:text-lg font-extrabold text-emerald-900 tracking-wider mt-0.5">
+                          4274384
+                        </div>
+                      </div>
+
+                      <!-- Montant sélectionné -->
+                      <div class="flex items-center justify-between pt-0.5">
+                        <span class="text-gray-500 text-[11px] uppercase font-semibold">Total a transferir :</span>
+                        <span id="sipap-qr-amount-display" class="font-extrabold text-base text-[#199E5E]">₲ 50.000 / día</span>
                       </div>
                     </div>
+                  </div>
+
+                  <!-- Quick instructions -->
+                  <div class="text-[11px] text-gray-500 bg-gray-50 p-2.5 rounded-xl space-y-1">
+                    <p class="font-semibold text-gray-700">💡 ¿Cómo transferir en 3 pasos?</p>
+                    <p>1. Entrá a tu app bancaria (Mango, ueno, Itaú, etc.) y elegí <strong>Transferir por Alias</strong>.</p>
+                    <p>2. Ingresá el C.I. <strong>4274384</strong> (Banco: <strong>Mango</strong> / Titular: <strong>Adán Pereira</strong>).</p>
+                    <p>3. Confirmá el monto y enviá tu comprobante por WhatsApp para entrega inmediata.</p>
                   </div>
                 </div>
               </div>
 
-              <button type="button" onclick="confirmQrPaymentOnWhatsApp()" class="w-full py-3.5 px-5 rounded-full bg-black hover:bg-gray-800 text-white font-semibold text-sm transition-all flex items-center justify-center gap-2 cursor-pointer">
-                <span>J'ai payé par QR — Envoyer le reçu</span>
+              <button type="button" onclick="confirmQrPaymentOnWhatsApp()" class="w-full py-4 px-5 rounded-full bg-[#199E5E] hover:bg-[#15874F] text-white font-bold text-sm shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer">
+                <span>Ya transferí — Enviar comprobante por WhatsApp</span>
                 <span>→</span>
               </button>
             </div>
 
-            <!-- Card 2: Automatic Recurring Card Debit (Daily / Weekly / Monthly) -->
+            <!-- Card 2: Automatic Recurring Card Debit (Pagopar / Bancard vPOS) -->
             <div class="rounded-3xl border-2 border-indigo-200 bg-gradient-to-br from-indigo-50/70 via-white to-slate-50 p-6 sm:p-8 shadow-sm flex flex-col justify-between">
               <div>
                 <div class="flex items-center justify-between gap-2 mb-4">
-                  <span class="inline-flex items-center gap-1.5 rounded-full bg-indigo-100 px-3 py-1 text-xs font-bold text-indigo-950">
-                    💳 DÉBIT AUTOMATIQUE CARTE BLEUE
+                  <span class="inline-flex items-center gap-1.5 rounded-full bg-indigo-100 border border-indigo-300 px-3 py-1 text-xs font-bold text-indigo-950">
+                    💳 DÉBITO AUTOMÁTICO • TARJETA DE CRÉDITO/DÉBITO
                   </span>
-                  <span class="text-xs font-semibold text-indigo-700">Jour • Semaine • Mois</span>
+                  <span class="text-xs font-bold text-indigo-700 bg-white px-2.5 py-0.5 rounded-full border border-indigo-200">Pagopar &amp; Bancard</span>
                 </div>
                 <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-2">
-                  Prélèvement Automatique par Carte
+                  Pago Automático Recurrente
                 </h3>
-                <p class="text-xs sm:text-sm text-gray-600 mb-5">
-                  Configurez votre carte bancaire (Visa, Mastercard, Débito/Crédito) pour être débité automatiquement selon votre rythme, sans avoir à repayer manuellement chaque période :
+                <p class="text-xs sm:text-sm text-gray-600 mb-5 leading-relaxed">
+                  Adherí tu tarjeta de débito o crédito (Visa, Mastercard, Panal, Cabal) para que se <strong>debite automáticamente cada día o cada semana</strong>. Despreocupate de pagar manualmente y mantené tu moto siempre al día.
                 </p>
 
                 <!-- Auto-Debit Frequency Selector (Every Day / Every Week / Every Month) -->
-                <p class="text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">
-                  Choisissez votre fréquence de débit automatique :
+                <p class="text-xs font-bold uppercase tracking-wider text-gray-700 mb-2">
+                  Elegí la frecuencia del débito automático :
                 </p>
                 <div class="grid grid-cols-3 gap-2 mb-5">
-                  <button type="button" data-autodebit-cycle="daily" onclick="selectAutoDebitCycle('daily')" class="py-2.5 px-2 rounded-xl border text-xs font-semibold transition-all cursor-pointer bg-indigo-600 text-white border-indigo-600 text-center">
-                    Chaque Jour<br /><span data-price="daily">₲50.000</span>/j
+                  <button type="button" data-autodebit-cycle="daily" onclick="selectAutoDebitCycle('daily')" class="py-2.5 px-2 rounded-xl border text-xs font-semibold transition-all cursor-pointer bg-indigo-600 text-white border-indigo-600 text-center shadow-sm">
+                    Cada Día<br /><span data-price="daily">₲50.000</span>/día
                   </button>
                   <button type="button" data-autodebit-cycle="weekly" onclick="selectAutoDebitCycle('weekly')" class="py-2.5 px-2 rounded-xl border text-xs font-semibold transition-all cursor-pointer bg-white text-gray-800 border-gray-300 hover:border-indigo-600 text-center">
-                    Chaque Semaine<br /><span data-price="weekly">₲350.000</span>/sem
+                    Cada Semana<br /><span data-price="weekly">₲350.000</span>/sem
                   </button>
                   <button type="button" data-autodebit-cycle="monthly" onclick="selectAutoDebitCycle('monthly')" class="py-2.5 px-2 rounded-xl border text-xs font-semibold transition-all cursor-pointer bg-white text-gray-800 border-gray-300 hover:border-indigo-600 text-center">
-                    Chaque Mois<br /><span data-price="monthly">₲1.400.000</span>/mois
+                    Cada Mes<br /><span data-price="monthly">₲1.400.000</span>/mes
                   </button>
                 </div>
 
                 <!-- Summary of Recurring Mandate -->
-                <div class="rounded-2xl bg-white p-4 border border-indigo-100 shadow-sm space-y-2.5 mb-5 text-xs sm:text-sm">
-                  <div class="flex justify-between items-center">
-                    <span class="text-gray-500">Fréquence choisie :</span>
-                    <span id="autodebit-cycle-label" class="font-bold text-gray-900">Débit automatique chaque jour (24h)</span>
+                <div class="rounded-2xl bg-white p-4 sm:p-5 border border-indigo-100 shadow-sm space-y-3 mb-5 text-xs sm:text-sm">
+                  <div class="flex justify-between items-center border-b border-gray-100 pb-2">
+                    <span class="text-gray-500 font-medium">Frecuencia elegida :</span>
+                    <span id="autodebit-cycle-label" class="font-bold text-gray-900">Débito automático cada día (24h)</span>
                   </div>
-                  <div class="flex justify-between items-center">
-                    <span class="text-gray-500">Montant prélevé :</span>
-                    <span id="autodebit-amount-label" class="font-bold text-base text-indigo-700">₲ 50.000 / jour</span>
+                  <div class="flex justify-between items-center border-b border-gray-100 pb-2">
+                    <span class="text-gray-500 font-medium">Monto del débito :</span>
+                    <span id="autodebit-amount-label" class="font-extrabold text-base text-indigo-700">₲ 50.000 / día</span>
                   </div>
-                  <div class="flex justify-between items-center pt-2 border-t border-gray-100 text-[11px] text-gray-500">
-                    <span>Processeur sécurisé (3D Secure / Tokenisation)</span>
-                    <span class="font-semibold text-gray-700">Visa • Mastercard • Bancard / Stripe</span>
+                  <div class="flex justify-between items-center text-[11px] text-gray-600">
+                    <span class="font-medium">Pasarela certificada en Paraguay :</span>
+                    <span class="font-bold text-indigo-900">Pagopar &amp; Bancard (PCI-DSS 3D Secure)</span>
+                  </div>
+
+                  <!-- Protection & flexibility badges -->
+                  <div class="grid grid-cols-2 gap-2 pt-2 border-t border-gray-100 text-[11px] text-gray-600">
+                    <div class="flex items-center gap-1.5">
+                      <span class="text-emerald-600 font-bold">✓</span>
+                      <span>Sin permanencia</span>
+                    </div>
+                    <div class="flex items-center gap-1.5">
+                      <span class="text-emerald-600 font-bold">✓</span>
+                      <span>Cancelá cuando devuelvas la moto</span>
+                    </div>
+                    <div class="flex items-center gap-1.5">
+                      <span class="text-emerald-600 font-bold">✓</span>
+                      <span>Recibo digital instantáneo</span>
+                    </div>
+                    <div class="flex items-center gap-1.5">
+                      <span class="text-emerald-600 font-bold">✓</span>
+                      <span>0 comisiones ocultas</span>
+                    </div>
                   </div>
                 </div>
               </div>
 
-              <button type="button" onclick="openAutoDebitModal()" class="w-full py-3.5 px-5 rounded-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-sm shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer">
-                <span>Activer le prélèvement automatique par Carte</span>
+              <button type="button" onclick="openAutoDebitModal()" class="w-full py-4 px-5 rounded-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer">
+                <span>Configurar Débito Automático con Tarjeta</span>
                 <span>→</span>
               </button>
             </div>
@@ -1922,34 +1976,43 @@
           </p>
 
           <!-- Dynamic QR Code Panel inside Modal (shown when SIPAP is selected) -->
-          <div id="modal-sipap-qr-box" class="mt-3 rounded-2xl border border-gray-200 bg-gray-50 p-3.5 flex items-center gap-3.5">
-            <img src="assets/images/qr-sipap.png" alt="QR SIPAP G&amp;L MOTORS" class="w-24 h-24 rounded-xl border border-gray-200 bg-white p-1 object-contain flex-shrink-0" />
-            <div class="text-xs space-y-1">
-              <div class="font-bold text-gray-900">QR Transferencia SIPAP</div>
-              <div class="text-gray-600">Bénéficiaire : <strong>G&amp;L MOTORS E.A.S</strong></div>
-              <div class="text-gray-600">Alias : <strong>+595 995 620 416</strong></div>
-              <div id="modal-qr-amount" class="font-bold text-[#199E5E]">Montant : ₲ 50.000 / jour</div>
+          <div id="modal-sipap-qr-box" class="mt-3 rounded-2xl border-2 border-emerald-200 bg-emerald-50/70 p-3.5 flex items-center gap-3.5">
+            <img src="assets/images/qr-sipap.png" alt="QR Interoperable Bancard Mango G&amp;L MOTORS" class="w-24 h-24 rounded-xl border border-gray-200 bg-white p-1 object-contain flex-shrink-0 shadow-sm" />
+            <div class="text-xs space-y-1 w-full">
+              <div class="flex items-center justify-between">
+                <span class="font-bold text-gray-900">Transferencia SIPAP 24/7</span>
+                <span class="text-[10px] font-bold text-emerald-800 bg-emerald-200 px-1.5 py-0.5 rounded">0% comisión</span>
+              </div>
+              <div class="text-gray-700">Banco : <strong>Mango</strong></div>
+              <div class="text-gray-700">Titular : <strong>Adán Pereira</strong> (C.I. 4.274.384)</div>
+              <div class="flex items-center justify-between pt-0.5">
+                <span class="text-emerald-950 font-bold">Alias C.I. : 4274384</span>
+                <button type="button" onclick="copySipapAlias()" id="modal-copy-alias-btn" class="px-2 py-0.5 rounded bg-emerald-600 hover:bg-emerald-700 text-white text-[10px] font-bold cursor-pointer">
+                  Copiar
+                </button>
+              </div>
+              <div id="modal-qr-amount" class="font-extrabold text-[#199E5E] pt-0.5">Total : ₲ 50.000 / día</div>
             </div>
           </div>
 
           <!-- Dynamic Auto-Debit Card Panel inside Modal (shown when CARD is selected) -->
-          <div id="modal-card-autodebit-box" class="hidden mt-3 rounded-2xl border border-indigo-200 bg-indigo-50/70 p-3.5 space-y-2.5 text-xs">
+          <div id="modal-card-autodebit-box" class="hidden mt-3 rounded-2xl border-2 border-indigo-200 bg-indigo-50/70 p-3.5 space-y-2.5 text-xs">
             <div class="font-bold text-indigo-950 flex items-center justify-between">
-              <span>💳 Prélèvement Automatique Carte Bleue</span>
-              <span class="rounded bg-indigo-200 px-1.5 py-0.5 text-[10px] font-bold text-indigo-900">AUTO-DEBIT</span>
+              <span>💳 Débito Automático con Tarjeta</span>
+              <span class="rounded bg-indigo-200 px-2 py-0.5 text-[10px] font-bold text-indigo-900">PAGOPAR &amp; BANCARD</span>
             </div>
-            <p class="text-indigo-900 leading-relaxed">
-              Votre carte (Visa / Mastercard) sera débitée automatiquement selon la périodicité choisie (annulable à tout moment lors de la restitution de la moto) :
+            <p class="text-indigo-950 leading-relaxed">
+              Tu tarjeta se debitará automáticamente cada día o cada semana según tu preferencia (sin permanencia, cancelable al devolver la moto) :
             </p>
             <div class="grid grid-cols-3 gap-1.5">
-              <button type="button" onclick="setModalPlanIndex(0)" id="modal-cycle-btn-0" class="py-1.5 px-2 rounded-lg border text-[11px] font-semibold bg-indigo-600 text-white border-indigo-600 cursor-pointer">
-                Chaque Jour<br />₲50.000
+              <button type="button" onclick="setModalPlanIndex(0)" id="modal-cycle-btn-0" class="py-1.5 px-2 rounded-lg border text-[11px] font-semibold bg-indigo-600 text-white border-indigo-600 cursor-pointer text-center">
+                Cada Día<br />₲50.000
               </button>
-              <button type="button" onclick="setModalPlanIndex(1)" id="modal-cycle-btn-1" class="py-1.5 px-2 rounded-lg border text-[11px] font-semibold bg-white text-gray-700 border-gray-300 cursor-pointer">
-                Chaque Sem.<br />₲350.000
+              <button type="button" onclick="setModalPlanIndex(1)" id="modal-cycle-btn-1" class="py-1.5 px-2 rounded-lg border text-[11px] font-semibold bg-white text-gray-700 border-gray-300 cursor-pointer text-center">
+                Cada Sem.<br />₲350.000
               </button>
-              <button type="button" onclick="setModalPlanIndex(2)" id="modal-cycle-btn-2" class="py-1.5 px-2 rounded-lg border text-[11px] font-semibold bg-white text-gray-700 border-gray-300 cursor-pointer">
-                Chaque Mois<br />₲1.400.000
+              <button type="button" onclick="setModalPlanIndex(2)" id="modal-cycle-btn-2" class="py-1.5 px-2 rounded-lg border text-[11px] font-semibold bg-white text-gray-700 border-gray-300 cursor-pointer text-center">
+                Cada Mes<br />₲1.400.000
               </button>
             </div>
           </div>
@@ -1967,6 +2030,139 @@
 
         <button type="submit" class="w-full mt-3 py-4 rounded-full bg-[#25D366] hover:bg-[#20BA5A] text-white font-semibold text-sm shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer">
           <span data-i18n="modal_submit">Confirmer sur WhatsApp</span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       AUTOMATIC RECURRING CARD DEBIT MODAL (Pagopar & Bancard vPOS 2.0)
+       ======================================================================== -->
+  <div id="autodebit-modal" class="booking-modal-backdrop fixed inset-0 z-50 flex items-center justify-center bg-black/75 backdrop-blur-sm p-4" onclick="if(event.target === this) closeAutoDebitModal()">
+    <div class="booking-modal-panel relative w-full max-w-lg max-h-[92vh] overflow-y-auto rounded-3xl bg-white p-6 sm:p-8 text-gray-900 shadow-2xl border border-gray-100">
+      
+      <!-- Close Button -->
+      <button type="button" onclick="closeAutoDebitModal()" class="absolute top-5 right-5 flex h-9 w-9 items-center justify-center rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 transition-colors cursor-pointer" aria-label="Fermer">
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+
+      <!-- Modal Header -->
+      <div class="mb-5">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 border border-indigo-200 text-indigo-900 text-xs font-bold mb-2">
+          <span>💳 PASARELA PARAGUAY</span>
+          <span>•</span>
+          <span>PAGOPAR &amp; BANCARD vPOS</span>
+        </div>
+        <h3 class="text-xl sm:text-2xl font-bold text-gray-900">Débito Automático con Tarjeta</h3>
+        <p class="text-xs sm:text-sm text-gray-500 mt-1">
+          Adherí tu tarjeta de crédito o débito para el pago recurrente del alquiler sin preocuparte por transferir cada día.
+        </p>
+      </div>
+
+      <form onsubmit="submitAutoDebitMandate(event)" class="space-y-4">
+        
+        <!-- Frequency Selector -->
+        <div>
+          <label class="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">
+            Frecuencia del Débito Automático
+          </label>
+          <div class="grid grid-cols-3 gap-2">
+            <button type="button" data-modal-cycle="daily" onclick="selectModalAutoDebitCycle('daily')" class="py-2.5 px-2 rounded-xl border text-xs font-semibold transition-all cursor-pointer bg-indigo-600 text-white border-indigo-600 text-center shadow-sm">
+              Cada Día<br /><span class="font-bold">₲ 50.000</span>
+            </button>
+            <button type="button" data-modal-cycle="weekly" onclick="selectModalAutoDebitCycle('weekly')" class="py-2.5 px-2 rounded-xl border text-xs font-semibold transition-all cursor-pointer bg-white text-gray-800 border-gray-300 hover:border-indigo-600 text-center">
+              Cada Semana<br /><span class="font-bold">₲ 350.000</span>
+            </button>
+            <button type="button" data-modal-cycle="monthly" onclick="selectModalAutoDebitCycle('monthly')" class="py-2.5 px-2 rounded-xl border text-xs font-semibold transition-all cursor-pointer bg-white text-gray-800 border-gray-300 hover:border-indigo-600 text-center">
+              Cada Mes<br /><span class="font-bold">₲ 1.400.000</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Modelo de Moto -->
+        <div>
+          <label for="autodebit-bike-select" class="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-1.5">Moto asignada</label>
+          <select id="autodebit-bike-select" class="w-full rounded-2xl border border-gray-300 bg-gray-50 px-4 py-3 text-sm font-medium focus:border-indigo-600 focus:outline-none">
+            <option value="XVR Grise et Verte 150cc">XVR Grise &amp; Verte 150cc (Trail Full Equipo)</option>
+            <option value="Buler Faiter Rojo 150cc (2025)">Buler Faiter Rojo 150cc (Año 2025)</option>
+            <option value="Star New Desert Rojo 150cc">Star New Desert Rojo 150cc</option>
+            <option value="Boxer Azul 150cc">Boxer Azul 150cc</option>
+            <option value="Enduro Star Negra 150cc">Enduro Star Negra 150cc</option>
+          </select>
+        </div>
+
+        <!-- Titular & CI -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label for="autodebit-cardholder" class="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-1.5">Nombre en la tarjeta</label>
+            <input id="autodebit-cardholder" type="text" required placeholder="Como figura en la tarjeta" class="w-full rounded-2xl border border-gray-300 bg-gray-50 px-4 py-3 text-sm font-medium focus:border-indigo-600 focus:outline-none" />
+          </div>
+          <div>
+            <label for="autodebit-ci" class="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-1.5">Cédula (C.I.) o Pasaporte</label>
+            <input id="autodebit-ci" type="text" required placeholder="Ej: 4.274.384" class="w-full rounded-2xl border border-gray-300 bg-gray-50 px-4 py-3 text-sm font-medium focus:border-indigo-600 focus:outline-none" />
+          </div>
+        </div>
+
+        <!-- WhatsApp Phone -->
+        <div>
+          <label for="autodebit-phone" class="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-1.5">Número de WhatsApp (para comprobantes)</label>
+          <input id="autodebit-phone" type="tel" required placeholder="+595 99X XXX XXX" class="w-full rounded-2xl border border-gray-300 bg-gray-50 px-4 py-3 text-sm font-medium focus:border-indigo-600 focus:outline-none" />
+        </div>
+
+        <!-- Card Number & Icons -->
+        <div>
+          <div class="flex items-center justify-between mb-1.5">
+            <label for="autodebit-cardnumber" class="text-xs font-semibold uppercase tracking-wider text-gray-500">Número de Tarjeta</label>
+            <div class="flex items-center gap-1.5">
+              <span class="text-[10px] font-bold text-gray-500">Visa • Mastercard • Bancard • Cabal • Panal</span>
+            </div>
+          </div>
+          <div class="relative">
+            <input id="autodebit-cardnumber" type="text" required maxlength="19" placeholder="4000 0000 0000 0000" oninput="formatCardNumberInput(this)" class="w-full rounded-2xl border border-gray-300 bg-gray-50 px-4 py-3 text-sm font-mono tracking-wider focus:border-indigo-600 focus:outline-none pr-10" />
+            <span class="absolute right-3.5 top-1/2 -translate-y-1/2 text-gray-400">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <rect x="2" y="5" width="20" height="14" rx="2" />
+                <line x1="2" y1="10" x2="22" y2="10" />
+              </svg>
+            </span>
+          </div>
+        </div>
+
+        <!-- Expiry & CVV -->
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label for="autodebit-expiry" class="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-1.5">Vencimiento (MM/AA)</label>
+            <input id="autodebit-expiry" type="text" required maxlength="5" placeholder="MM/AA" oninput="formatExpiryInput(this)" class="w-full rounded-2xl border border-gray-300 bg-gray-50 px-4 py-3 text-sm font-mono text-center focus:border-indigo-600 focus:outline-none" />
+          </div>
+          <div>
+            <label for="autodebit-cvv" class="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-1.5">Código CVV / CVC</label>
+            <input id="autodebit-cvv" type="password" required maxlength="4" placeholder="123" class="w-full rounded-2xl border border-gray-300 bg-gray-50 px-4 py-3 text-sm font-mono text-center focus:border-indigo-600 focus:outline-none" />
+          </div>
+        </div>
+
+        <!-- Terms & Security Footnote -->
+        <div class="p-3.5 rounded-2xl bg-indigo-50/70 border border-indigo-100 text-xs text-indigo-950 space-y-1.5">
+          <div class="flex items-center gap-2 font-bold text-indigo-900">
+            <svg class="w-4 h-4 text-indigo-600 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+              <path d="M7 11V7a5 5 0 0110 0v4" />
+            </svg>
+            <span>Seguridad Bancaria PCI-DSS &amp; 3D Secure</span>
+          </div>
+          <p class="leading-relaxed text-[11px] text-gray-600">
+            Los datos son encriptados y procesados de acuerdo a las normas del Banco Central del Paraguay (BCP) a través de la pasarela <strong>Pagopar &amp; Bancard</strong>. El débito se efectuará de forma automática según el ciclo elegido.
+          </p>
+          <p class="text-[11px] font-semibold text-emerald-800">
+            ✓ Cancelable en cualquier momento sin penalizaciones notificando a G&amp;L Motors.
+          </p>
+        </div>
+
+        <!-- Submit Button -->
+        <button id="autodebit-submit-btn" type="submit" class="w-full py-4 rounded-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm shadow-xl transition-all flex items-center justify-center gap-2 cursor-pointer">
+          <span id="autodebit-submit-btn-text">Confirmar y Activar Débito Automático (₲ 50.000 / día)</span>
+          <span>→</span>
         </button>
       </form>
     </div>

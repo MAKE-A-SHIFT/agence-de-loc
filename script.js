@@ -238,6 +238,7 @@ function updateCurrencyDisplay() {
 
   if (typeof selectQrAmount === "function") selectQrAmount(currentQrPlan);
   if (typeof selectAutoDebitCycle === "function") selectAutoDebitCycle(currentAutoDebitCycle);
+  if (typeof selectModalAutoDebitCycle === "function") selectModalAutoDebitCycle(modalAutoDebitCycle);
 
   // Update Booking Modal Plan Options dynamically with active currency
   const planSelect = document.getElementById("booking-plan-select");
@@ -537,31 +538,37 @@ function selectQrAmount(planKey) {
 
 async function copySipapAlias() {
   const btn = document.getElementById("copy-alias-btn");
+  const modalBtn = document.getElementById("modal-copy-alias-btn");
   try {
-    await navigator.clipboard.writeText("+595995620416");
-    if (btn) {
-      const orig = btn.textContent;
-      btn.textContent = "Copié !";
-      setTimeout(() => {
-        btn.textContent = orig;
-      }, 2000);
-    }
+    await navigator.clipboard.writeText("4274384");
+    [btn, modalBtn].forEach((b) => {
+      if (b) {
+        const orig = b.textContent;
+        b.textContent = "¡Copiado!";
+        setTimeout(() => {
+          b.textContent = orig;
+        }, 2200);
+      }
+    });
   } catch (_) {}
 }
 
 function confirmQrPaymentOnWhatsApp() {
   const planMap = {
-    daily: "Journalier (₲ 50.000 / jour)",
-    weekly: "Hebdomadaire (₲ 350.000 / semaine)",
-    monthly: "Mensuel (₲ 1.400.000 / mois)"
+    daily: "Por Día (₲ 50.000 / día)",
+    weekly: "Por Semana (₲ 350.000 / semana)",
+    monthly: "Por Mes (₲ 1.400.000 / mes)"
   };
   const label = planMap[currentQrPlan] || planMap.daily;
-  const msg = `Bonjour G&L MOTORS ! 🇵🇾\nJe viens d'effectuer un virement SIPAP (QR Code) pour la formule : ${label}.\nVoici mon reçu de transfert :`;
+  const msg = `¡Hola G&L MOTORS! 🇵🇾\nAcabo de realizar una transferencia SIPAP / Mango para el alquiler de moto :\n• Plan : ${label}\n• Banco destino : Mango\n• Titular : Adán Pereira (C.I. 4.274.384)\n• Alias C.I. : 4274384\n\nAdjunto aquí mi comprobante de transferencia :`;
   window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, "_blank", "noopener,noreferrer");
 }
 
+let modalAutoDebitCycle = "daily";
+
 function selectAutoDebitCycle(cycleKey) {
   currentAutoDebitCycle = cycleKey;
+  modalAutoDebitCycle = cycleKey;
   document.querySelectorAll("[data-autodebit-cycle]").forEach((btn) => {
     const isSelected = btn.getAttribute("data-autodebit-cycle") === cycleKey;
     if (isSelected) {
@@ -576,25 +583,107 @@ function selectAutoDebitCycle(cycleKey) {
   const cycleLabel = document.getElementById("autodebit-cycle-label");
   const amountLabel = document.getElementById("autodebit-amount-label");
   if (cycleKey === "daily") {
-    if (cycleLabel) cycleLabel.textContent = "Débit automatique chaque jour (24h)";
-    if (amountLabel) amountLabel.textContent = `${formatPygAmount(BASE_PRICES_PYG.daily, currentCurrency, true)} / jour`;
+    if (cycleLabel) cycleLabel.textContent = "Débito automático cada día (24h)";
+    if (amountLabel) amountLabel.textContent = `${formatPygAmount(BASE_PRICES_PYG.daily, currentCurrency, true)} / día`;
   } else if (cycleKey === "weekly") {
-    if (cycleLabel) cycleLabel.textContent = "Débit automatique chaque semaine (7j)";
-    if (amountLabel) amountLabel.textContent = `${formatPygAmount(BASE_PRICES_PYG.weekly, currentCurrency, true)} / semaine`;
+    if (cycleLabel) cycleLabel.textContent = "Débito automático cada semana (7 días)";
+    if (amountLabel) amountLabel.textContent = `${formatPygAmount(BASE_PRICES_PYG.weekly, currentCurrency, true)} / semana`;
   } else {
-    if (cycleLabel) cycleLabel.textContent = "Débit automatique chaque mois (30j)";
-    if (amountLabel) amountLabel.textContent = `${formatPygAmount(BASE_PRICES_PYG.monthly, currentCurrency, true)} / mois`;
+    if (cycleLabel) cycleLabel.textContent = "Débito automático cada mes (30 días)";
+    if (amountLabel) amountLabel.textContent = `${formatPygAmount(BASE_PRICES_PYG.monthly, currentCurrency, true)} / mes`;
   }
 }
 
-function openAutoDebitModal() {
-  const planSelect = document.getElementById("booking-plan-select");
-  if (planSelect) {
-    if (currentAutoDebitCycle === "daily") planSelect.selectedIndex = 0;
-    else if (currentAutoDebitCycle === "weekly") planSelect.selectedIndex = 1;
-    else planSelect.selectedIndex = 2;
+function openAutoDebitModal(preselectedCycle) {
+  const modal = document.getElementById("autodebit-modal");
+  if (preselectedCycle) {
+    selectModalAutoDebitCycle(preselectedCycle);
+  } else {
+    selectModalAutoDebitCycle(currentAutoDebitCycle || "daily");
   }
-  openBookingModal("", false, "CARD");
+  if (modal) {
+    modal.classList.add("active");
+    document.body.style.overflow = "hidden";
+  }
+}
+
+function closeAutoDebitModal() {
+  const modal = document.getElementById("autodebit-modal");
+  if (modal) {
+    modal.classList.remove("active");
+    document.body.style.overflow = "";
+  }
+}
+
+function selectModalAutoDebitCycle(cycleKey) {
+  modalAutoDebitCycle = cycleKey;
+  document.querySelectorAll("[data-modal-cycle]").forEach((btn) => {
+    const isSelected = btn.getAttribute("data-modal-cycle") === cycleKey;
+    if (isSelected) {
+      btn.classList.remove("bg-white", "text-gray-800", "border-gray-300");
+      btn.classList.add("bg-indigo-600", "text-white", "border-indigo-600");
+    } else {
+      btn.classList.add("bg-white", "text-gray-800", "border-gray-300");
+      btn.classList.remove("bg-indigo-600", "text-white", "border-indigo-600");
+    }
+  });
+
+  const submitText = document.getElementById("autodebit-submit-btn-text");
+  if (submitText) {
+    if (cycleKey === "daily") {
+      submitText.textContent = `Confirmar y Activar Débito Automático (${formatPygAmount(BASE_PRICES_PYG.daily, currentCurrency, true)} / día)`;
+    } else if (cycleKey === "weekly") {
+      submitText.textContent = `Confirmar y Activar Débito Automático (${formatPygAmount(BASE_PRICES_PYG.weekly, currentCurrency, true)} / semana)`;
+    } else {
+      submitText.textContent = `Confirmar y Activar Débito Automático (${formatPygAmount(BASE_PRICES_PYG.monthly, currentCurrency, true)} / mes)`;
+    }
+  }
+}
+
+function formatCardNumberInput(input) {
+  let v = input.value.replace(/\D/g, "").slice(0, 16);
+  let matches = v.match(/\d{4,16}/g);
+  let match = (matches && matches[0]) || "";
+  let parts = [];
+  for (let i = 0, len = match.length; i < len; i += 4) {
+    parts.push(match.substring(i, i + 4));
+  }
+  if (parts.length) {
+    input.value = parts.join(" ");
+  } else {
+    input.value = v;
+  }
+}
+
+function formatExpiryInput(input) {
+  let v = input.value.replace(/\D/g, "").slice(0, 4);
+  if (v.length >= 2) {
+    input.value = v.substring(0, 2) + "/" + v.substring(2);
+  } else {
+    input.value = v;
+  }
+}
+
+function submitAutoDebitMandate(e) {
+  e.preventDefault();
+  const cardholder = document.getElementById("autodebit-cardholder")?.value || "";
+  const ci = document.getElementById("autodebit-ci")?.value || "";
+  const phone = document.getElementById("autodebit-phone")?.value || "";
+  const bike = document.getElementById("autodebit-bike-select")?.value || "XVR 150cc";
+  const cardNum = document.getElementById("autodebit-cardnumber")?.value.replace(/\s/g, "") || "";
+  const last4 = cardNum.slice(-4) || "****";
+
+  const cycleLabels = {
+    daily: `Cada Día (${formatPygAmount(BASE_PRICES_PYG.daily, currentCurrency, true)} / día)`,
+    weekly: `Cada Semana (${formatPygAmount(BASE_PRICES_PYG.weekly, currentCurrency, true)} / semana)`,
+    monthly: `Cada Mes (${formatPygAmount(BASE_PRICES_PYG.monthly, currentCurrency, true)} / mes)`
+  };
+  const cycleName = cycleLabels[modalAutoDebitCycle] || cycleLabels.daily;
+
+  const msg = `¡Hola G&L MOTORS! 🇵🇾💳\nQuiero confirmar mi adhesión al DÉBITO AUTOMÁTICO recurrente :\n• Frecuencia : ${cycleName}\n• Moto : ${bike}\n• Titular : ${cardholder}\n• Cédula (C.I.) : ${ci}\n• WhatsApp : ${phone}\n• Tarjeta terminada en : ...${last4}\n• Pasarela oficial : Pagopar & Bancard Paraguay\n\nPor favor confirmar la activación de mi cobro recurrente. ¡Muchas gracias!`;
+
+  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, "_blank", "noopener,noreferrer");
+  closeAutoDebitModal();
 }
 
 function setModalPlanIndex(idx) {
