@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr" class="scroll-smooth">
+<html lang="es" class="scroll-smooth">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -49,26 +49,35 @@
        ======================================================================== -->
   <div id="admin-lock-overlay" class="fixed inset-0 z-[100] bg-gray-950/95 backdrop-blur-md flex items-center justify-center p-4">
     <div class="w-full max-w-sm rounded-3xl bg-white p-7 sm:p-8 shadow-2xl border border-gray-200 text-center">
+      <!-- Language Switcher on Lock Screen -->
+      <div class="flex justify-center mb-5">
+        <div class="inline-flex rounded-full bg-gray-100 p-1 gap-1 border border-gray-200">
+          <button type="button" onclick="setAdminLang('es', true)" data-lang-btn="es" class="admin-lang-btn px-3 py-1 rounded-full text-xs font-bold cursor-pointer transition-all">🇵🇾 ES</button>
+          <button type="button" onclick="setAdminLang('fr', true)" data-lang-btn="fr" class="admin-lang-btn px-3 py-1 rounded-full text-xs font-bold cursor-pointer transition-all">🇫🇷 FR</button>
+          <button type="button" onclick="setAdminLang('en', true)" data-lang-btn="en" class="admin-lang-btn px-3 py-1 rounded-full text-xs font-bold cursor-pointer transition-all">🇬🇧 EN</button>
+        </div>
+      </div>
+
       <div class="w-16 h-16 rounded-2xl bg-gray-950 text-white mx-auto flex items-center justify-center mb-4 shadow-lg">
         <svg class="w-8 h-8 text-[#34D186]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
         </svg>
       </div>
       <h1 class="text-2xl font-extrabold text-gray-900 tracking-tight">G&amp;L MOTORS ERP</h1>
-      <p class="text-xs text-gray-500 mt-1 mb-6">Accès réservé aux associés • Gestion Flotte &amp; Finances</p>
+      <p data-a18n="lock_subtitle" class="text-xs text-gray-500 mt-1 mb-6">Acceso exclusivo socios • Gestión de Flota y Finanzas</p>
 
       <form onsubmit="unlockAdminOverlay(event)" class="space-y-4 text-left">
         <div>
-          <label for="overlay-password-input" class="block text-xs font-semibold text-gray-700 mb-1.5">Mot de passe</label>
-          <input id="overlay-password-input" type="password" required placeholder="Mot de passe administrateur..." class="w-full rounded-2xl border border-gray-300 bg-gray-50 px-4 py-3 text-sm font-medium focus:border-black focus:outline-none" />
-          <p id="overlay-password-error" class="hidden text-xs font-semibold text-red-600 mt-1.5">Mot de passe incorrect.</p>
+          <label for="overlay-password-input" data-a18n="lock_label" class="block text-xs font-semibold text-gray-700 mb-1.5">Contraseña de acceso</label>
+          <input id="overlay-password-input" type="password" required data-a18n-ph="lock_placeholder" placeholder="Ingresá la contraseña..." class="w-full rounded-2xl border border-gray-300 bg-gray-50 px-4 py-3 text-sm font-medium focus:border-black focus:outline-none" />
+          <p id="overlay-password-error" data-a18n="lock_error" class="hidden text-xs font-semibold text-red-600 mt-1.5">Contraseña incorrecta.</p>
         </div>
-        <button type="submit" class="w-full py-3.5 rounded-full bg-black hover:bg-gray-800 text-white font-bold text-sm shadow-lg transition-all cursor-pointer">
-          Déverrouiller l'espace →
+        <button type="submit" data-a18n="lock_btn" class="w-full py-3.5 rounded-full bg-black hover:bg-gray-800 text-white font-bold text-sm shadow-lg transition-all cursor-pointer">
+          Desbloquear Panel →
         </button>
       </form>
-      <a href="index.html" class="inline-block mt-5 text-xs text-gray-500 hover:text-gray-900 underline">
-        ← Retour au site public
+      <a href="index.html" data-a18n="lock_back" class="inline-block mt-5 text-xs text-gray-500 hover:text-gray-900 underline">
+        ← Volver al sitio público
       </a>
     </div>
   </div>
@@ -78,7 +87,7 @@
        ======================================================================== -->
   <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-xs">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-3">
-      <!-- Left: Brand & Sync Pill -->
+      <!-- Left: Brand & Honest Cloud Sync Pill -->
       <div class="flex items-center gap-3">
         <a href="index.html" class="flex items-center gap-2.5 group">
           <img src="assets/images/favicon.png" alt="G&L MOTORS" class="w-9 h-9 rounded-full border border-gray-200 shadow-sm object-cover" />
@@ -87,42 +96,63 @@
               <span>G&amp;L MOTORS</span>
               <span class="px-2 py-0.5 rounded-full bg-gray-900 text-white text-[10px] font-bold tracking-wider uppercase">ERP 80/20</span>
             </div>
-            <div class="flex items-center gap-1.5 text-[11px] text-gray-500">
-              <span id="cloud-sync-dot" class="w-2 h-2 rounded-full bg-emerald-500 inline-block"></span>
-              <span id="cloud-sync-label">Base synchronisée</span>
-            </div>
+            <button type="button" onclick="openBackupModal()" class="flex items-center gap-1.5 text-[11px] text-gray-600 hover:text-gray-900 cursor-pointer text-left">
+              <span id="cloud-sync-dot" class="w-2 h-2 rounded-full bg-amber-400 animate-pulse inline-block"></span>
+              <span id="cloud-sync-label">Connexion serveur Cloud...</span>
+            </button>
           </div>
         </a>
       </div>
 
-      <!-- Right: Fast Executive Actions -->
+      <!-- Right: Language Switcher (ES/FR/EN) + Fast Executive Actions -->
       <div class="flex items-center gap-2 flex-wrap">
-        <button type="button" onclick="openAddBikeModal()" class="px-3 py-2 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-900 text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5">
-          <span>+ Moto</span>
+        <!-- Admin Language Selector -->
+        <div class="inline-flex rounded-full bg-gray-100 p-0.5 gap-0.5 border border-gray-200" role="group" aria-label="Language">
+          <button type="button" onclick="setAdminLang('es', true)" data-lang-btn="es" class="admin-lang-btn px-2.5 py-1.5 rounded-full text-[11px] font-bold cursor-pointer transition-all">🇵🇾 ES</button>
+          <button type="button" onclick="setAdminLang('fr', true)" data-lang-btn="fr" class="admin-lang-btn px-2.5 py-1.5 rounded-full text-[11px] font-bold cursor-pointer transition-all">🇫🇷 FR</button>
+          <button type="button" onclick="setAdminLang('en', true)" data-lang-btn="en" class="admin-lang-btn px-2.5 py-1.5 rounded-full text-[11px] font-bold cursor-pointer transition-all">🇬🇧 EN</button>
+        </div>
+
+        <button type="button" onclick="openAddBikeModal()" data-a18n="btn_add_bike_short" class="px-3 py-2 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-900 text-xs font-bold transition-all cursor-pointer">
+          + Moto
         </button>
-        <button type="button" onclick="openRentalModal()" class="px-3.5 py-2 rounded-full bg-[#199E5E] hover:bg-[#14824d] text-white text-xs font-bold shadow-sm transition-all cursor-pointer flex items-center gap-1.5">
-          <span>+ Location</span>
+        <button type="button" onclick="openRentalModal()" data-a18n="btn_add_rental_short" class="px-3.5 py-2 rounded-full bg-[#199E5E] hover:bg-[#14824d] text-white text-xs font-bold shadow-sm transition-all cursor-pointer">
+          + Location
         </button>
-        <button type="button" onclick="openRepuestoModal()" class="px-3 py-2 rounded-full bg-amber-50 hover:bg-amber-100 border border-amber-200 text-amber-900 text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5">
-          <span>+ Repuesto</span>
+        <button type="button" onclick="openRepuestoModal()" data-a18n="btn_add_repuesto_short" class="px-3 py-2 rounded-full bg-amber-50 hover:bg-amber-100 border border-amber-200 text-amber-900 text-xs font-bold transition-all cursor-pointer">
+          + Repuesto
         </button>
-        <button type="button" onclick="syncFromCloud(true)" title="Synchroniser entre vos appareils" class="p-2 rounded-full border border-gray-200 hover:bg-gray-100 text-gray-700 text-xs transition-all cursor-pointer" aria-label="Synchroniser">
+        <button type="button" onclick="syncFromCloud(true)" title="Sync Cloud" class="p-2 rounded-full border border-gray-200 hover:bg-gray-100 text-gray-700 text-xs transition-all cursor-pointer" aria-label="Sync">
           🔄
         </button>
-        <button type="button" onclick="openBackupModal()" title="Sauvegarde &amp; Export JSON" class="p-2 rounded-full border border-gray-200 hover:bg-gray-100 text-gray-700 text-xs transition-all cursor-pointer" aria-label="Sauvegarde">
+        <button type="button" onclick="openBackupModal()" title="Cloud & Backup" class="p-2 rounded-full border border-gray-200 hover:bg-gray-100 text-gray-700 text-xs transition-all cursor-pointer" aria-label="Backup">
           💾
         </button>
-        <a href="index.html" class="px-3 py-2 rounded-full border border-gray-200 hover:bg-gray-100 text-gray-700 text-xs font-semibold transition-all hidden sm:inline-flex items-center gap-1">
+        <a href="index.html" data-a18n="btn_site" class="px-3 py-2 rounded-full border border-gray-200 hover:bg-gray-100 text-gray-700 text-xs font-semibold transition-all hidden sm:inline-flex items-center gap-1">
           ← Site
         </a>
-        <button type="button" onclick="lockAdmin()" title="Verrouiller" class="p-2 rounded-full border border-red-200 bg-red-50 hover:bg-red-100 text-red-700 text-xs transition-all cursor-pointer" aria-label="Verrouiller">
+        <button type="button" onclick="lockAdmin()" title="Lock" class="p-2 rounded-full border border-red-200 bg-red-50 hover:bg-red-100 text-red-700 text-xs transition-all cursor-pointer" aria-label="Lock">
           🔒
         </button>
       </div>
     </div>
   </header>
 
-  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-8 space-y-12">
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-8 space-y-10">
+
+    <!-- HONEST CLOUD CONNECTION NOTICE (Shown ONLY when Vercel Cloud DB isn't connected yet) -->
+    <div id="cloud-setup-banner" class="hidden rounded-2xl bg-amber-50 border-2 border-amber-300 p-4 flex flex-wrap items-center justify-between gap-3 shadow-xs">
+      <div class="flex items-start gap-3">
+        <span class="text-xl">☁️</span>
+        <div>
+          <p data-a18n="cloud_banner_title" class="text-xs sm:text-sm font-extrabold text-amber-950">Synchronisation Multi-Appareils (PC / Téléphone / Tablette)</p>
+          <p data-a18n="cloud_banner_desc" class="text-xs text-amber-900 mt-0.5">Votre base Cloud n'est pas encore reliée dans Vercel. Actuellement les modifications ne sont enregistrées que dans le cache de cet appareil.</p>
+        </div>
+      </div>
+      <button type="button" onclick="openBackupModal()" data-a18n="cloud_banner_btn" class="px-4 py-2 rounded-full bg-amber-600 hover:bg-amber-700 text-white text-xs font-extrabold cursor-pointer shadow-xs">
+        ⚙️ Activer le Cloud (Gratuit, 1 min)
+      </button>
+    </div>
 
     <!-- ======================================================================
          PARTIE 1 (EN HAUT) : RÉSERVES BANCAIRES, STATS 80/20 & DASHBOARD FINANCIER
@@ -130,13 +160,13 @@
     <section id="part-1-finance" class="space-y-6">
       <div class="flex flex-wrap items-end justify-between gap-3">
         <div>
-          <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-900 text-[11px] font-bold uppercase tracking-wider mb-1">
+          <span data-a18n="part1_badge" class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-900 text-[11px] font-bold uppercase tracking-wider mb-1">
             Partie 1 • Trésorerie &amp; Pilotage
           </span>
-          <h2 class="text-2xl sm:text-3xl font-extrabold text-gray-900 tracking-tight">Réserves &amp; Dashboard Financier</h2>
+          <h2 data-a18n="part1_title" class="text-2xl sm:text-3xl font-extrabold text-gray-900 tracking-tight">Réserves &amp; Dashboard Financier</h2>
         </div>
         <div class="text-xs text-gray-500 font-medium bg-white border border-gray-200 px-3 py-1.5 rounded-full shadow-2xs">
-          Tarif unique non négociable : <strong class="text-gray-900">₲ 50.000 / jour</strong>
+          <span data-a18n="fixed_rate_pill">Tarif unique non négociable :</span> <strong class="text-gray-900">₲ 50.000 <span data-a18n="per_day">/ jour</span></strong>
         </div>
       </div>
 
@@ -148,11 +178,11 @@
             <div class="flex items-center gap-2.5">
               <div class="w-10 h-10 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center text-lg font-bold">💵</div>
               <div>
-                <p class="text-[11px] font-bold uppercase tracking-wider text-emerald-700">Caisse Agence</p>
-                <h3 class="text-sm font-bold text-gray-900">Réserve CASH (Espèces)</h3>
+                <p data-a18n="cash_sub" class="text-[11px] font-bold uppercase tracking-wider text-emerald-700">Caisse Agence</p>
+                <h3 data-a18n="cash_title" class="text-sm font-bold text-gray-900">Réserve CASH (Espèces)</h3>
               </div>
             </div>
-            <button type="button" onclick="openAdjustBalanceModal('cash')" class="text-[11px] font-semibold text-gray-500 hover:text-gray-900 bg-gray-100 hover:bg-gray-200 px-2.5 py-1 rounded-full cursor-pointer transition-colors">
+            <button type="button" onclick="openAdjustBalanceModal('cash')" data-a18n="btn_adjust" class="text-[11px] font-semibold text-gray-500 hover:text-gray-900 bg-gray-100 hover:bg-gray-200 px-2.5 py-1 rounded-full cursor-pointer transition-colors">
               ⚙️ Ajuster
             </button>
           </div>
@@ -160,8 +190,8 @@
             ₲ 0
           </div>
           <div class="mt-3 pt-3 border-t border-gray-100 flex items-center justify-between text-xs text-gray-600">
-            <span>Encaissé : <strong id="bank-cash-in" class="text-emerald-700">+ ₲ 0</strong></span>
-            <span>Repuestos : <strong id="bank-cash-out" class="text-red-600">- ₲ 0</strong></span>
+            <span><span data-a18n="label_collected">Encaissé :</span> <strong id="bank-cash-in" class="text-emerald-700">+ ₲ 0</strong></span>
+            <span><span data-a18n="label_repuestos_short">Repuestos :</span> <strong id="bank-cash-out" class="text-red-600">- ₲ 0</strong></span>
           </div>
         </div>
 
@@ -171,11 +201,11 @@
             <div class="flex items-center gap-2.5">
               <div class="w-10 h-10 rounded-2xl bg-indigo-100 text-indigo-700 flex items-center justify-center text-lg font-bold">🏦</div>
               <div>
-                <p class="text-[11px] font-bold uppercase tracking-wider text-indigo-700">Mango / SIPAP</p>
-                <h3 class="text-sm font-bold text-gray-900">Réserve BANQUE (Transferencia)</h3>
+                <p data-a18n="bank_sub" class="text-[11px] font-bold uppercase tracking-wider text-indigo-700">Mango / SIPAP</p>
+                <h3 data-a18n="bank_title" class="text-sm font-bold text-gray-900">Réserve BANQUE (Transferencia)</h3>
               </div>
             </div>
-            <button type="button" onclick="openAdjustBalanceModal('transferencia')" class="text-[11px] font-semibold text-gray-500 hover:text-gray-900 bg-gray-100 hover:bg-gray-200 px-2.5 py-1 rounded-full cursor-pointer transition-colors">
+            <button type="button" onclick="openAdjustBalanceModal('transferencia')" data-a18n="btn_adjust" class="text-[11px] font-semibold text-gray-500 hover:text-gray-900 bg-gray-100 hover:bg-gray-200 px-2.5 py-1 rounded-full cursor-pointer transition-colors">
               ⚙️ Ajuster
             </button>
           </div>
@@ -183,8 +213,8 @@
             ₲ 0
           </div>
           <div class="mt-3 pt-3 border-t border-gray-100 flex items-center justify-between text-xs text-gray-600">
-            <span>Encaissé : <strong id="bank-transfer-in" class="text-indigo-700">+ ₲ 0</strong></span>
-            <span>Repuestos : <strong id="bank-transfer-out" class="text-red-600">- ₲ 0</strong></span>
+            <span><span data-a18n="label_collected">Encaissé :</span> <strong id="bank-transfer-in" class="text-indigo-700">+ ₲ 0</strong></span>
+            <span><span data-a18n="label_repuestos_short">Repuestos :</span> <strong id="bank-transfer-out" class="text-red-600">- ₲ 0</strong></span>
           </div>
         </div>
 
@@ -194,18 +224,17 @@
             <div class="flex items-center gap-2.5">
               <div class="w-10 h-10 rounded-2xl bg-[#34D186]/20 text-[#34D186] flex items-center justify-center text-lg font-bold">💎</div>
               <div>
-                <p class="text-[11px] font-bold uppercase tracking-wider text-[#34D186]">Cash + Banque</p>
-                <h3 class="text-sm font-bold text-white">Trésorerie Totale Agence</h3>
+                <p data-a18n="total_sub" class="text-[11px] font-bold uppercase tracking-wider text-[#34D186]">Cash + Banque</p>
+                <h3 data-a18n="total_title" class="text-sm font-bold text-white">Trésorerie Totale Agence</h3>
               </div>
             </div>
             <span id="daily-runrate-pill" class="text-[11px] font-bold px-2.5 py-1 rounded-full bg-white/10 text-emerald-300">
-              ₲ 0 / jour actif
+              ₲ 0
             </span>
           </div>
           <div id="bank-total-balance" class="text-3xl sm:text-4xl font-black text-white tracking-tight my-2">
             ₲ 0
           </div>
-          <!-- Split Ratio Bar Cash vs Transferencia -->
           <div class="mt-3">
             <div class="h-2 w-full rounded-full bg-white/15 overflow-hidden flex">
               <div id="ratio-bar-cash" class="bg-[#34D186] h-full transition-all duration-300" style="width: 50%"></div>
@@ -223,55 +252,55 @@
       <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
         <!-- Stat 1: Louées vs Non Louées -->
         <div class="rounded-2xl bg-white border border-gray-200 p-4 shadow-2xs">
-          <p class="text-[11px] font-bold uppercase tracking-wider text-gray-500">Occupation Flotte</p>
+          <p data-a18n="kpi_occupancy" class="text-[11px] font-bold uppercase tracking-wider text-gray-500">Occupation Flotte</p>
           <div class="mt-2 flex items-baseline gap-2 flex-wrap">
             <span id="stat-rented-count" class="text-2xl sm:text-3xl font-black text-emerald-600">0</span>
-            <span class="text-xs font-semibold text-gray-600">louées</span>
+            <span data-a18n="kpi_rented" class="text-xs font-semibold text-gray-600">louées</span>
             <span class="text-gray-300">/</span>
             <span id="stat-available-count" class="text-xl sm:text-2xl font-extrabold text-blue-600">0</span>
-            <span class="text-xs font-semibold text-gray-600">dispo</span>
+            <span data-a18n="kpi_available" class="text-xs font-semibold text-gray-600">dispo</span>
           </div>
-          <p id="stat-occupancy-rate" class="text-[11px] text-gray-500 mt-1.5">Taux d'occupation : 0%</p>
+          <p id="stat-occupancy-rate" class="text-[11px] text-gray-500 mt-1.5">—</p>
         </div>
 
         <!-- Stat 2: En Service vs Hors Service + Pertes Potentielles -->
         <div class="rounded-2xl bg-white border border-gray-200 p-4 shadow-2xs">
-          <p class="text-[11px] font-bold uppercase tracking-wider text-gray-500">État Technique &amp; Pertes</p>
+          <p data-a18n="kpi_tech_state" class="text-[11px] font-bold uppercase tracking-wider text-gray-500">État Technique &amp; Pertes</p>
           <div class="mt-2 flex items-baseline gap-2 flex-wrap">
             <span id="stat-in-service-count" class="text-2xl sm:text-3xl font-black text-gray-900">0</span>
-            <span class="text-xs font-semibold text-gray-600">en service</span>
+            <span data-a18n="kpi_in_service" class="text-xs font-semibold text-gray-600">en service</span>
             <span class="text-gray-300">/</span>
             <span id="stat-out-service-count" class="text-xl sm:text-2xl font-extrabold text-amber-600">0</span>
-            <span class="text-xs font-semibold text-amber-700">Hors Service</span>
+            <span data-a18n="kpi_out_service" class="text-xs font-semibold text-amber-700">Hors Service</span>
           </div>
           <p class="text-[11px] text-red-600 font-semibold mt-1.5">
-            Pertes estimées : <span id="stat-downtime-loss">₲ 0</span>
+            <span data-a18n="kpi_est_loss">Pertes estimées :</span> <span id="stat-downtime-loss">₲ 0</span>
           </p>
         </div>
 
         <!-- Stat 3: Impayés (CLIQUABLE pour détails complets) -->
         <button type="button" onclick="openUnpaidDetailsModal()" class="text-left rounded-2xl bg-red-50/70 hover:bg-red-50 border-2 border-red-200 hover:border-red-400 p-4 shadow-2xs transition-all cursor-pointer group">
           <div class="flex items-center justify-between">
-            <p class="text-[11px] font-bold uppercase tracking-wider text-red-700">Impayés (Cliquer 🔍)</p>
-            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-red-600 text-white group-hover:scale-105 transition-transform">Détails</span>
+            <p data-a18n="kpi_unpaid_title" class="text-[11px] font-bold uppercase tracking-wider text-red-700">Impayés (Cliquer 🔍)</p>
+            <span data-a18n="kpi_details" class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-red-600 text-white group-hover:scale-105 transition-transform">Détails</span>
           </div>
           <div class="mt-2 flex items-baseline gap-2 flex-wrap">
             <span id="stat-unpaid-amount" class="text-2xl sm:text-3xl font-black text-red-700">₲ 0</span>
           </div>
           <p class="text-[11px] text-red-800 font-medium mt-1.5">
-            <span id="stat-unpaid-count">0</span> jour(s) / <span id="stat-unpaid-clients">0</span> client(s) concerné(s)
+            <span id="stat-unpaid-count">0</span> <span data-a18n="kpi_unpaid_sub_days">jour(s)</span> / <span id="stat-unpaid-clients">0</span> <span data-a18n="kpi_unpaid_sub_clients">client(s)</span>
           </p>
         </button>
 
         <!-- Stat 4: Clients Servis & Bénéfice Net -->
         <div class="rounded-2xl bg-white border border-gray-200 p-4 shadow-2xs">
-          <p class="text-[11px] font-bold uppercase tracking-wider text-gray-500">Clients Servis &amp; Net</p>
+          <p data-a18n="kpi_clients_title" class="text-[11px] font-bold uppercase tracking-wider text-gray-500">Clients Servis &amp; Net</p>
           <div class="mt-2 flex items-baseline gap-2 flex-wrap">
             <span id="stat-clients-served" class="text-2xl sm:text-3xl font-black text-gray-900">0</span>
-            <span class="text-xs font-semibold text-gray-600">clients servis</span>
+            <span data-a18n="kpi_clients_served" class="text-xs font-semibold text-gray-600">clients servis</span>
           </div>
           <p class="text-[11px] text-gray-600 mt-1.5">
-            Bénéfice net période : <strong id="stat-period-net" class="text-emerald-700">₲ 0</strong>
+            <span data-a18n="kpi_period_net">Bénéfice net période :</span> <strong id="stat-period-net" class="text-emerald-700">₲ 0</strong>
           </p>
         </div>
       </div>
@@ -280,62 +309,58 @@
       <div class="rounded-3xl bg-white border border-gray-200 p-5 sm:p-6 shadow-sm space-y-5">
         <div class="flex flex-wrap items-center justify-between gap-3 border-b border-gray-100 pb-4">
           <div>
-            <h3 class="text-lg font-extrabold text-gray-900">Évolution Économique &amp; Dépenses Repuestos</h3>
-            <p class="text-xs text-gray-500">Analyse temps réel : revenus Cash/Transferencia, ratio bénéfice/dépenses et pièces atelier.</p>
+            <h3 data-a18n="fin_title" class="text-lg font-extrabold text-gray-900">Évolution Économique &amp; Dépenses Repuestos</h3>
+            <p data-a18n="fin_desc" class="text-xs text-gray-500">Analyse temps réel : revenus Cash/Transferencia, ratio bénéfice/dépenses et pièces atelier.</p>
           </div>
 
-          <!-- Sélecteur Journalier / Hebdomadaire / Mensuel / Total -->
-          <div class="inline-flex rounded-full bg-gray-100 p-1 gap-1" role="group" aria-label="Période financière">
-            <button type="button" id="period-btn-daily" onclick="setFinancialPeriod('daily')" class="period-btn px-3.5 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer">Journalier</button>
-            <button type="button" id="period-btn-weekly" onclick="setFinancialPeriod('weekly')" class="period-btn px-3.5 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer">Hebdo</button>
-            <button type="button" id="period-btn-monthly" onclick="setFinancialPeriod('monthly')" class="period-btn px-3.5 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer">Mensuel</button>
-            <button type="button" id="period-btn-total" onclick="setFinancialPeriod('total')" class="period-btn px-3.5 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer">Total</button>
+          <div class="inline-flex rounded-full bg-gray-100 p-1 gap-1" role="group">
+            <button type="button" id="period-btn-daily" onclick="setFinancialPeriod('daily')" data-a18n="period_daily" class="period-btn px-3.5 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer">Journalier</button>
+            <button type="button" id="period-btn-weekly" onclick="setFinancialPeriod('weekly')" data-a18n="period_weekly" class="period-btn px-3.5 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer">Hebdo</button>
+            <button type="button" id="period-btn-monthly" onclick="setFinancialPeriod('monthly')" data-a18n="period_monthly" class="period-btn px-3.5 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer">Mensuel</button>
+            <button type="button" id="period-btn-total" onclick="setFinancialPeriod('total')" data-a18n="period_total" class="period-btn px-3.5 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer">Total</button>
           </div>
         </div>
 
         <!-- Résumé chiffres sur la période choisie -->
         <div class="grid grid-cols-2 md:grid-cols-4 gap-3 bg-gray-50 rounded-2xl p-4 border border-gray-100">
           <div>
-            <p class="text-[11px] font-semibold text-gray-500">Revenus Bruts (Période)</p>
+            <p data-a18n="period_gross" class="text-[11px] font-semibold text-gray-500">Revenus Bruts (Période)</p>
             <p id="period-revenue" class="text-lg sm:text-xl font-black text-gray-900">₲ 0</p>
           </div>
           <div>
-            <p class="text-[11px] font-semibold text-gray-500">Dépenses Repuestos</p>
+            <p data-a18n="period_repuestos" class="text-[11px] font-semibold text-gray-500">Dépenses Repuestos</p>
             <p id="period-repuestos" class="text-lg sm:text-xl font-black text-amber-700">₲ 0</p>
           </div>
           <div>
-            <p class="text-[11px] font-semibold text-gray-500">Bénéfice Net</p>
+            <p data-a18n="period_profit" class="text-[11px] font-semibold text-gray-500">Bénéfice Net</p>
             <p id="period-profit" class="text-lg sm:text-xl font-black text-emerald-700">₲ 0</p>
           </div>
           <div>
-            <p class="text-[11px] font-semibold text-gray-500">Ratio Bénéfice / Dépenses</p>
+            <p data-a18n="period_ratio" class="text-[11px] font-semibold text-gray-500">Ratio Bénéfice / Dépenses</p>
             <p id="period-ratio" class="text-lg sm:text-xl font-black text-indigo-700">—</p>
           </div>
         </div>
 
         <!-- 3 Courbes / Graphiques -->
         <div class="grid lg:grid-cols-3 gap-5">
-          <!-- Courbe 1 : Croissance Économique -->
           <div class="rounded-2xl border border-gray-200 p-4 bg-white">
-            <h4 class="text-xs font-bold uppercase tracking-wider text-gray-600 mb-3">1. Courbe Croissance Économique (CA vs Net)</h4>
+            <h4 data-a18n="chart1_title" class="text-xs font-bold uppercase tracking-wider text-gray-600 mb-3">1. Courbe Croissance Économique (CA vs Net)</h4>
             <div class="relative h-56 w-full">
               <canvas id="chart-growth"></canvas>
             </div>
           </div>
 
-          <!-- Courbe 2 : Ratio Bénéfice / Dépenses -->
           <div class="rounded-2xl border border-gray-200 p-4 bg-white">
-            <h4 class="text-xs font-bold uppercase tracking-wider text-gray-600 mb-3">2. Ratio Bénéfice / Dépenses &amp; Marge %</h4>
+            <h4 data-a18n="chart2_title" class="text-xs font-bold uppercase tracking-wider text-gray-600 mb-3">2. Ratio Bénéfice / Dépenses</h4>
             <div class="relative h-56 w-full">
               <canvas id="chart-ratio"></canvas>
             </div>
           </div>
 
-          <!-- Courbe 3 : Évolution des Dépenses en Repuestos -->
           <div class="rounded-2xl border border-gray-200 p-4 bg-white">
             <div class="flex items-center justify-between mb-3">
-              <h4 class="text-xs font-bold uppercase tracking-wider text-gray-600">3. Évolution Dépenses Repuestos</h4>
-              <button type="button" onclick="openRepuestoModal()" class="text-[11px] font-bold text-amber-700 hover:underline cursor-pointer">+ Ajouter</button>
+              <h4 data-a18n="chart3_title" class="text-xs font-bold uppercase tracking-wider text-gray-600">3. Évolution Dépenses Repuestos</h4>
+              <button type="button" onclick="openRepuestoModal()" data-a18n="btn_add_short" class="text-[11px] font-bold text-amber-700 hover:underline cursor-pointer">+ Ajouter</button>
             </div>
             <div class="relative h-56 w-full">
               <canvas id="chart-repuestos"></canvas>
@@ -346,12 +371,10 @@
         <!-- Journal compact des dernières dépenses Repuestos -->
         <div class="pt-2">
           <div class="flex items-center justify-between mb-2">
-            <h4 class="text-xs font-bold uppercase tracking-wider text-gray-500">Dernières Dépenses Repuestos &amp; Atelier</h4>
-            <span id="repuestos-count-badge" class="text-[11px] text-gray-500">0 dépense(s)</span>
+            <h4 data-a18n="recent_repuestos_title" class="text-xs font-bold uppercase tracking-wider text-gray-500">Dernières Dépenses Repuestos &amp; Atelier</h4>
+            <span id="repuestos-count-badge" class="text-[11px] text-gray-500">0</span>
           </div>
-          <div id="repuestos-list" class="flex gap-2.5 overflow-x-auto pb-2 no-scrollbar">
-            <!-- Populated by admin.js -->
-          </div>
+          <div id="repuestos-list" class="flex gap-2.5 overflow-x-auto pb-2 no-scrollbar"></div>
         </div>
       </div>
     </section>
@@ -364,26 +387,24 @@
     <section id="part-2-fleet" class="space-y-8">
       <div class="flex flex-wrap items-end justify-between gap-3">
         <div>
-          <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-gray-900 text-white text-[11px] font-bold uppercase tracking-wider mb-1">
+          <span data-a18n="part2_badge" class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-gray-900 text-white text-[11px] font-bold uppercase tracking-wider mb-1">
             Partie 2 • Opérations &amp; Flotte
           </span>
-          <h2 class="text-2xl sm:text-3xl font-extrabold text-gray-900 tracking-tight">Gestion des Motos, Paiements &amp; Contrats</h2>
+          <h2 data-a18n="part2_title" class="text-2xl sm:text-3xl font-extrabold text-gray-900 tracking-tight">Gestion des Motos, Paiements &amp; Contrats</h2>
         </div>
 
         <div class="flex items-center gap-2">
-          <button type="button" onclick="openAddBikeModal()" class="px-4 py-2 rounded-full bg-gray-900 hover:bg-gray-800 text-white text-xs font-bold shadow-sm transition-all cursor-pointer">
+          <button type="button" onclick="openAddBikeModal()" data-a18n="btn_new_bike" class="px-4 py-2 rounded-full bg-gray-900 hover:bg-gray-800 text-white text-xs font-bold shadow-sm transition-all cursor-pointer">
             + Ajouter une nouvelle moto
           </button>
-          <button type="button" onclick="openRentalModal()" class="px-4 py-2 rounded-full bg-[#199E5E] hover:bg-[#14824d] text-white text-xs font-bold shadow-sm transition-all cursor-pointer">
+          <button type="button" onclick="openRentalModal()" data-a18n="btn_new_rental" class="px-4 py-2 rounded-full bg-[#199E5E] hover:bg-[#14824d] text-white text-xs font-bold shadow-sm transition-all cursor-pointer">
             + Nouvelle Location
           </button>
         </div>
       </div>
 
-      <!-- 2.1 CENTRE D'ALERTES PRIORITAIRES (GPS NIVEAU 2 + PAIEMENT DU JOUR NIVEAU 1) -->
-      <div id="alerts-center" class="space-y-3">
-        <!-- Populated dynamically by admin.js -->
-      </div>
+      <!-- 2.1 CENTRE D'ALERTES PRIORITAIRES -->
+      <div id="alerts-center" class="space-y-3"></div>
 
       <!-- 2.2 CONTRÔLE POLICE & RECHERCHE PAR DATE / HISTORIQUE CONDUCTEUR -->
       <div class="rounded-3xl bg-slate-900 text-white p-5 sm:p-6 shadow-md">
@@ -391,69 +412,61 @@
           <div class="flex items-center gap-3">
             <div class="w-10 h-10 rounded-2xl bg-blue-500/20 text-blue-300 flex items-center justify-center text-xl">👮</div>
             <div>
-              <h3 class="text-base sm:text-lg font-extrabold text-white">Traçabilité Police &amp; Contrôle par Date</h3>
-              <p class="text-xs text-slate-300">Retrouvez immédiatement qui conduisait n'importe quelle moto à une date précise et téléchargez tous ses documents.</p>
+              <h3 data-a18n="police_title" class="text-base sm:text-lg font-extrabold text-white">Traçabilité Police &amp; Contrôle par Date</h3>
+              <p data-a18n="police_desc" class="text-xs text-slate-300">Retrouvez immédiatement qui conduisait n'importe quelle moto à une date précise et téléchargez tous ses documents.</p>
             </div>
           </div>
         </div>
 
         <div class="grid sm:grid-cols-3 gap-3">
           <div>
-            <label for="police-date-input" class="block text-[11px] font-semibold text-slate-300 mb-1">Date recherchée</label>
+            <label for="police-date-input" data-a18n="police_date_lbl" class="block text-[11px] font-semibold text-slate-300 mb-1">Date recherchée</label>
             <input id="police-date-input" type="date" onchange="runPoliceLookup()" class="w-full rounded-xl bg-slate-800 border border-slate-700 text-white px-3.5 py-2.5 text-sm font-medium focus:border-emerald-400 focus:outline-none" />
           </div>
           <div>
-            <label for="police-bike-select" class="block text-[11px] font-semibold text-slate-300 mb-1">Moto (Optionnel)</label>
-            <select id="police-bike-select" onchange="runPoliceLookup()" class="w-full rounded-xl bg-slate-800 border border-slate-700 text-white px-3.5 py-2.5 text-sm font-medium focus:border-emerald-400 focus:outline-none">
-              <option value="">Toutes les motos</option>
-            </select>
+            <label for="police-bike-select" data-a18n="police_bike_lbl" class="block text-[11px] font-semibold text-slate-300 mb-1">Moto (Optionnel)</label>
+            <select id="police-bike-select" onchange="runPoliceLookup()" class="w-full rounded-xl bg-slate-800 border border-slate-700 text-white px-3.5 py-2.5 text-sm font-medium focus:border-emerald-400 focus:outline-none"></select>
           </div>
           <div>
-            <label for="police-text-input" class="block text-[11px] font-semibold text-slate-300 mb-1">Client / Cédula / Plaque</label>
-            <input id="police-text-input" type="text" oninput="runPoliceLookup()" placeholder="Nom, C.I. ou placa..." class="w-full rounded-xl bg-slate-800 border border-slate-700 text-white px-3.5 py-2.5 text-sm font-medium focus:border-emerald-400 focus:outline-none" />
+            <label for="police-text-input" data-a18n="police_search_lbl" class="block text-[11px] font-semibold text-slate-300 mb-1">Client / Cédula / Plaque</label>
+            <input id="police-text-input" type="text" oninput="runPoliceLookup()" data-a18n-ph="police_search_ph" placeholder="Nom, C.I. ou plaque..." class="w-full rounded-xl bg-slate-800 border border-slate-700 text-white px-3.5 py-2.5 text-sm font-medium focus:border-emerald-400 focus:outline-none" />
           </div>
         </div>
 
-        <div id="police-results" class="mt-4 space-y-2">
-          <!-- Populated dynamically -->
-        </div>
+        <div id="police-results" class="mt-4 space-y-2"></div>
       </div>
 
       <!-- 2.3 FILTRES & GRILLE DE LA FLOTTE DE MOTOS -->
       <div>
         <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
           <div class="flex flex-wrap items-center gap-2">
-            <button type="button" onclick="setFleetFilter('all')" id="fleet-filter-all" class="fleet-filter-btn px-3.5 py-2 rounded-full text-xs font-bold cursor-pointer transition-all">Toutes</button>
-            <button type="button" onclick="setFleetFilter('rented')" id="fleet-filter-rented" class="fleet-filter-btn px-3.5 py-2 rounded-full text-xs font-bold cursor-pointer transition-all">🟢 Louées</button>
-            <button type="button" onclick="setFleetFilter('available')" id="fleet-filter-available" class="fleet-filter-btn px-3.5 py-2 rounded-full text-xs font-bold cursor-pointer transition-all">🔵 Disponibles (Non louées)</button>
-            <button type="button" onclick="setFleetFilter('maintenance')" id="fleet-filter-maintenance" class="fleet-filter-btn px-3.5 py-2 rounded-full text-xs font-bold cursor-pointer transition-all">🔴 Hors Service</button>
+            <button type="button" onclick="setFleetFilter('all')" id="fleet-filter-all" data-a18n="filter_all" class="fleet-filter-btn px-3.5 py-2 rounded-full text-xs font-bold cursor-pointer transition-all">Toutes</button>
+            <button type="button" onclick="setFleetFilter('rented')" id="fleet-filter-rented" data-a18n="filter_rented" class="fleet-filter-btn px-3.5 py-2 rounded-full text-xs font-bold cursor-pointer transition-all">🟢 Louées</button>
+            <button type="button" onclick="setFleetFilter('available')" id="fleet-filter-available" data-a18n="filter_available" class="fleet-filter-btn px-3.5 py-2 rounded-full text-xs font-bold cursor-pointer transition-all">🔵 Disponibles</button>
+            <button type="button" onclick="setFleetFilter('maintenance')" id="fleet-filter-maintenance" data-a18n="filter_maintenance" class="fleet-filter-btn px-3.5 py-2 rounded-full text-xs font-bold cursor-pointer transition-all">🔴 Hors Service</button>
           </div>
-          <span id="fleet-count-label" class="text-xs font-semibold text-gray-500">0 motos</span>
+          <span id="fleet-count-label" class="text-xs font-semibold text-gray-500">0</span>
         </div>
 
-        <div id="fleet-grid" class="grid md:grid-cols-2 xl:grid-cols-3 gap-5">
-          <!-- Bike Cards populated dynamically by admin.js -->
-        </div>
+        <div id="fleet-grid" class="grid md:grid-cols-2 xl:grid-cols-3 gap-5"></div>
       </div>
 
       <!-- 2.4 TABLEAU CHRONOLOGIQUE PASSÉ - PRÉSENT - FUTUR -->
       <div class="rounded-3xl bg-white border border-gray-200 p-5 sm:p-6 shadow-sm">
         <div class="flex flex-wrap items-center justify-between gap-3 border-b border-gray-100 pb-4 mb-4">
           <div>
-            <h3 class="text-lg font-extrabold text-gray-900">Registre des Locations : Présent • Futur • Passé</h3>
-            <p class="text-xs text-gray-500">Historique complet de chaque location, encaissements et accès direct aux dossiers clients.</p>
+            <h3 data-a18n="timeline_title" class="text-lg font-extrabold text-gray-900">Registre des Locations : Présent • Futur • Passé</h3>
+            <p data-a18n="timeline_desc" class="text-xs text-gray-500">Historique complet de chaque location, encaissements et accès direct aux dossiers clients.</p>
           </div>
 
           <div class="inline-flex rounded-full bg-gray-100 p-1 gap-1">
-            <button type="button" onclick="setTimelineTab('active')" id="timeline-tab-active" class="timeline-tab-btn px-3.5 py-1.5 rounded-full text-xs font-bold cursor-pointer transition-all">🟢 En cours (Présent)</button>
-            <button type="button" onclick="setTimelineTab('future')" id="timeline-tab-future" class="timeline-tab-btn px-3.5 py-1.5 rounded-full text-xs font-bold cursor-pointer transition-all">📅 Futures</button>
-            <button type="button" onclick="setTimelineTab('completed')" id="timeline-tab-completed" class="timeline-tab-btn px-3.5 py-1.5 rounded-full text-xs font-bold cursor-pointer transition-all">🗄️ Passées (Archives)</button>
+            <button type="button" onclick="setTimelineTab('active')" id="timeline-tab-active" data-a18n="tab_active" class="timeline-tab-btn px-3.5 py-1.5 rounded-full text-xs font-bold cursor-pointer transition-all">🟢 En cours</button>
+            <button type="button" onclick="setTimelineTab('future')" id="timeline-tab-future" data-a18n="tab_future" class="timeline-tab-btn px-3.5 py-1.5 rounded-full text-xs font-bold cursor-pointer transition-all">📅 Futures</button>
+            <button type="button" onclick="setTimelineTab('completed')" id="timeline-tab-completed" data-a18n="tab_completed" class="timeline-tab-btn px-3.5 py-1.5 rounded-full text-xs font-bold cursor-pointer transition-all">🗄️ Passées</button>
           </div>
         </div>
 
-        <div id="rentals-timeline-list" class="space-y-3">
-          <!-- Populated dynamically by admin.js -->
-        </div>
+        <div id="rentals-timeline-list" class="space-y-3"></div>
       </div>
     </section>
 
@@ -468,14 +481,12 @@
     <div class="w-full max-w-2xl rounded-3xl bg-white shadow-2xl border border-gray-200 overflow-hidden max-h-[90vh] flex flex-col">
       <div class="p-5 sm:p-6 bg-red-600 text-white flex items-center justify-between">
         <div>
-          <h3 class="text-lg sm:text-xl font-extrabold">Détails des Impayés &amp; Recouvrement</h3>
-          <p class="text-xs text-red-100 mt-0.5">Liste exacte des clients qui doivent de l'argent à G&amp;L MOTORS (₲ 50.000 / jour)</p>
+          <h3 data-a18n="modal_unpaid_title" class="text-lg sm:text-xl font-extrabold">Détails des Impayés &amp; Recouvrement</h3>
+          <p data-a18n="modal_unpaid_sub" class="text-xs text-red-100 mt-0.5">Liste exacte des clients qui doivent de l'argent à G&amp;L MOTORS (₲ 50.000 / jour)</p>
         </div>
         <button type="button" onclick="closeModal('unpaid-modal')" class="w-8 h-8 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center font-bold cursor-pointer">✕</button>
       </div>
-      <div id="unpaid-modal-body" class="p-5 sm:p-6 overflow-y-auto space-y-3 flex-1 bg-gray-50">
-        <!-- Populated dynamically -->
-      </div>
+      <div id="unpaid-modal-body" class="p-5 sm:p-6 overflow-y-auto space-y-3 flex-1 bg-gray-50"></div>
     </div>
   </div>
 
@@ -483,47 +494,47 @@
   <div id="add-bike-modal" class="fixed inset-0 z-50 hidden bg-black/70 backdrop-blur-sm flex items-center justify-center p-4" onclick="if(event.target === this) closeModal('add-bike-modal')">
     <div class="w-full max-w-md rounded-3xl bg-white shadow-2xl border border-gray-200 p-6 max-h-[90vh] overflow-y-auto">
       <div class="flex items-center justify-between mb-4">
-        <h3 id="bike-modal-title" class="text-lg font-extrabold text-gray-900">Ajouter une Moto à la Flotte</h3>
+        <h3 id="bike-modal-title" class="text-lg font-extrabold text-gray-900">Moto</h3>
         <button type="button" onclick="closeModal('add-bike-modal')" class="w-8 h-8 rounded-full hover:bg-gray-100 flex items-center justify-center cursor-pointer">✕</button>
       </div>
       <form onsubmit="submitBikeForm(event)" class="space-y-3.5 text-sm">
         <input type="hidden" id="bike-form-id" />
         <div>
-          <label class="block text-xs font-bold text-gray-700 mb-1">Modèle &amp; Cylindrée *</label>
-          <input id="bike-form-name" type="text" required placeholder="Ex: Buler Faiter Rojo 150cc" class="w-full rounded-xl border border-gray-300 bg-gray-50 px-3.5 py-2.5 focus:border-black focus:outline-none" />
+          <label data-a18n="lbl_model" class="block text-xs font-bold text-gray-700 mb-1">Modèle &amp; Cylindrée *</label>
+          <input id="bike-form-name" type="text" required placeholder="Buler Faiter Rojo 150cc" class="w-full rounded-xl border border-gray-300 bg-gray-50 px-3.5 py-2.5 focus:border-black focus:outline-none" />
         </div>
         <div class="grid grid-cols-2 gap-3">
           <div>
-            <label class="block text-xs font-bold text-gray-700 mb-1">Plaque (Chapa)</label>
-            <input id="bike-form-plate" type="text" placeholder="Ex: 123 ABC" class="w-full rounded-xl border border-gray-300 bg-gray-50 px-3.5 py-2.5 focus:border-black focus:outline-none uppercase" />
+            <label data-a18n="lbl_plate_form" class="block text-xs font-bold text-gray-700 mb-1">Plaque (Chapa)</label>
+            <input id="bike-form-plate" type="text" placeholder="123 ABC" class="w-full rounded-xl border border-gray-300 bg-gray-50 px-3.5 py-2.5 focus:border-black focus:outline-none uppercase" />
           </div>
           <div>
-            <label class="block text-xs font-bold text-gray-700 mb-1">Année</label>
+            <label data-a18n="lbl_year" class="block text-xs font-bold text-gray-700 mb-1">Année</label>
             <input id="bike-form-year" type="number" value="2025" class="w-full rounded-xl border border-gray-300 bg-gray-50 px-3.5 py-2.5 focus:border-black focus:outline-none" />
           </div>
         </div>
         <div class="grid grid-cols-2 gap-3">
           <div>
-            <label class="block text-xs font-bold text-gray-700 mb-1">N° Châssis</label>
-            <input id="bike-form-chassis" type="text" placeholder="Châssis / Motor" class="w-full rounded-xl border border-gray-300 bg-gray-50 px-3.5 py-2.5 focus:border-black focus:outline-none" />
+            <label data-a18n="lbl_chassis" class="block text-xs font-bold text-gray-700 mb-1">N° Châssis</label>
+            <input id="bike-form-chassis" type="text" class="w-full rounded-xl border border-gray-300 bg-gray-50 px-3.5 py-2.5 focus:border-black focus:outline-none" />
           </div>
           <div>
-            <label class="block text-xs font-bold text-gray-700 mb-1">ID Traceur GPS</label>
-            <input id="bike-form-gps" type="text" placeholder="Ex: GPS-06" class="w-full rounded-xl border border-gray-300 bg-gray-50 px-3.5 py-2.5 focus:border-black focus:outline-none" />
+            <label data-a18n="lbl_gps_id" class="block text-xs font-bold text-gray-700 mb-1">ID Traceur GPS</label>
+            <input id="bike-form-gps" type="text" placeholder="GPS-06" class="w-full rounded-xl border border-gray-300 bg-gray-50 px-3.5 py-2.5 focus:border-black focus:outline-none" />
           </div>
         </div>
         <div>
-          <label class="block text-xs font-bold text-gray-700 mb-1">Visuel de la moto</label>
+          <label data-a18n="lbl_bike_img" class="block text-xs font-bold text-gray-700 mb-1">Visuel de la moto</label>
           <select id="bike-form-image" class="w-full rounded-xl border border-gray-300 bg-gray-50 px-3.5 py-2.5 focus:border-black focus:outline-none">
             <option value="assets/images/buler-faiter.png">Buler Faiter Rojo</option>
             <option value="assets/images/star-desert-rojo.png">Star New Desert Rojo</option>
             <option value="assets/images/enduro-star-negra.png">Enduro Star Negra</option>
             <option value="assets/images/xvr-150.png">XVR Grise et Verte</option>
             <option value="assets/images/boxer-azul.png">Boxer Azul</option>
-            <option value="assets/images/logo-gl-motors.jpg">Logo G&amp;L MOTORS (Autre modèle)</option>
+            <option value="assets/images/logo-gl-motors.jpg">Logo G&amp;L MOTORS</option>
           </select>
         </div>
-        <button type="submit" class="w-full py-3 rounded-full bg-black hover:bg-gray-800 text-white font-bold text-sm cursor-pointer mt-2">
+        <button type="submit" data-a18n="btn_save_bike" class="w-full py-3 rounded-full bg-black hover:bg-gray-800 text-white font-bold text-sm cursor-pointer mt-2">
           Enregistrer la Moto
         </button>
       </form>
@@ -535,120 +546,113 @@
     <div class="w-full max-w-lg rounded-3xl bg-white shadow-2xl border border-gray-200 p-6 max-h-[92vh] overflow-y-auto">
       <div class="flex items-center justify-between mb-4">
         <div>
-          <h3 class="text-lg font-extrabold text-gray-900">Nouvelle Location (50.000 Gs/jour)</h3>
-          <p class="text-xs text-gray-500">Enclenchez une location immédiate ou programmez une future réservation.</p>
+          <h3 data-a18n="modal_rental_title" class="text-lg font-extrabold text-gray-900">Nouvelle Location (50.000 Gs/jour)</h3>
+          <p data-a18n="modal_rental_sub" class="text-xs text-gray-500">Enclenchez une location immédiate ou programmez une future réservation.</p>
         </div>
         <button type="button" onclick="closeModal('rental-modal')" class="w-8 h-8 rounded-full hover:bg-gray-100 flex items-center justify-center cursor-pointer">✕</button>
       </div>
       <form onsubmit="submitRentalForm(event)" class="space-y-3.5 text-sm">
         <div class="grid grid-cols-2 gap-3">
           <div>
-            <label class="block text-xs font-bold text-gray-700 mb-1">Moto *</label>
+            <label data-a18n="lbl_bike" class="block text-xs font-bold text-gray-700 mb-1">Moto *</label>
             <select id="rental-bike-select" required class="w-full rounded-xl border border-gray-300 bg-gray-50 px-3 py-2.5 focus:border-black focus:outline-none"></select>
           </div>
           <div>
-            <label class="block text-xs font-bold text-gray-700 mb-1">Type *</label>
+            <label data-a18n="lbl_type" class="block text-xs font-bold text-gray-700 mb-1">Type *</label>
             <select id="rental-type-select" class="w-full rounded-xl border border-gray-300 bg-gray-50 px-3 py-2.5 focus:border-black focus:outline-none">
-              <option value="active">🟢 Démarrer maintenant</option>
-              <option value="future">📅 Réservation future</option>
+              <option value="active" data-a18n="opt_start_now">🟢 Démarrer maintenant</option>
+              <option value="future" data-a18n="opt_future_res">📅 Réservation future</option>
             </select>
           </div>
         </div>
 
         <div class="grid grid-cols-2 gap-3">
           <div>
-            <label class="block text-xs font-bold text-gray-700 mb-1">Nom complet du Client *</label>
-            <input id="rental-client-name" type="text" required placeholder="Ex: Carlos Benítez" class="w-full rounded-xl border border-gray-300 bg-gray-50 px-3 py-2.5 focus:border-black focus:outline-none" />
+            <label data-a18n="lbl_client_name" class="block text-xs font-bold text-gray-700 mb-1">Nom complet du Client *</label>
+            <input id="rental-client-name" type="text" required placeholder="Carlos Benítez" class="w-full rounded-xl border border-gray-300 bg-gray-50 px-3 py-2.5 focus:border-black focus:outline-none" />
           </div>
           <div>
-            <label class="block text-xs font-bold text-gray-700 mb-1">N° Cédula / Passeport *</label>
-            <input id="rental-client-ci" type="text" required placeholder="Ex: 4.580.123" class="w-full rounded-xl border border-gray-300 bg-gray-50 px-3 py-2.5 focus:border-black focus:outline-none" />
+            <label data-a18n="lbl_client_ci" class="block text-xs font-bold text-gray-700 mb-1">N° Cédula / Passeport *</label>
+            <input id="rental-client-ci" type="text" required placeholder="4.580.123" class="w-full rounded-xl border border-gray-300 bg-gray-50 px-3 py-2.5 focus:border-black focus:outline-none" />
           </div>
         </div>
 
         <div class="grid grid-cols-2 gap-3">
           <div>
-            <label class="block text-xs font-bold text-gray-700 mb-1">Téléphone WhatsApp *</label>
+            <label data-a18n="lbl_client_phone" class="block text-xs font-bold text-gray-700 mb-1">Téléphone WhatsApp *</label>
             <input id="rental-client-phone" type="tel" required placeholder="595981..." class="w-full rounded-xl border border-gray-300 bg-gray-50 px-3 py-2.5 focus:border-black focus:outline-none" />
           </div>
           <div>
-            <label class="block text-xs font-bold text-gray-700 mb-1">Date de début *</label>
+            <label data-a18n="lbl_start_date" class="block text-xs font-bold text-gray-700 mb-1">Date de début *</label>
             <input id="rental-start-date" type="date" required class="w-full rounded-xl border border-gray-300 bg-gray-50 px-3 py-2.5 focus:border-black focus:outline-none" />
           </div>
         </div>
 
         <div>
-          <label class="block text-xs font-bold text-gray-700 mb-1">Adresse de domicile &amp; Contact d'urgence</label>
-          <input id="rental-client-address" type="text" placeholder="Barrio, Ciudad + Téléphone proche" class="w-full rounded-xl border border-gray-300 bg-gray-50 px-3 py-2.5 focus:border-black focus:outline-none" />
+          <label data-a18n="lbl_address_emerg" class="block text-xs font-bold text-gray-700 mb-1">Adresse &amp; Contact d'urgence</label>
+          <input id="rental-client-address" type="text" placeholder="Barrio, Ciudad + Tel..." class="w-full rounded-xl border border-gray-300 bg-gray-50 px-3 py-2.5 focus:border-black focus:outline-none" />
         </div>
 
         <div class="grid grid-cols-2 gap-3 bg-emerald-50/70 border border-emerald-200 p-3 rounded-2xl">
           <div>
-            <label class="block text-xs font-bold text-emerald-900 mb-1">Premier jour payé ?</label>
+            <label data-a18n="lbl_first_pay" class="block text-xs font-bold text-emerald-900 mb-1">Premier jour payé ?</label>
             <select id="rental-first-pay-status" class="w-full rounded-xl border border-emerald-300 bg-white px-3 py-2 text-xs font-bold focus:outline-none">
-              <option value="pending">⏳ Valider plus tard</option>
-              <option value="paid_cash">✅ Payé CASH (₲ 50.000)</option>
-              <option value="paid_transferencia">✅ Payé TRANSFERENCIA (₲ 50.000)</option>
+              <option value="pending" data-a18n="opt_pay_later">⏳ Valider plus tard</option>
+              <option value="paid_cash" data-a18n="opt_pay_cash">✅ Payé CASH (₲ 50.000)</option>
+              <option value="paid_transferencia" data-a18n="opt_pay_transf">✅ Payé TRANSFERENCIA (₲ 50.000)</option>
             </select>
           </div>
           <div>
-            <label class="block text-xs font-bold text-emerald-900 mb-1">Caution (Garantía Gs)</label>
+            <label data-a18n="lbl_deposit" class="block text-xs font-bold text-emerald-900 mb-1">Caution (Garantía Gs)</label>
             <input id="rental-deposit" type="number" value="0" step="10000" class="w-full rounded-xl border border-emerald-300 bg-white px-3 py-2 text-xs font-bold focus:outline-none" />
           </div>
         </div>
 
-        <button type="submit" class="w-full py-3.5 rounded-full bg-[#199E5E] hover:bg-[#14824d] text-white font-bold text-sm shadow-lg cursor-pointer">
+        <button type="submit" data-a18n="btn_save_rental" class="w-full py-3.5 rounded-full bg-[#199E5E] hover:bg-[#14824d] text-white font-bold text-sm shadow-lg cursor-pointer">
           Enregistrer &amp; Ouvrir Contrat →
         </button>
       </form>
     </div>
   </div>
 
-  <!-- 4. MODALE CONTRAT & DOCUMENTS CLIENT (UPLOAD / VISIONNEUSE / DOWNLOAD / PDF) -->
+  <!-- 4. MODALE CONTRAT & DOCUMENTS CLIENT -->
   <div id="contract-docs-modal" class="fixed inset-0 z-50 hidden bg-black/75 backdrop-blur-sm flex items-center justify-center p-4" onclick="if(event.target === this) closeModal('contract-docs-modal')">
     <div class="w-full max-w-3xl rounded-3xl bg-white shadow-2xl border border-gray-200 overflow-hidden max-h-[92vh] flex flex-col">
       <div class="p-5 sm:p-6 bg-gray-950 text-white flex items-center justify-between gap-3">
         <div>
-          <p class="text-[11px] font-bold uppercase tracking-wider text-[#34D186]">Dossier Légal, Police &amp; Documents Client</p>
+          <p data-a18n="modal_docs_kicker" class="text-[11px] font-bold uppercase tracking-wider text-[#34D186]">Dossier Légal, Police &amp; Documents Client</p>
           <h3 id="docs-modal-title" class="text-lg sm:text-xl font-extrabold">Contrat &amp; Pièces Justificatives</h3>
         </div>
         <button type="button" onclick="closeModal('contract-docs-modal')" class="w-8 h-8 rounded-full bg-white/15 hover:bg-white/25 flex items-center justify-center font-bold cursor-pointer">✕</button>
       </div>
 
       <div class="p-5 sm:p-6 overflow-y-auto space-y-6 flex-1 bg-gray-50">
-        <!-- Info Locataire + Bouton Imprimer Contrat -->
-        <div id="docs-client-summary" class="rounded-2xl bg-white border border-gray-200 p-4 flex flex-wrap items-center justify-between gap-3">
-          <!-- Populated dynamically -->
-        </div>
+        <div id="docs-client-summary" class="rounded-2xl bg-white border border-gray-200 p-4 flex flex-wrap items-center justify-between gap-3"></div>
 
-        <!-- Zone Upload Documents -->
         <div class="rounded-2xl bg-white border-2 border-dashed border-gray-300 p-5">
-          <h4 class="text-sm font-extrabold text-gray-900 mb-3">📤 Téléverser un Document Client (Photo ou PDF)</h4>
+          <h4 data-a18n="upload_title" class="text-sm font-extrabold text-gray-900 mb-3">📤 Téléverser un Document Client (Photo ou PDF)</h4>
           <div class="grid sm:grid-cols-3 gap-3 items-end">
             <div>
-              <label class="block text-xs font-bold text-gray-600 mb-1">Type de document</label>
+              <label data-a18n="lbl_doc_type" class="block text-xs font-bold text-gray-600 mb-1">Type de document</label>
               <select id="upload-doc-type" class="w-full rounded-xl border border-gray-300 bg-gray-50 px-3 py-2 text-xs font-semibold">
-                <option value="Cédula de Identidad">🪪 Cédula / Passeport</option>
-                <option value="Registro de Conducir">🏍️ Permis de conduire</option>
+                <option value="Cédula de Identidad">🪪 Cédula / Pasaporte</option>
+                <option value="Registro de Conducir">🏍️ Registro / Permis</option>
                 <option value="Antecedentes Policiales">👮 Antecedentes Policiales</option>
-                <option value="Contrato Firmado">📝 Contrat Signé</option>
-                <option value="Foto Moto Entrega">📸 Photo État Moto</option>
-                <option value="Comprobante / Otro">📄 Autre Document</option>
+                <option value="Contrato Firmado">📝 Contrato / Contrat</option>
+                <option value="Foto Moto Entrega">📸 Foto Moto</option>
+                <option value="Comprobante / Otro">📄 Otro / Autre</option>
               </select>
             </div>
             <div class="sm:col-span-2">
-              <label class="block text-xs font-bold text-gray-600 mb-1">Sélectionner fichier(s) (Caméra téléphone ou PC)</label>
+              <label data-a18n="lbl_doc_files" class="block text-xs font-bold text-gray-600 mb-1">Sélectionner fichier(s)</label>
               <input id="upload-doc-file" type="file" multiple accept="image/*,.pdf" onchange="handleDocumentUpload(event)" class="w-full text-xs text-gray-600 file:mr-3 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-bold file:bg-black file:text-white hover:file:bg-gray-800 cursor-pointer" />
             </div>
           </div>
         </div>
 
-        <!-- Liste des documents stockés -->
         <div>
-          <h4 class="text-xs font-bold uppercase tracking-wider text-gray-500 mb-3">Documents enregistrés dans ce dossier</h4>
-          <div id="docs-files-grid" class="grid sm:grid-cols-2 gap-3">
-            <!-- Populated dynamically -->
-          </div>
+          <h4 data-a18n="stored_docs_title" class="text-xs font-bold uppercase tracking-wider text-gray-500 mb-3">Documents enregistrés dans ce dossier</h4>
+          <div id="docs-files-grid" class="grid sm:grid-cols-2 gap-3"></div>
         </div>
       </div>
     </div>
@@ -659,14 +663,12 @@
     <div class="w-full max-w-2xl rounded-3xl bg-white shadow-2xl border border-gray-200 overflow-hidden max-h-[90vh] flex flex-col">
       <div class="p-5 bg-gray-900 text-white flex items-center justify-between">
         <div>
-          <h3 id="bike-history-title" class="text-lg font-extrabold">Historique de la Moto</h3>
-          <p class="text-xs text-gray-300">Tous les conducteurs passés/présents/futurs et dépenses repuestos liées</p>
+          <h3 id="bike-history-title" class="text-lg font-extrabold">Historique</h3>
+          <p class="text-xs text-gray-300">G&amp;L MOTORS E.A.S.</p>
         </div>
         <button type="button" onclick="closeModal('bike-history-modal')" class="w-8 h-8 rounded-full bg-white/15 hover:bg-white/25 flex items-center justify-center font-bold cursor-pointer">✕</button>
       </div>
-      <div id="bike-history-body" class="p-5 overflow-y-auto space-y-4 flex-1 bg-gray-50">
-        <!-- Populated dynamically -->
-      </div>
+      <div id="bike-history-body" class="p-5 overflow-y-auto space-y-4 flex-1 bg-gray-50"></div>
     </div>
   </div>
 
@@ -674,111 +676,115 @@
   <div id="repuesto-modal" class="fixed inset-0 z-50 hidden bg-black/70 backdrop-blur-sm flex items-center justify-center p-4" onclick="if(event.target === this) closeModal('repuesto-modal')">
     <div class="w-full max-w-md rounded-3xl bg-white shadow-2xl border border-gray-200 p-6">
       <div class="flex items-center justify-between mb-4">
-        <h3 class="text-lg font-extrabold text-gray-900">Enregistrer Dépense Repuesto</h3>
+        <h3 data-a18n="modal_rep_title" class="text-lg font-extrabold text-gray-900">Enregistrer Dépense Repuesto</h3>
         <button type="button" onclick="closeModal('repuesto-modal')" class="w-8 h-8 rounded-full hover:bg-gray-100 flex items-center justify-center cursor-pointer">✕</button>
       </div>
       <form onsubmit="submitRepuestoForm(event)" class="space-y-3.5 text-sm">
         <div>
-          <label class="block text-xs font-bold text-gray-700 mb-1">Moto concernée (ou Atelier Général)</label>
+          <label data-a18n="lbl_rep_bike" class="block text-xs font-bold text-gray-700 mb-1">Moto concernée</label>
           <select id="repuesto-bike-select" class="w-full rounded-xl border border-gray-300 bg-gray-50 px-3 py-2.5 focus:border-black focus:outline-none"></select>
         </div>
         <div>
-          <label class="block text-xs font-bold text-gray-700 mb-1">Pièce / Motif *</label>
-          <input id="repuesto-desc" type="text" required placeholder="Ex: Kit cadena, aceite Motul, cubierta..." class="w-full rounded-xl border border-gray-300 bg-gray-50 px-3 py-2.5 focus:border-black focus:outline-none" />
+          <label data-a18n="lbl_rep_desc" class="block text-xs font-bold text-gray-700 mb-1">Pièce / Motif *</label>
+          <input id="repuesto-desc" type="text" required placeholder="Kit cadena, aceite Motul, cubierta..." class="w-full rounded-xl border border-gray-300 bg-gray-50 px-3 py-2.5 focus:border-black focus:outline-none" />
         </div>
         <div class="grid grid-cols-2 gap-3">
           <div>
-            <label class="block text-xs font-bold text-gray-700 mb-1">Montant (Guaraníes Gs) *</label>
-            <input id="repuesto-amount" type="number" required min="1000" step="1000" placeholder="Ex: 85000" class="w-full rounded-xl border border-gray-300 bg-gray-50 px-3 py-2.5 focus:border-black focus:outline-none font-bold" />
+            <label data-a18n="lbl_rep_amount" class="block text-xs font-bold text-gray-700 mb-1">Montant (Gs) *</label>
+            <input id="repuesto-amount" type="number" required min="1000" step="1000" placeholder="85000" class="w-full rounded-xl border border-gray-300 bg-gray-50 px-3 py-2.5 focus:border-black focus:outline-none font-bold" />
           </div>
           <div>
-            <label class="block text-xs font-bold text-gray-700 mb-1">Payé avec *</label>
+            <label data-a18n="lbl_rep_method" class="block text-xs font-bold text-gray-700 mb-1">Payé avec *</label>
             <select id="repuesto-method" class="w-full rounded-xl border border-gray-300 bg-gray-50 px-3 py-2.5 focus:border-black focus:outline-none font-semibold">
-              <option value="cash">💵 Réserve CASH</option>
-              <option value="transferencia">🏦 Réserve BANQUE (Transferencia)</option>
+              <option value="cash" data-a18n="opt_from_cash">💵 Réserve CASH</option>
+              <option value="transferencia" data-a18n="opt_from_bank">🏦 Réserve BANQUE</option>
             </select>
           </div>
         </div>
         <div>
-          <label class="block text-xs font-bold text-gray-700 mb-1">Date de la dépense *</label>
+          <label data-a18n="lbl_rep_date" class="block text-xs font-bold text-gray-700 mb-1">Date de la dépense *</label>
           <input id="repuesto-date" type="date" required class="w-full rounded-xl border border-gray-300 bg-gray-50 px-3 py-2.5 focus:border-black focus:outline-none" />
         </div>
-        <button type="submit" class="w-full py-3 rounded-full bg-amber-600 hover:bg-amber-700 text-white font-bold text-sm cursor-pointer">
+        <button type="submit" data-a18n="btn_save_rep" class="w-full py-3 rounded-full bg-amber-600 hover:bg-amber-700 text-white font-bold text-sm cursor-pointer">
           Déduire &amp; Enregistrer la Dépense
         </button>
       </form>
     </div>
   </div>
 
-  <!-- 7. MODALE HORS SERVICE (SIGNALER PANNE / ATELIER) -->
+  <!-- 7. MODALE HORS SERVICE -->
   <div id="maintenance-modal" class="fixed inset-0 z-50 hidden bg-black/70 backdrop-blur-sm flex items-center justify-center p-4" onclick="if(event.target === this) closeModal('maintenance-modal')">
     <div class="w-full max-w-md rounded-3xl bg-white shadow-2xl border border-gray-200 p-6">
       <div class="flex items-center justify-between mb-4">
-        <h3 class="text-lg font-extrabold text-gray-900">Mettre la Moto Hors Service</h3>
+        <h3 data-a18n="modal_maint_title" class="text-lg font-extrabold text-gray-900">Mettre la Moto Hors Service</h3>
         <button type="button" onclick="closeModal('maintenance-modal')" class="w-8 h-8 rounded-full hover:bg-gray-100 flex items-center justify-center cursor-pointer">✕</button>
       </div>
       <form onsubmit="submitMaintenanceForm(event)" class="space-y-3.5 text-sm">
         <input type="hidden" id="maint-bike-id" />
-        <p class="text-xs text-gray-600 bg-amber-50 border border-amber-200 rounded-xl p-3">
-          Chaque jour hors service calculera automatiquement le manque à gagner estimé (<strong>₲ 50.000 / jour</strong>) dans votre Dashboard Financier.
+        <p data-a18n="maint_note" class="text-xs text-gray-600 bg-amber-50 border border-amber-200 rounded-xl p-3">
+          Chaque jour hors service calculera automatiquement le manque à gagner estimé (₲ 50.000 / jour).
         </p>
         <div>
-          <label class="block text-xs font-bold text-gray-700 mb-1">Motif de la panne / révision *</label>
-          <input id="maint-reason" type="text" required placeholder="Ex: Problème embrayage, pneu crevé, accident..." class="w-full rounded-xl border border-gray-300 bg-gray-50 px-3 py-2.5 focus:border-black focus:outline-none" />
+          <label data-a18n="lbl_maint_reason" class="block text-xs font-bold text-gray-700 mb-1">Motif de la panne *</label>
+          <input id="maint-reason" type="text" required class="w-full rounded-xl border border-gray-300 bg-gray-50 px-3 py-2.5 focus:border-black focus:outline-none" />
         </div>
         <div>
-          <label class="block text-xs font-bold text-gray-700 mb-1">Date de mise hors service *</label>
+          <label data-a18n="lbl_maint_since" class="block text-xs font-bold text-gray-700 mb-1">Date de mise hors service *</label>
           <input id="maint-since" type="date" required class="w-full rounded-xl border border-gray-300 bg-gray-50 px-3 py-2.5 focus:border-black focus:outline-none" />
         </div>
-        <button type="submit" class="w-full py-3 rounded-full bg-red-600 hover:bg-red-700 text-white font-bold text-sm cursor-pointer">
+        <button type="submit" data-a18n="btn_confirm_maint" class="w-full py-3 rounded-full bg-red-600 hover:bg-red-700 text-white font-bold text-sm cursor-pointer">
           Confirmer Hors Service
         </button>
       </form>
     </div>
   </div>
 
-  <!-- 8. MODALE AJUSTER SOLDE INITIAL CASH / BANQUE -->
+  <!-- 8. MODALE AJUSTER SOLDE INITIAL -->
   <div id="adjust-balance-modal" class="fixed inset-0 z-50 hidden bg-black/70 backdrop-blur-sm flex items-center justify-center p-4" onclick="if(event.target === this) closeModal('adjust-balance-modal')">
     <div class="w-full max-w-sm rounded-3xl bg-white shadow-2xl border border-gray-200 p-6">
       <div class="flex items-center justify-between mb-3">
-        <h3 id="adjust-modal-title" class="text-lg font-extrabold text-gray-900">Ajuster Solde Initial</h3>
+        <h3 id="adjust-modal-title" class="text-lg font-extrabold text-gray-900">Ajuster</h3>
         <button type="button" onclick="closeModal('adjust-balance-modal')" class="w-8 h-8 rounded-full hover:bg-gray-100 flex items-center justify-center cursor-pointer">✕</button>
       </div>
       <form onsubmit="submitAdjustBalance(event)" class="space-y-4 text-sm">
         <input type="hidden" id="adjust-account-type" />
-        <p class="text-xs text-gray-500">Définissez le fond de caisse ou solde initial avant le suivi sur le logiciel (s'ajoute automatiquement à tous vos encaissements moins les repuestos).</p>
+        <p data-a18n="adj_desc" class="text-xs text-gray-500">Définissez le solde initial.</p>
         <div>
-          <label class="block text-xs font-bold text-gray-700 mb-1">Montant Initial (Gs)</label>
+          <label data-a18n="lbl_adj_amount" class="block text-xs font-bold text-gray-700 mb-1">Montant Initial (Gs)</label>
           <input id="adjust-amount-input" type="number" required step="1000" class="w-full rounded-xl border border-gray-300 bg-gray-50 px-3.5 py-2.5 font-bold focus:border-black focus:outline-none" />
         </div>
-        <button type="submit" class="w-full py-3 rounded-full bg-black text-white font-bold text-sm cursor-pointer">
+        <button type="submit" data-a18n="btn_save_adj" class="w-full py-3 rounded-full bg-black text-white font-bold text-sm cursor-pointer">
           Mettre à jour le solde
         </button>
       </form>
     </div>
   </div>
 
-  <!-- 9. MODALE SAUVEGARDE / IMPORT-EXPORT JSON & SYNCHRONISATION -->
+  <!-- 9. MODALE SERVEUR CLOUD & SAUVEGARDE JSON -->
   <div id="backup-modal" class="fixed inset-0 z-50 hidden bg-black/70 backdrop-blur-sm flex items-center justify-center p-4" onclick="if(event.target === this) closeModal('backup-modal')">
-    <div class="w-full max-w-md rounded-3xl bg-white shadow-2xl border border-gray-200 p-6 space-y-4">
+    <div class="w-full max-w-md rounded-3xl bg-white shadow-2xl border border-gray-200 p-6 space-y-4 max-h-[92vh] overflow-y-auto">
       <div class="flex items-center justify-between">
-        <h3 class="text-lg font-extrabold text-gray-900">Base de Données &amp; Sauvegarde</h3>
+        <h3 data-a18n="modal_backup_title" class="text-lg font-extrabold text-gray-900">Serveur Cloud &amp; Sauvegarde</h3>
         <button type="button" onclick="closeModal('backup-modal')" class="w-8 h-8 rounded-full hover:bg-gray-100 flex items-center justify-center cursor-pointer">✕</button>
       </div>
-      <p class="text-xs text-gray-600 leading-relaxed">
-        Vos données sont synchronisées automatiquement sur le Cloud entre votre téléphone, tablette et ordinateur. Vous pouvez aussi télécharger une copie de sécurité complète à tout moment.
-      </p>
-      <div class="space-y-2.5 pt-2">
-        <button type="button" onclick="exportDatabaseJson()" class="w-full py-3 rounded-full bg-black text-white text-xs font-bold hover:bg-gray-800 cursor-pointer">
+      <p data-a18n="backup_desc" class="text-xs text-gray-600 leading-relaxed"></p>
+
+      <div id="cloud-setup-instructions" class="rounded-2xl bg-indigo-50 border border-indigo-200 p-4 text-xs text-indigo-950 space-y-1.5">
+        <p data-a18n="cloud_setup_title" class="font-extrabold"></p>
+        <p data-a18n-html="cloud_setup_steps" class="leading-relaxed"></p>
+      </div>
+
+      <div class="space-y-2.5 pt-1">
+        <button type="button" onclick="syncFromCloud(true); closeModal('backup-modal')" data-a18n="btn_force_sync" class="w-full py-3 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold cursor-pointer">
+          🔄 Forcer la Synchronisation Cloud
+        </button>
+        <button type="button" onclick="exportDatabaseJson()" data-a18n="btn_export_json" class="w-full py-3 rounded-full bg-black text-white text-xs font-bold hover:bg-gray-800 cursor-pointer">
           ⬇️ Télécharger Sauvegarde Complète (.json)
         </button>
         <label class="block w-full py-3 rounded-full border-2 border-gray-300 text-center text-xs font-bold text-gray-800 hover:bg-gray-50 cursor-pointer">
-          ⬆️ Importer une Sauvegarde (.json)
+          <span data-a18n="btn_import_json">⬆️ Importer une Sauvegarde (.json)</span>
           <input type="file" accept=".json" onchange="importDatabaseJson(event)" class="hidden" />
         </label>
-        <button type="button" onclick="syncFromCloud(true); closeModal('backup-modal')" class="w-full py-3 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 text-xs font-bold hover:bg-emerald-100 cursor-pointer">
-          🔄 Forcer la Synchronisation Cloud
-        </button>
       </div>
     </div>
   </div>
@@ -788,17 +794,16 @@
     <div class="flex items-center justify-between text-white pb-3 max-w-5xl w-full mx-auto">
       <span id="viewer-doc-name" class="text-sm font-bold truncate">Document</span>
       <div class="flex items-center gap-2">
-        <a id="viewer-doc-download" href="#" download class="px-4 py-1.5 rounded-full bg-[#34D186] text-black text-xs font-bold hover:bg-emerald-400">
+        <a id="viewer-doc-download" href="#" download data-a18n="btn_download" class="px-4 py-1.5 rounded-full bg-[#34D186] text-black text-xs font-bold hover:bg-emerald-400">
           ⬇️ Télécharger
         </a>
         <button type="button" onclick="closeModal('doc-viewer-modal')" class="w-8 h-8 rounded-full bg-white/15 hover:bg-white/25 flex items-center justify-center font-bold cursor-pointer">✕</button>
       </div>
     </div>
-    <div id="viewer-doc-content" class="flex-1 max-w-5xl w-full mx-auto flex items-center justify-center overflow-auto bg-gray-900/50 rounded-2xl p-2">
-      <!-- Image or PDF iframe -->
-    </div>
+    <div id="viewer-doc-content" class="flex-1 max-w-5xl w-full mx-auto flex items-center justify-center overflow-auto bg-gray-900/50 rounded-2xl p-2"></div>
   </div>
 
+  <script src="admin-translations.js"></script>
   <script src="admin.js"></script>
 </body>
 </html>
