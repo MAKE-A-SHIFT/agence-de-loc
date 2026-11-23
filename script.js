@@ -935,6 +935,62 @@ function submitBookingModal(e) {
   closeBookingModal();
 }
 
+// Admin Password Gate
+function openAdminAuthModal() {
+  const mobileMenu = document.getElementById("mobile-menu");
+  if (mobileMenu) mobileMenu.classList.add("hidden");
+
+  // If already authenticated on this device, open directly or allow quick entry
+  if (sessionStorage.getItem("gl_admin_auth") === "BigLuck_OK") {
+    window.location.href = "admin.html";
+    return;
+  }
+
+  const modal = document.getElementById("admin-auth-modal");
+  const input = document.getElementById("admin-password-input");
+  const err = document.getElementById("admin-password-error");
+  if (err) err.classList.add("hidden");
+  if (input) input.value = "";
+
+  if (modal) {
+    modal.classList.remove("hidden");
+    requestAnimationFrame(() => modal.classList.add("active"));
+    document.body.style.overflow = "hidden";
+    setTimeout(() => input?.focus(), 100);
+  }
+}
+
+function closeAdminAuthModal() {
+  const modal = document.getElementById("admin-auth-modal");
+  if (modal) {
+    modal.classList.remove("active");
+    modal.classList.add("hidden");
+    document.body.style.overflow = "";
+  }
+}
+
+function submitAdminAuth(e) {
+  e.preventDefault();
+  const input = document.getElementById("admin-password-input");
+  const err = document.getElementById("admin-password-error");
+  const val = (input?.value || "").trim();
+
+  if (val === "BigLuck") {
+    sessionStorage.setItem("gl_admin_auth", "BigLuck_OK");
+    localStorage.setItem("gl_admin_auth", "BigLuck_OK");
+    closeAdminAuthModal();
+    window.location.href = "admin.html";
+  } else {
+    if (err) err.classList.remove("hidden");
+    if (input) {
+      input.value = "";
+      input.focus();
+      input.classList.add("border-red-500", "ring-2", "ring-red-200");
+      setTimeout(() => input.classList.remove("border-red-500", "ring-2", "ring-red-200"), 1200);
+    }
+  }
+}
+
 // 10. Initialization & Event Listeners
 document.addEventListener("DOMContentLoaded", () => {
   const currBtn = document.getElementById("currency-menu-btn");
